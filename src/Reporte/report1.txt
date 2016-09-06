@@ -1,0 +1,547 @@
+
+   tipo_herramienta
+
+
+
+                                      descripcion
+
+
+          Manuales                      axxxxx
+
+        Rudimentaria                     buena
+
+         Electricas                   Consolador
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            Page 1 of 13
+
+
+
+   tipo_herramienta                   descripcion
+
+
+        Rudimentaria                      ddd
+
+        Rudimentaria                     dede
+
+        Rudimentaria                Destornillador
+
+        Rudimentaria                     dfdsf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            Page 2 of 13
+
+
+
+   tipo_herramienta                   descripcion
+
+
+        Rudimentaria                      ede
+
+        Rudimentaria                      ede
+
+        Rudimentaria                    ededed
+
+        Rudimentaria                      efe
+
+        Rudimentaria                      efe
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            Page 3 of 13
+
+
+
+   tipo_herramienta                   descripcion
+
+
+        Rudimentaria                      efe
+
+        Rudimentaria                      efe
+
+        Rudimentaria                     ererr
+
+        Rudimentaria                     Gubia
+
+        Rudimentaria              Hacha de piedra con
+                                    cabo de madera
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            Page 4 of 13
+
+
+
+   tipo_herramienta                   descripcion
+
+
+        Rudimentaria                    jajaja
+
+        Rudimentaria                    jajaja
+
+        Rudimentaria                   jujujuju
+
+        Rudimentaria                   jujujuju
+
+         Electricas                     lachola
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  martes 23                                 Page 5 of 13
+
+
+
+   tipo_herramienta                   descripcion
+
+
+          Manuales                 Manzana de Bruja
+
+          Manuales                     martillo
+
+        Rudimentaria                   Martillo
+
+        Rudimentaria              martillo de piedra
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            Page 6 of 13
+
+
+
+   tipo_herramienta                   descripcion
+
+
+        Rudimentaria               martillo de torh
+
+        Rudimentaria               martillo de Torh
+
+        Rudimentaria               Martillo de Torh
+
+        Rudimentaria               Martillo de Torh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            Page 7 of 13
+
+
+
+   tipo_herramienta                   descripcion
+
+
+          Manuales                 Martillo y Gubia
+
+        Rudimentaria                 Maso Capital
+                                      Cabernicola
+
+        Rudimentaria                 Maso capitan
+                                      Cabernicola
+
+        Rudimentaria                 Maso de Indio
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            Page 8 of 13
+
+
+
+   tipo_herramienta                   descripcion
+
+
+         Electricas                   Moto Sierra
+
+        Rudimentaria                Muñeca Inflable
+
+        Rudimentaria            Muñeca Inflable (MArca
+                                        Molina)
+
+        Rudimentaria            Muñeca Inflable (MArca
+                                        Molina)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            Page 9 of 13
+
+
+
+   tipo_herramienta                   descripcion
+
+
+          Manuales                    pa la paja
+
+        Rudimentaria                   pedorras
+
+          Manuales                      Poronga
+
+        Rudimentaria                     sdsds
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                           Page 10 of 13
+
+
+
+   tipo_herramienta                   descripcion
+
+
+         Electricas                 Sierra caladora
+
+         Electricas                 Sierra caladora
+
+          Manuales                  Sierra de arco
+
+         Electricas                 Sierra de Calar
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                           Page 11 of 13
+
+
+
+   tipo_herramienta                   descripcion
+
+
+          Manuales                      Tijeras
+
+            null                     Uso de madera
+
+        Rudimentaria                      xx
+
+        Rudimentaria                      xx
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                           Page 12 of 13
+
+
+
+   tipo_herramienta                   descripcion
+
+
+        Rudimentaria                   xxxxxxxxx
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  martes 23                                Page 13 of 13
+
+
+
