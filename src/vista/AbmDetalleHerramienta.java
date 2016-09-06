@@ -13,13 +13,17 @@ import javax.swing.DefaultListModel;
  */
 public class AbmDetalleHerramienta extends javax.swing.JFrame {
 
-    DefaultListModel modeloL = new DefaultListModel();
+    DefaultListModel modeloL;
     
     /**
      * Creates new form Mantenimiento
      */
     public AbmDetalleHerramienta() {
         initComponents();
+        modeloL = new DefaultListModel();
+        jlHerrRudimentaria.setModel(modeloL);
+        
+        
     }
 
     /**
@@ -147,10 +151,18 @@ public class AbmDetalleHerramienta extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    public void agregarLista(){
+        
+        String valor = jtfDHerramienta.getText();
+        modeloL.addElement(valor);
+    }
+    
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         // Código boton agregar
-        String hDetalle = jtfDHerramienta.getText();
+        agregarLista();
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
