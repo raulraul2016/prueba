@@ -3,13 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/bangho/NetBeansProjects/Tesis%23/src/vista/AbmActividades.java</file>
-            <file>file:/home/bangho/NetBeansProjects/Tesis%23/src/modelo/Premio.java</file>
-            <file>file:/home/bangho/NetBeansProjects/Tesis%23/src/controlador/ControladorDatosCarga.java</file>
-            <file>file:/home/bangho/NetBeansProjects/Tesis%23/src/vista/AbmDatos.java</file>
-            <file>file:/home/bangho/NetBeansProjects/Tesis%23/src/controlador/ControladorDetalleHerramienta.java</file>
-            <file>file:/home/bangho/NetBeansProjects/Tesis%23/src/modelo/Herramienta.java</file>
-            <file>file:/home/bangho/NetBeansProjects/Tesis%23/src/modelo/DetalleHerramienta.java</file>
+            <file>file:/home/bangho/NetBeansProjects/Tesis%23/src/vista/AbmDetalleHerramienta.java</file>
         </group>
     </open-files>
 </project-private>

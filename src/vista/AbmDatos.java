@@ -35,8 +35,8 @@ import javax.swing.JOptionPane;
 
 public class AbmDatos extends javax.swing.JInternalFrame {
     
-    ArrayList <Herramienta> herramienta = new ArrayList<>();
-    ArrayList<DetalleHerramienta> detalleHerramientas=new ArrayList<>();
+    ArrayList <Herramienta> herramienta;
+    ArrayList<DetalleHerramienta> detalleHerramientas;
     //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:ii:ss");
     //SimpleDateFormat sdf;
     //    DafaultTableModel modelo = new DefaultTableModel();
@@ -46,12 +46,13 @@ public class AbmDatos extends javax.swing.JInternalFrame {
     Taller tal;
     JCheckBox jckb1, jckb2, jckb3, jckb4;
     ButtonGroup buttonGroup;
-    DefaultTableModel modelo = new DefaultTableModel();
+    DefaultTableModel modelo;
     PreparedStatement stmt;
     ResultSet rs;
     ResultSetMetaData rsm;
     Integer bandera = 0;
-    DefaultListModel listaHerramienta;
+    DefaultListModel listaHerramienta, tipoHerramienta;
+    
 
     ///////////////////////////////////////////////////
     public AbmDatos() {
@@ -63,6 +64,11 @@ public class AbmDatos extends javax.swing.JInternalFrame {
         dp = new DatoPersonal();
         her= new Herramienta();
         tal= new Taller();
+        listaHerramienta = new DefaultListModel();;
+        tipoHerramienta = new DefaultListModel();
+        modelo = new DefaultTableModel();
+        herramienta = new ArrayList<>();
+        detalleHerramientas = new ArrayList<>();
   
     }
 
@@ -118,13 +124,7 @@ public class AbmDatos extends javax.swing.JInternalFrame {
         jLabel16 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jList4 = new javax.swing.JList();
+        jlTipoHerramientas = new javax.swing.JList();
         jbRudimentaria = new javax.swing.JButton();
         jbManuales = new javax.swing.JButton();
         JbElectricas = new javax.swing.JButton();
@@ -401,22 +401,8 @@ public class AbmDatos extends javax.swing.JInternalFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo de Herramientas"));
 
-        jList1.setBorder(javax.swing.BorderFactory.createTitledBorder("Rudimentaria"));
-        jScrollPane3.setViewportView(jList1);
-
-        jList2.setBorder(javax.swing.BorderFactory.createTitledBorder("Manuales"));
-        jScrollPane4.setViewportView(jList2);
-
-        jList3.setBorder(javax.swing.BorderFactory.createTitledBorder("Maquinarias"));
-        jList3.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { " " };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane5.setViewportView(jList3);
-
-        jList4.setBorder(javax.swing.BorderFactory.createTitledBorder("Electricas"));
-        jScrollPane6.setViewportView(jList4);
+        jlTipoHerramientas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jScrollPane3.setViewportView(jlTipoHerramientas);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -424,30 +410,23 @@ public class AbmDatos extends javax.swing.JInternalFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 9, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 8, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jbRudimentaria.setText("Rudimentarias");
+        jbRudimentaria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbRudimentariaMouseClicked(evt);
+            }
+        });
         jbRudimentaria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbRudimentariaActionPerformed(evt);
@@ -488,13 +467,13 @@ public class AbmDatos extends javax.swing.JInternalFrame {
                                             .addComponent(JbElectricas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jbRudimentaria, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jbManuales, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(130, 130, 130))))
+                                        .addGap(130, 130, 130)))
+                                .addGap(19, 19, 19)
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -521,14 +500,15 @@ public class AbmDatos extends javax.swing.JInternalFrame {
                                 .addComponent(JbElectricas, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(5, 5, 5)
                                 .addComponent(jbMaquinarias, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                                .addGap(18, 18, 18))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(25, 25, 25)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(11, Short.MAX_VALUE))
         );
@@ -662,7 +642,6 @@ public class AbmDatos extends javax.swing.JInternalFrame {
         AbmDetalleHerramienta adh = new AbmDetalleHerramienta();
         adh.setTitle("Herramientas Rudimentarias");
         adh.setLocationRelativeTo(null);
-        
         bandera = 1;
         if(bandera == 1){
             JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Rudimentaria a la Lista");
@@ -672,17 +651,15 @@ public class AbmDatos extends javax.swing.JInternalFrame {
             
             // caraga elementos a jList
             listaHerramienta = new DefaultListModel();
-            //listaHerramienta.setElementAt(evt, index);
-        }
-        else{
-            
-        }
-                
-        
+                                    
         }
         
         
     }//GEN-LAST:event_jbRudimentariaActionPerformed
+    }
+    private void jbRudimentariaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRudimentariaMouseClicked
+
+    }//GEN-LAST:event_jbRudimentariaMouseClicked
 
 //    public static int diferenciaEnDias2(Date fechaMayor, Date fechaMenor) {
 //    
@@ -830,10 +807,6 @@ public class AbmDatos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList jList1;
-    private javax.swing.JList jList2;
-    private javax.swing.JList jList3;
-    private javax.swing.JList jList4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -842,9 +815,6 @@ public class AbmDatos extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton jbManuales;
     private javax.swing.JButton jbMaquinarias;
@@ -855,6 +825,7 @@ public class AbmDatos extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser jdcFechaCarga;
     private com.toedter.calendar.JDateChooser jdcFechaNac;
     private javax.swing.JLabel jlId;
+    private javax.swing.JList jlTipoHerramientas;
     private javax.swing.JTable jtbCargaDato;
     private javax.swing.JTable jtbHerramientaTaller;
     private javax.swing.JTextField jtfApellidoNombre;
