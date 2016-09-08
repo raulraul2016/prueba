@@ -16,7 +16,7 @@ import modelo.DetalleHerramienta;
  *
  * @author bangho
  */
-public abstract class ControladorDetalleHerramienta  {
+public class ControladorDetalleHerramienta  {
     
     public static String url;
     public static Connection conexion;
