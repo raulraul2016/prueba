@@ -5,9 +5,20 @@
  */
 package vista;
 
-import java.util.List;
-import javax.swing.DefaultListModel;
+import controlador.ControladorDetalleHRudimentaria;
+import controlador.ControladorDetalleHerramienta;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.DetalleHerramienta;
+
 
 /**
  *
@@ -15,15 +26,23 @@ import javax.swing.JOptionPane;
  */
 public class AbmDetalleHerramienta extends javax.swing.JFrame {
 
-    DefaultListModel modeloL;
+    //DefaultListModel modeloL;
+    Connection conexion;
+    DefaultTableModel modelo;
+    DetalleHerramienta dh;
+    ResultSet rs;
+    PreparedStatement stmt;
+    ResultSetMetaData rsm;
     
     /**
      * Creates new form Mantenimiento
      */
     public AbmDetalleHerramienta() {
         initComponents();
-        modeloL = new DefaultListModel();
-        jlHerrRudimentaria.setModel(modeloL);
+        //modeloL = new DefaultListModel();
+        //jlHerrRudimentaria.setModel(modeloL);
+        dh = new DetalleHerramienta();
+        modelo = new DefaultTableModel();
         
         
     }
@@ -43,12 +62,12 @@ public class AbmDetalleHerramienta extends javax.swing.JFrame {
         jtfDHerramienta = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jlHerrRudimentaria = new javax.swing.JList();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jtfFila = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtDHerramienta = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -73,8 +92,6 @@ public class AbmDetalleHerramienta extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane1.setViewportView(jlHerrRudimentaria);
-
         jButton3.setText("Actualizar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +110,16 @@ public class AbmDetalleHerramienta extends javax.swing.JFrame {
 
         jtfFila.setEditable(false);
 
+        jtDHerramienta.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(jtDHerramienta);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -101,25 +128,23 @@ public class AbmDetalleHerramienta extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jLabel2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfFila, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfDHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfFila, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jtfDHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(79, Short.MAX_VALUE))
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,8 +166,8 @@ public class AbmDetalleHerramienta extends javax.swing.JFrame {
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -150,22 +175,23 @@ public class AbmDetalleHerramienta extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(148, 148, 148)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -178,9 +204,21 @@ public class AbmDetalleHerramienta extends javax.swing.JFrame {
 
     public void agregarLista(){
         
-        String valor = jtfDHerramienta.getText();
-        modeloL.addElement(valor);
-        int fila = modeloL.size();
+        ControladorDetalleHerramienta cdh = new ControladorDetalleHerramienta();
+        dh = new DetalleHerramienta();
+        String texto = jtfDHerramienta.getText();
+        
+        dh.setDetalleHerramienta(texto);
+        cdh.agregar(dh);
+        
+        actualizaTabla();
+        //String valor = jtfDHerramienta.getText();
+        //modeloL.addElement(valor);
+        //String texto = jtfDHerramienta.getText();
+              
+        
+        
+        //int fila = modeloL.size();
         //String.valueOf(jtfFila.setText(fila));
         //jtfFila.setText(valor);
         
@@ -197,18 +235,18 @@ public class AbmDetalleHerramienta extends javax.swing.JFrame {
 
     public void eliminaLista(){
        
-        // Boton Eliminar elemento de lista
-        int bandera = 0;
-        int elemento = jlHerrRudimentaria.getSelectedIndex();
-        
-        //List elemento = jlHerrRudimentaria.getSelectedValuesList();
-        
-        int fila = elemento;
-        JOptionPane.showConfirmDialog(null, "Desea eliminar elemento de la Lista?");
-        
-        jlHerrRudimentaria.remove(elemento);
-        JOptionPane.showMessageDialog(null, "Se elimino el siguiente elemento: "+elemento);
-        jlHerrRudimentaria.updateUI();
+//        // Boton Eliminar elemento de lista
+//        int bandera = 0;
+//        //int elemento = jlHerrRudimentaria.getSelectedIndex();
+//        
+//        //List elemento = jlHerrRudimentaria.getSelectedValuesList();
+//        
+//        int fila = elemento;
+//        JOptionPane.showConfirmDialog(null, "Desea eliminar elemento de la Lista?");
+//        
+//        jlHerrRudimentaria.remove(elemento);
+//        JOptionPane.showMessageDialog(null, "Se elimino el siguiente elemento: "+elemento);
+//        jlHerrRudimentaria.updateUI();
         
         
     }
@@ -221,6 +259,7 @@ public class AbmDetalleHerramienta extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
         // Boton actuallzar
+        
         
         
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -272,9 +311,76 @@ public class AbmDetalleHerramienta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList jlHerrRudimentaria;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jtDHerramienta;
     private javax.swing.JTextField jtfDHerramienta;
     private javax.swing.JTextField jtfFila;
     // End of variables declaration//GEN-END:variables
+
+    private void actualizaTabla() {
+    ResultSet r;
+    DefaultTableModel mod;
+        try {
+            r = rs;
+            cargaFilas();
+            mod = new DefaultTableModel();
+            String  fila [] = new String[1];
+            
+            while(r.next()){
+                
+                fila[1] = r.getString("Orden");
+                fila[2] = r.getString("Detalle Herramienta");
+                mod.addRow(fila);
+            }
+            jtDHerramienta.setModel(mod);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void cargaFilas() {
+    
+        try {
+            Class.forName("org.postgresql.Driver");
+            String url = "jdbc:postgresql://localhost:5432/mercartenueva";
+            conexion = DriverManager.getConnection(url, "postgres", "camello");
+            System.out.println("Conectado");
+            
+            String query = "SELECT * FROM detalle_herramienta";
+            
+            stmt = conexion.prepareStatement(query);
+            rs = stmt.executeQuery();
+            rsm = rs.getMetaData();
+            
+            while(rs.next()){
+                
+                Object [] fila = new Object[rsm.getColumnCount()];
+                
+                fila[0] = rs.getString(1);
+                fila[1] = rs.getString(2);
+                
+                modelo.addRow(fila);
+            }
+            rs.close();
+     } catch (SQLException error) {
+            JOptionPane.showConfirmDialog(null, error);
+            
+        } catch (ClassNotFoundException ex) {
+            
+            System.out.println(ex);
+
+            Logger.getLogger(DetalleHerramienta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }
+    
+    public void nombreFila(){
+        
+       dh = new DetalleHerramienta();
+       ControladorDetalleHerramienta cdh = new ControladorDetalleHerramienta(); 
+       modelo.addColumn("Orden");
+       modelo.addColumn("Detalle Herramienta");
+       
+       jtDHerramienta.setModel(modelo);
+    }
 }
