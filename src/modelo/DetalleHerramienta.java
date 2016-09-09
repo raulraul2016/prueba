@@ -42,4 +42,11 @@ public class DetalleHerramienta {
         this.detalleHerramienta = detalleHerramienta;
     }
 
+    @Override
+    public String toString() {
+        return  detalleHerramienta;
+    }
+
+    
+    
 }
