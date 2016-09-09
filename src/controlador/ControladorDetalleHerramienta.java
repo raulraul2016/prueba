@@ -41,6 +41,9 @@ public class ControladorDetalleHerramienta  {
             stmt = conexion.prepareStatement(query);
             
 //            stmt.setArray(1, (Array) detalleTipoHerramienta.getDetalleHerramienta());
+            //stmt.setLong(1, detalleTipoHerramienta.getId_detalle_herramienta());
+            stmt.setString(1, detalleTipoHerramienta.getDetalleHerramienta());
+            System.out.println("El detalla de la herramienta es:" +detalleTipoHerramienta.toString());
             stmt.execute();
             
         } catch (Exception e) {
@@ -54,14 +57,19 @@ public class ControladorDetalleHerramienta  {
         
             DetalleHerramienta detalleTipoHerramienta = new DetalleHerramienta() {};
         try {
-            String query = "select detalle_herramienta from detalle_herramienta where id = ?";
+            String query = "select * from detalle_herramienta where id = ?";
             PreparedStatement stmt;
             stmt = conexion.prepareStatement(query);
             
 //            stmt.setArray(1, (Array) detalleTipoHerramienta.getDetalleHerramienta().get(id));
-            ResultSet fila = stmt.getGeneratedKeys();
+            stmt.setLong(1, detalleTipoHerramienta.getId_detalle_herramienta());
+            stmt.setString(2, detalleTipoHerramienta.getDetalleHerramienta());
             
-            System.out.println(fila);
+            stmt.executeQuery();
+            
+            //ResultSet fila = stmt.getGeneratedKeys();
+            
+            //System.out.println(fila);
             
                       
         } catch (Exception e) {
