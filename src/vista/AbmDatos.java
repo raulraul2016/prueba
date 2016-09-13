@@ -434,6 +434,11 @@ public class AbmDatos extends javax.swing.JInternalFrame {
         });
 
         jbManuales.setText("Manuales");
+        jbManuales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbManualesActionPerformed(evt);
+            }
+        });
 
         JbElectricas.setText("Electricas");
 
@@ -638,6 +643,11 @@ public class AbmDatos extends javax.swing.JInternalFrame {
     private void jbRudimentariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRudimentariaActionPerformed
 
         // TODO add your handling code here:Boton Rudimentaria
+        Object componente = evt.getSource();
+//        if(componente == jbRudimentaria){
+//            
+//            her.settHerramienta(tHerramienta);
+//        }
         bandera = 0;
         AbmDetalleHerramienta adh = new AbmDetalleHerramienta();
         adh.setTitle("Herramientas Rudimentarias");
@@ -661,6 +671,24 @@ public class AbmDatos extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jbRudimentariaMouseClicked
 
+    private void jbManualesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbManualesActionPerformed
+        
+          // TODO add your handling code here:Boton Manuales
+        bandera = 0;
+        AbmDetalleHerramienta adh = new AbmDetalleHerramienta();
+        adh.setTitle("Herramientas Manuales");
+        adh.setLocationRelativeTo(null);
+        bandera = 1;
+        if(bandera == 1){
+            JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Manuales a la Lista");
+            adh.setVisible(true);
+            this.desktopIcon.add(adh);
+            if(jbRudimentaria.isSelected()){
+            
+            // caraga elementos a jList
+            listaHerramienta = new DefaultListModel();
+    }//GEN-LAST:event_jbManualesActionPerformed
+        }}
 //    public static int diferenciaEnDias2(Date fechaMayor, Date fechaMenor) {
 //    
 //        long diferenciaEn_ms;
