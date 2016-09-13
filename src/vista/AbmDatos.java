@@ -1,12 +1,10 @@
-
 package vista;
+
 import controlador.ControladorDatoPersonal;
 import controlador.ControladorDatosCarga;
 import static controlador.ControladorEspecialidad.conexion;
 import controlador.ControladorHerramienta;
 import controlador.ControladorTaller;
-
-
 
 import modelo.DatoPersonal;
 import modelo.DatosCarga;
@@ -30,12 +28,9 @@ import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
-
-
-
 public class AbmDatos extends javax.swing.JInternalFrame {
-    
-    ArrayList <Herramienta> herramienta;
+
+    ArrayList<Herramienta> herramienta;
     ArrayList<DetalleHerramienta> detalleHerramientas;
     //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:ii:ss");
     //SimpleDateFormat sdf;
@@ -52,24 +47,22 @@ public class AbmDatos extends javax.swing.JInternalFrame {
     ResultSetMetaData rsm;
     Integer bandera = 0;
     DefaultListModel listaHerramienta, tipoHerramienta;
-    
 
     ///////////////////////////////////////////////////
     public AbmDatos() {
         initComponents();
-        
+
         //sdf = new SimpleDateFormat("dd - MM - yyyy");
-        
         dc = new DatosCarga();
         dp = new DatoPersonal();
-        her= new Herramienta();
-        tal= new Taller();
+        her = new Herramienta();
+        tal = new Taller();
         listaHerramienta = new DefaultListModel();;
         tipoHerramienta = new DefaultListModel();
         modelo = new DefaultTableModel();
         herramienta = new ArrayList<>();
         detalleHerramientas = new ArrayList<>();
-  
+
     }
 
     @SuppressWarnings("unchecked")
@@ -539,7 +532,7 @@ public class AbmDatos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      
+
         //System.out.println("Se agrago correctamente el dato carga");
         //Datos Persona
         String apeNom = jtfApellidoNombre.getText();
@@ -549,7 +542,7 @@ public class AbmDatos extends javax.swing.JInternalFrame {
         String lugarNac = jtfLugarNac.getText();
         System.out.println(lugarNac);
         String telef = jtfTelefono.getText();
-        System.out.println(telef);      
+        System.out.println(telef);
         String email = jtfEmail.getText();
         System.out.println(email);
         String edad = jtfEdad.getText();
@@ -558,13 +551,13 @@ public class AbmDatos extends javax.swing.JInternalFrame {
         System.out.println(dni);
         String estadoCivil = jcbEstadoCivil.getSelectedItem().toString();
         System.out.println(estadoCivil);
-        
-        int anioNac=jdcFechaNac.getCalendar().get(Calendar.YEAR);
-        int mesNac=jdcFechaNac.getCalendar().get(Calendar.MONTH);
-        int diaNac=jdcFechaNac.getCalendar().get(Calendar.DAY_OF_MONTH);
-        String fechaNac= anioNac +"-"+ mesNac +"-"+ diaNac;
+
+        int anioNac = jdcFechaNac.getCalendar().get(Calendar.YEAR);
+        int mesNac = jdcFechaNac.getCalendar().get(Calendar.MONTH);
+        int diaNac = jdcFechaNac.getCalendar().get(Calendar.DAY_OF_MONTH);
+        String fechaNac = anioNac + "-" + mesNac + "-" + diaNac;
         System.out.println(fechaNac);
-        
+
         dp.setFechaNacimiento(fechaNac);
         dp.setApeNom(apeNom);
         dp.setLugNac(lugarNac);
@@ -575,120 +568,111 @@ public class AbmDatos extends javax.swing.JInternalFrame {
         dp.setTel(telef);
         dp.setEdad(edad);
         dp.setEmail(email);
-        
-      
+
         ControladorDatosCarga cdc = new ControladorDatosCarga();
-        
-        int año=jdcFechaCarga.getCalendar().get(Calendar.YEAR);
-        int mes=jdcFechaCarga.getCalendar().get(Calendar.MONTH);
-        int dia=jdcFechaCarga.getCalendar().get(Calendar.DAY_OF_MONTH);
-        
+
+        int año = jdcFechaCarga.getCalendar().get(Calendar.YEAR);
+        int mes = jdcFechaCarga.getCalendar().get(Calendar.MONTH);
+        int dia = jdcFechaCarga.getCalendar().get(Calendar.DAY_OF_MONTH);
+
         String fecha = año + "-" + mes + "-" + dia;
         dc.setFecha_carga(fecha);
-        
+
         System.out.println(fecha);
         String lCarga = jtfLugarCarga.getText();
         dc.setLugarCarga(lCarga);
-        
+
         System.out.println(lCarga);
-        
+
         ControladorDatoPersonal cdp = new ControladorDatoPersonal();
         //Controlador DatoPersona
         cdp.agregar(dp);
         System.out.println("Se agrego correctamente datos personales");
-          
+
         Integer dniTmp = dni;
         Long dniTmp1 = dniTmp.longValue();
         dc.setId_personas(dniTmp1);
         //Controlador DatoCarga
         cdc.agregar(dc);
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       
-//        String tipoHerremienta = jtfTipoHerramienta.getText();
-        
-//        String descripHerramienta= jtfDescripcionHerr.getText();
 
-        her.setTipoHerramienta(null);
+//        String tipoHerremienta = jtfTipoHerramienta.getText();
+//        String descripHerramienta= jtfDescripcionHerr.getText();
+          her.getdHerramienta();
         //her.setTipoHerramienta(tipoHerremienta);
 //        her.setDescripcion(descripHerramienta);
-        
-        
-        ControladorTaller ct= new ControladorTaller();
-        
+
+        ControladorTaller ct = new ControladorTaller();
+
         String lugarProduccion = jcbLugarProduccion.getSelectedItem().toString();
         String descripTaller = jtfDescripTaller.getText();
         String estadoTaller = jcbEstadoTaller.getSelectedItem().toString();
-        
+
         tal.setLugarProduccion(lugarProduccion);
         tal.setDescripcion(descripTaller);
         //tal.setHerramienta(null);
-        
-                
-        ControladorHerramienta ch= new ControladorHerramienta();
-                
+
+        ControladorHerramienta ch = new ControladorHerramienta();
+
         ch.agregar(her);
         System.out.println("Se agrego correctamente datos Taller/Herramienta");
-                
+
         //ct.agregar(tal);
-        
         // dc.setId_personas(dni);
         //cdc.agregar(dc);
-         ct.agregar(tal);
+        ct.agregar(tal);
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jbRudimentariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRudimentariaActionPerformed
 
-        // TODO add your handling code here:Boton Rudimentaria
+        // Boton Rudimentaria
         Object componente = evt.getSource();
 //        if(componente == jbRudimentaria){
 //            
-//            her.settHerramienta(tHerramienta);
-//        }
-        bandera = 0;
-        AbmDetalleHerramienta adh = new AbmDetalleHerramienta();
-        adh.setTitle("Herramientas Rudimentarias");
-        adh.setLocationRelativeTo(null);
-        bandera = 1;
-        if(bandera == 1){
-            JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Rudimentaria a la Lista");
+        int resp = JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Rudimentaria a la Lista?");
+        if (JOptionPane.OK_OPTION == resp) {
+
+            AbmDetalleHerramienta adh = new AbmDetalleHerramienta();
+            adh.setTitle("Herramientas Rudimentarias");
+            adh.setLocationRelativeTo(null);
             adh.setVisible(true);
             this.desktopIcon.add(adh);
-            if(jbRudimentaria.isSelected()){
+            System.out.println("Se agrego una herramienta Rudimentaria");
+        } else {
             
-            // caraga elementos a jList
-            listaHerramienta = new DefaultListModel();
-                                    
+            JOptionPane.showMessageDialog(null, "Seleccione otro tipo de Herramienta si lo necesita");
         }
-        
-        
+
+
     }//GEN-LAST:event_jbRudimentariaActionPerformed
-    }
+
     private void jbRudimentariaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRudimentariaMouseClicked
 
     }//GEN-LAST:event_jbRudimentariaMouseClicked
 
     private void jbManualesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbManualesActionPerformed
-        
-          // TODO add your handling code here:Boton Manuales
+
+        // Boton Manuales
         bandera = 0;
         AbmDetalleHerramienta adh = new AbmDetalleHerramienta();
         adh.setTitle("Herramientas Manuales");
         adh.setLocationRelativeTo(null);
         bandera = 1;
-        if(bandera == 1){
+        if (bandera == 1) {
             JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Manuales a la Lista");
             adh.setVisible(true);
             this.desktopIcon.add(adh);
-            if(jbRudimentaria.isSelected()){
-            
-            // caraga elementos a jList
-            listaHerramienta = new DefaultListModel();
+            if (jbRudimentaria.isSelected()) {
+
+                // caraga elementos a jList
+                listaHerramienta = new DefaultListModel();
     }//GEN-LAST:event_jbManualesActionPerformed
-        }}
+        }
+    }
 //    public static int diferenciaEnDias2(Date fechaMayor, Date fechaMenor) {
 //    
 //        long diferenciaEn_ms;
@@ -699,14 +683,14 @@ public class AbmDatos extends javax.swing.JInternalFrame {
 //        long dias = (diferenciaEn_ms / (1000 * 60 * 60 * 24));
 //        return (int) dias;
 //        }
-        
-    public void nombreFila(){
-         
-        dp = new DatoPersonal(); 
+
+    public void nombreFila() {
+
+        dp = new DatoPersonal();
         //cdp = new ControladorDatoPersonal();
         dc = new DatosCarga();
         //cdc = new ControladorDatosCarga();
-        
+
         modelo.addColumn("Fecha Carga");
         modelo.addColumn("Lugar carga");
         modelo.addColumn("Apellido y Nombre");
@@ -718,34 +702,34 @@ public class AbmDatos extends javax.swing.JInternalFrame {
         modelo.addColumn("Dni");
         modelo.addColumn("Email");
         modelo.addColumn("Estado Civil");
-        
+
         jtbCargaDato.setModel(modelo);
-        }
-    
+    }
+
     private void cargaFilas() {
-        
+
         try {
-            
+
             Class.forName("org.postgresql.Driver");
             String url = "jdbc:postgresql://localhost:5432/mercartenueva";
-            conexion = DriverManager.getConnection(url,"postgres","camello");
+            conexion = DriverManager.getConnection(url, "postgres", "camello");
             //JOptionPane.showConfirmDialog(null, "Conexión Exitosa");
             System.out.println("Conectado");
-            
-            String query = "SELECT fecha_carga, lugar_carga, id_personas, apellido_nombre, domicilio, lugar_nacimiento," +
-                                "edad, dni, correo_electronico, estado_civil FROM datos_carga , personas " +
-                                "WHERE datos_carga.id_personas = personas.id_persona";
-            
+
+            String query = "SELECT fecha_carga, lugar_carga, id_personas, apellido_nombre, domicilio, lugar_nacimiento,"
+                    + "edad, dni, correo_electronico, estado_civil FROM datos_carga , personas "
+                    + "WHERE datos_carga.id_personas = personas.id_persona";
+
             stmt = conexion.prepareStatement(query);
-            
+
             rs = stmt.executeQuery();
-            
+
             rsm = rs.getMetaData();
-            
+
             while (rs.next()) {
-                
-                Object [] fila = new Object[rsm.getColumnCount()];
-                
+
+                Object[] fila = new Object[rsm.getColumnCount()];
+
                 fila[0] = rs.getString(2);
                 fila[1] = rs.getString(3);
                 fila[2] = rs.getString(4);
@@ -757,37 +741,38 @@ public class AbmDatos extends javax.swing.JInternalFrame {
                 fila[8] = rs.getString(10);
                 fila[9] = rs.getString(11);
                 fila[10] = rs.getString(12);
-                
+
                 modelo.addRow(fila);
-                
-            }    
-            
+
+            }
+
             rs.close();
-            
+
         } catch (SQLException error) {
             JOptionPane.showConfirmDialog(null, error);
-            
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AbmDatos.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-       
+        }
+
     }
+
     private void actualizaTabla() {
-        
+
         ResultSet r;
         DefaultTableModel mod;
         try {
-            
+
             r = rs;
-           // nombreFila();
+            // nombreFila();
             //generosControlador.cargaFilas();
             //nombreFila();
             cargaFilas();
             mod = new DefaultTableModel();
-            String fila [] = new String[1];
-             
-            while(r.next()){
-                
+            String fila[] = new String[1];
+
+            while (r.next()) {
+
                 fila[1] = r.getString("fecha_carga");
                 fila[2] = r.getString("lugar_carga");
                 fila[3] = r.getString("apellido_nombre");
@@ -799,18 +784,18 @@ public class AbmDatos extends javax.swing.JInternalFrame {
                 fila[9] = r.getString("estado_civil");
                 fila[10] = r.getString(10);
                 fila[11] = r.getString(11);
-                
+
                 mod.addRow(fila);
-                
+
             }
-            
+
             jtbCargaDato.setModel(mod);
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JbElectricas;
     private javax.swing.ButtonGroup bgTipoHerram;
@@ -867,7 +852,4 @@ public class AbmDatos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfTelefono;
     // End of variables declaration//GEN-END:variables
 
-    
-    
-  
 }

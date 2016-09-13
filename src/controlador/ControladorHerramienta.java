@@ -41,7 +41,8 @@ public class ControladorHerramienta {
             stmt = conexion.prepareStatement(query);
 
             
-            stmt.setArray(1, (Array) herramienta.getTipoHerramienta());
+            //stmt.setArray(1, (Array) herramienta.getTipoHerramienta());
+            stmt.setArray(1, (Array) herramienta.getdHerramienta());
           //stmt.setString(2, herramienta.getDescripcion());
            
 
