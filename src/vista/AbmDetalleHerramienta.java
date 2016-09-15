@@ -5,7 +5,6 @@
  */
 package vista;
 
-import controlador.ControladorDetalleHRudimentaria;
 import controlador.ControladorDetalleHerramienta;
 import java.sql.Connection;
 import java.sql.DriverManager;

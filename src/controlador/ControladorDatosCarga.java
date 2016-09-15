@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import conexion.Conexion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,29 +19,18 @@ import modelo.DatosCarga;
 public class ControladorDatosCarga {
 
     private static String url;
-    private Connection conexion;
-
-    public ControladorDatosCarga() {
-        try {
-            Class.forName("org.postgresql.Driver");
-            url = "jdbc:postgresql://localhost:5432/mercartenueva";
-            this.conexion = DriverManager.getConnection(url, "postgres", "camello");
-            System.out.println("conectado");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+    private  static final Conexion conexion = new Conexion();
 
     public void agregar(Object o) {
         PreparedStatement stmt;
         String query;
         try {
-            //DatoPersonal Dato = (DatoPersonal) o;
+            
             DatosCarga DatoC = (DatosCarga) o;
             query = "insert into datos_carga (id_personas, fecha_carga, lugar_carga ) "
                     + "VALUES ((SELECT id_persona FROM personas WHERE dni=?), ?, ?)";
 
-            stmt = conexion.prepareStatement(query);
+            stmt = conexion.getConexion().prepareStatement(query);
 
             stmt.setLong(1, DatoC.getId_personas());
             stmt.setString(2, DatoC.getFecha_carga());

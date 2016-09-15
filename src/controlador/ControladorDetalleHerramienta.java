@@ -5,78 +5,61 @@
  */
 package controlador;
 
-import java.sql.Array;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import conexion.Conexion;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import modelo.DetalleHerramienta;
 
 /**
  *
  * @author bangho
  */
-public class ControladorDetalleHerramienta  {
-    
-    public static String url;
-    public static Connection conexion;
+public class ControladorDetalleHerramienta {
 
-    public ControladorDetalleHerramienta() {
-    
-    try {
-             Class.forName("org.postgresql.Driver");
-             url= "jdbc:postgresql://localhost:5432/mercartenueva";
-            this.conexion= DriverManager.getConnection(url,"postgres", "camello");
-            System.out.println("conectado");
-        } catch (Exception e) {
-        }
-    }
-    public void agregar(Object o){
-        
+    private static String url;
+    private static final Conexion conexion = new Conexion();
+
+    public void agregar(Object o) {
+
         try {
-            
+
             DetalleHerramienta detalleTipoHerramienta = (DetalleHerramienta) o;
             String query = "insert into detalle_herramienta (detalle_herramienta) values (?)";
             PreparedStatement stmt;
-            stmt = conexion.prepareStatement(query);
-            
+            stmt = conexion.getConexion().prepareStatement(query);
+
 //            stmt.setArray(1, (Array) detalleTipoHerramienta.getDetalleHerramienta());
             //stmt.setLong(1, detalleTipoHerramienta.getId_detalle_herramienta());
             stmt.setString(1, detalleTipoHerramienta.getDetalleHerramienta());
-            System.out.println("El detalla de la herramienta es:" +detalleTipoHerramienta.toString());
+            System.out.println("El detalla de la herramienta es:" + detalleTipoHerramienta.toString());
             stmt.execute();
-            
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-    
-    
-    
-    public int mostrar(int id){
+
+    public int mostrar(int id) {
+
+        DetalleHerramienta detalleTipoHerramienta = new DetalleHerramienta();
         
-            DetalleHerramienta detalleTipoHerramienta = new DetalleHerramienta() {};
         try {
             String query = "select * from detalle_herramienta where id = ?";
             PreparedStatement stmt;
-            stmt = conexion.prepareStatement(query);
-            
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
 //            stmt.setArray(1, (Array) detalleTipoHerramienta.getDetalleHerramienta().get(id));
             stmt.setLong(1, detalleTipoHerramienta.getId_detalle_herramienta());
             stmt.setString(2, detalleTipoHerramienta.getDetalleHerramienta());
-            
+
             stmt.executeQuery();
-            
+
             //ResultSet fila = stmt.getGeneratedKeys();
-            
             //System.out.println(fila);
-            
-                      
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
-        
+
         return id;
     }
-    }
+}

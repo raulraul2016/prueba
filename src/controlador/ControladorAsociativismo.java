@@ -1,8 +1,8 @@
 
-package Controlador;
+package controlador;
 
 import java.sql.DriverManager;
-import Modelo.Asociativismo;
+import modelo.Asociativismo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 /**

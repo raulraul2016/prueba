@@ -630,9 +630,11 @@ public class AbmDatos extends javax.swing.JInternalFrame {
     private void jbRudimentariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRudimentariaActionPerformed
 
         // Boton Rudimentaria
-        Object componente = evt.getSource();
-//        if(componente == jbRudimentaria){
-//            
+            
+        tipoHerramienta.add(1, jbRudimentaria.getText());
+        jlTipoHerramientas.setModel(tipoHerramienta);
+            
+         //hacer metodo de ventana emergente!!!   
         int resp = JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Rudimentaria a la Lista?");
         if (JOptionPane.OK_OPTION == resp) {
 
@@ -649,7 +651,7 @@ public class AbmDatos extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_jbRudimentariaActionPerformed
-
+    //}
     private void jbRudimentariaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRudimentariaMouseClicked
 
     }//GEN-LAST:event_jbRudimentariaMouseClicked

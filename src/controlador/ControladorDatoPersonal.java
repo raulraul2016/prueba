@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import conexion.Conexion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,18 +18,11 @@ import modelo.DatoPersonal;
 public class ControladorDatoPersonal {
     
     private static String url;
-    private static Connection conexion;
+    private  static final Conexion conexion = new Conexion();
 
     public ControladorDatoPersonal() {
     
-         try {
-             Class.forName("org.postgresql.Driver");
-             url= "jdbc:postgresql://localhost:5432/mercartenueva";
-            this.conexion= DriverManager.getConnection(url,"postgres", "camello");
-            System.out.println("conectado");
-        } catch (Exception e) {
-             System.out.println(e.getMessage());
-        }
+         
     }
     
     //Metodo agregar tesis3
@@ -36,9 +30,11 @@ public class ControladorDatoPersonal {
         
         try {
             DatoPersonal Dato = (DatoPersonal) o;
-            String query = "insert into personas(apellido_nombre, lugar_nacimiento,estado_civil, domicilio, e_mail, dni, telefono, edad, fecha_nacimiento) VALUES (?, ?, ?, ?,?, ?, ?, ?, ?)";
+            String query = "insert into personas(apellido_nombre, lugar_nacimiento,estado_civil, "
+                    + "domicilio, e_mail, dni, telefono, edad, fecha_nacimiento) VALUES (?, ?, ?, ?,?, ?, ?, ?, ?)";
             PreparedStatement stmt;
-            stmt = conexion.prepareStatement(query);
+            
+            stmt = conexion.getConexion().prepareStatement(query);
             
             stmt.setString(1, Dato.getApeNom());
             stmt.setString(2, Dato.getLugNac());
