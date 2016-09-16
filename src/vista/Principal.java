@@ -103,7 +103,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
         
-        AbmDatos abmDatos = new AbmDatos();
+        FrmCarga abmDatos = new FrmCarga();
         abmDatos.setVisible(true);
         this.desktopPane.add(abmDatos);
     }//GEN-LAST:event_openMenuItemActionPerformed
