@@ -44,4 +44,20 @@ public class ControladorDatosCarga {
 
     }
 
+    
+    public void modificar (Object o){
+        
+        try {
+            DatosCarga DatoC = (DatosCarga) o;
+            
+            String query = "UPDATE datos_carga SET lugar_carga=?, id_dato_carga=?, id_personas=?, fecha_carga=?\n" +
+                           " WHERE id_dato_carga = ?";
+            
+            PreparedStatement stmt;
+            stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setString(1, DatoC.getLugarCarga());
+        } catch (Exception e) {
+        }
+    }
 }

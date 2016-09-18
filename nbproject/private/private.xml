@@ -5,11 +5,7 @@
         <group>
             <file>file:/home/bangho/NetBeansProjects/prueba2/src/controlador/ControladorDatosCarga.java</file>
             <file>file:/home/bangho/NetBeansProjects/prueba2/src/controlador/ControladorDetalleHerramienta.java</file>
-            <file>file:/home/bangho/NetBeansProjects/prueba2/src/vista/AbmDatos.java</file>
-            <file>file:/home/bangho/NetBeansProjects/prueba2/src/modelo/DetalleHerramienta.java</file>
-            <file>file:/home/bangho/NetBeansProjects/prueba2/src/modelo/Herramienta.java</file>
-            <file>file:/home/bangho/NetBeansProjects/prueba2/src/modelo/herramientaDetalleHerramienta.java</file>
-            <file>file:/home/bangho/NetBeansProjects/prueba2/src/vista/AbmDetalleHerramienta.java</file>
+            <file>file:/home/bangho/NetBeansProjects/prueba2/src/modelo/Controlador.java</file>
         </group>
     </open-files>
 </project-private>
