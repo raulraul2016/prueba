@@ -1,4 +1,3 @@
-
 package controlador;
 
 import conexion.Conexion;
@@ -6,6 +5,9 @@ import static controlador.ControladorEspecialidad.url;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Aprendizaje;
 
 /**
@@ -13,32 +15,65 @@ import modelo.Aprendizaje;
  * @author bangho
  */
 public class ControladorAprendizaje {
-    
+
     private static String url;
-    private static final Conexion conexion =  new Conexion();
+    private static final Conexion conexion = new Conexion();
 
     public ControladorAprendizaje() {
-        
-       }
-    
-    
-    public void agregar (Object o){
-        
+
+    }
+
+    public void agregar(Aprendizaje aprendizaje) {
+
         try {
-            
-            Aprendizaje a = (Aprendizaje) o;
-            String query = "insert into aprendizajes (tipo_aprendizaje) values ( ? )";
+            String query = "insert into aprendizajes (tipo_aprendizaje, descripcion) values (?, ? )";
             PreparedStatement stmt;
             stmt = conexion.getConexion().prepareStatement(query);
-            
-            stmt.setString(1, a.getTipoAprendizaje());
-            
+
+            stmt.setString(1, aprendizaje.getTipoAprendizaje());
+            stmt.setString(2, aprendizaje.getDescripcion());
+
             stmt.execute();
-            
-            
-        } catch (Exception e) {
-            System.out.println(e.getMessage()); 
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorAprendizaje.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void modificar(Aprendizaje aprendizaje) {
+
+        try {
+            String query = "UPDATE aprendizajes SET tipo_aprendizaje=?, descripcion=? WHERE id_aprendizaje=?";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.setString(1, aprendizaje.getTipoAprendizaje());
+            stmt.setString(2, aprendizaje.getDescripcion());
+
+            stmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorAprendizaje.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    public void eliminar(Aprendizaje aprendizaje) {
+
+        try {
+            String query = "DELETE FROM aprendizaje WHERE id_aprendizaje";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.setString(1, aprendizaje.getTipoAprendizaje());
+            stmt.setString(2, aprendizaje.getDescripcion());
+
+            stmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorAprendizaje.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

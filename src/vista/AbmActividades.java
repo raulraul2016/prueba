@@ -47,11 +47,11 @@ public class AbmActividades extends javax.swing.JInternalFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        jcbTipoMatPri = new javax.swing.JComboBox<>();
+        jcbTipoMatPri = new javax.swing.JComboBox<String>();
         jLabel12 = new javax.swing.JLabel();
-        jcbObtencionMatPri = new javax.swing.JComboBox<>();
+        jcbObtencionMatPri = new javax.swing.JComboBox<String>();
         jLabel13 = new javax.swing.JLabel();
-        jcbLugarMatPri = new javax.swing.JComboBox<>();
+        jcbLugarMatPri = new javax.swing.JComboBox<String>();
         jLabel14 = new javax.swing.JLabel();
         jtfMateriaPrima = new javax.swing.JTextField();
         jbTrueque = new javax.swing.JButton();
@@ -62,12 +62,12 @@ public class AbmActividades extends javax.swing.JInternalFrame {
         jCheckBoxTruqueSi = new javax.swing.JCheckBox();
         jCheckBoxTruqueNo = new javax.swing.JCheckBox();
         jLabel16 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<String>();
         jLabel17 = new javax.swing.JLabel();
         jtfTrueque = new javax.swing.JTextField();
         jPanel13 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<String>();
         jLabel19 = new javax.swing.JLabel();
         jtfPeriodoMayVta = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
@@ -98,10 +98,6 @@ public class AbmActividades extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jCheckBoxSi = new javax.swing.JCheckBox();
         jCheckBoxNo = new javax.swing.JCheckBox();
-        jLabel6 = new javax.swing.JLabel();
-        jtfDescripcionCurso = new javax.swing.JTextField();
-        jtfInstitucionDicto = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         jbAgregarRubro = new javax.swing.JButton();
         jbModificarRubro = new javax.swing.JButton();
         jbCancelarRubro = new javax.swing.JButton();
@@ -113,21 +109,21 @@ public class AbmActividades extends javax.swing.JInternalFrame {
         jtfOtorgo = new javax.swing.JTextField();
         jPanel10 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jcbRubro = new javax.swing.JComboBox<>();
+        jcbRubro = new javax.swing.JComboBox<String>();
 
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder("Materia Prima"));
 
         jLabel11.setText("¿Qué tipo de materia prima utiliza?");
 
-        jcbTipoMatPri.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Animal", "Vegetal", "Mineral", "Reciclado", "Industrial" }));
+        jcbTipoMatPri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Animal", "Vegetal", "Mineral", "Reciclado", "Industrial" }));
 
         jLabel12.setText("¿De dónde obtiene la materia prima?");
 
-        jcbObtencionMatPri.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Extracción", "Compra", "De mi propiedad" }));
+        jcbObtencionMatPri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Extracción", "Compra", "De mi propiedad" }));
 
         jLabel13.setText("¿En qué lugar la obtiene?");
 
-        jcbLugarMatPri.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En la zona de residencia", "En otra localidad", "En otra provincia" }));
+        jcbLugarMatPri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "En la zona de residencia", "En otra localidad", "En otra provincia" }));
 
         jLabel14.setText("Otra/s");
 
@@ -146,7 +142,7 @@ public class AbmActividades extends javax.swing.JInternalFrame {
                             .addComponent(jLabel14)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jtfMateriaPrima))
-                        .addComponent(jcbLugarMatPri, javax.swing.GroupLayout.Alignment.LEADING, 0, 171, Short.MAX_VALUE)
+                        .addComponent(jcbLugarMatPri, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jcbObtencionMatPri, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -189,7 +185,7 @@ public class AbmActividades extends javax.swing.JInternalFrame {
 
         jLabel16.setText("¿Con quién lo hace?");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vecinos", "Comerciantes", "Otros artesanos", " " }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vecinos", "Comerciantes", "Otros artesanos", " " }));
 
         jLabel17.setText("Otra/s");
 
@@ -237,7 +233,7 @@ public class AbmActividades extends javax.swing.JInternalFrame {
 
         jLabel18.setText("¿Cuál es el periodo de mayor venta?");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Festivales nacionales", "Semana Santa", "Vacaciones de invierno", "Fin de año", "Fiestas patronales" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Festivales nacionales", "Semana Santa", "Vacaciones de invierno", "Fin de año", "Fiestas patronales" }));
 
         jLabel19.setText("Otra/s");
 
@@ -307,7 +303,7 @@ public class AbmActividades extends javax.swing.JInternalFrame {
                                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Venta Producto-Trueque- Materia Prima", jPanel6);
@@ -513,7 +509,7 @@ public class AbmActividades extends javax.swing.JInternalFrame {
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Especialidad Aprendizaje Formacion", jPanel1);
@@ -526,39 +522,33 @@ public class AbmActividades extends javax.swing.JInternalFrame {
         jLabel5.setText("Realizo cursos de perfeccionamiento");
 
         jCheckBoxSi.setText("Si");
+        jCheckBoxSi.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBoxSiStateChanged(evt);
+            }
+        });
+        jCheckBoxSi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxSiActionPerformed(evt);
+            }
+        });
 
         jCheckBoxNo.setText("No");
-
-        jLabel6.setText("¿Cuales?");
-
-        jLabel7.setText("Persona o Institución que lo dictó");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
                     .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel8Layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jCheckBoxNo)
-                                            .addComponent(jCheckBoxSi)))
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(23, 23, 23))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jtfInstitucionDicto, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfDescripcionCurso))
-                        .addContainerGap())))
+                            .addComponent(jCheckBoxSi)
+                            .addComponent(jCheckBoxNo))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -569,14 +559,6 @@ public class AbmActividades extends javax.swing.JInternalFrame {
                 .addComponent(jCheckBoxSi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jCheckBoxNo)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfDescripcionCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7)
-                .addGap(11, 11, 11)
-                .addComponent(jtfInstitucionDicto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -633,7 +615,7 @@ public class AbmActividades extends javax.swing.JInternalFrame {
 
         jLabel10.setText("Rubro Principal");
 
-        jcbRubro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tradicional", "Etnográfica/Indígena", "De proyección folclórica", "Urbana", "Arte popular" }));
+        jcbRubro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tradicional", "Etnográfica/Indígena", "De proyección folclórica", "Urbana", "Arte popular" }));
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -642,8 +624,8 @@ public class AbmActividades extends javax.swing.JInternalFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbRubro, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbRubro, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
@@ -662,38 +644,38 @@ public class AbmActividades extends javax.swing.JInternalFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbAgregarRubro)
-                    .addComponent(jbModificarRubro)
-                    .addComponent(jbCancelarRubro))
-                .addGap(34, 34, 34)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbModificarRubro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbCancelarRubro)
+                    .addComponent(jbAgregarRubro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addGap(148, 148, 148)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addGap(85, 85, 85))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jbAgregarRubro)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbModificarRubro)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addComponent(jbAgregarRubro)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbModificarRubro))
+                            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jbCancelarRubro))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(198, Short.MAX_VALUE))
+                        .addGap(31, 31, 31)
+                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
 
         jPanel8.getAccessibleContext().setAccessibleDescription("");
@@ -732,14 +714,34 @@ public class AbmActividades extends javax.swing.JInternalFrame {
 
         aprendizaje.setTipoAprendizaje(aprend);
         ControladorAprendizaje ca = new ControladorAprendizaje();
-        ca.agregar(ca);
+        ca.agregar(aprendizaje);
 
         formacion.setNivelFormacion(formac);
         ControladorRubro cr = new ControladorRubro();
         cr.agregar(cr);
 
     }//GEN-LAST:event_jButton1ActionPerformed
-   
+
+    private void jCheckBoxSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxSiActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jCheckBoxSiActionPerformed
+
+    private void jCheckBoxSiStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBoxSiStateChanged
+        
+        if(jCheckBoxSi.isSelected() == true){
+            
+            
+        }
+    }//GEN-LAST:event_jCheckBoxSiStateChanged
+ 
+    public void botonDesactivado(){
+        
+        
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -773,8 +775,6 @@ public class AbmActividades extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -806,8 +806,6 @@ public class AbmActividades extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jcbRubro;
     private javax.swing.JComboBox<String> jcbTipoMatPri;
     private javax.swing.JTable jtbActividades;
-    private javax.swing.JTextField jtfDescripcionCurso;
-    private javax.swing.JTextField jtfInstitucionDicto;
     private javax.swing.JTextField jtfMateriaPrima;
     private javax.swing.JTextField jtfOtorgo;
     private javax.swing.JTextField jtfOtrosEspec;
