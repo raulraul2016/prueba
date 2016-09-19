@@ -728,7 +728,7 @@ public class AbmActividades extends javax.swing.JInternalFrame {
             String otra = jtfOtrosEspec.getText();
         }
         ControladorEspecialidad ce = new ControladorEspecialidad();
-        ce.agregar(ce);
+        ce.agregar(especialidad);
 
         aprendizaje.setTipoAprendizaje(aprend);
         ControladorAprendizaje ca = new ControladorAprendizaje();

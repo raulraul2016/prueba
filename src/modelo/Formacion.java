@@ -11,25 +11,25 @@ package modelo;
  */
 public class Formacion {
     
-    private Long id;
+    private Long id_formacion;
     private String nivelFormacion;
     private String descripcion;
 
     public Formacion() {
     }
 
-    public Formacion(Long id, String nivelFormacion, String descripcion) {
-        this.id = id;
+    public Formacion(Long id_formacion, String nivelFormacion, String descripcion) {
+        this.id_formacion = id_formacion;
         this.nivelFormacion = nivelFormacion;
         this.descripcion = descripcion;
     }
 
-    public Long getId() {
-        return id;
+    public Long getId_formacion() {
+        return id_formacion;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId_formacion(Long id_formacion) {
+        this.id_formacion = id_formacion;
     }
 
     public String getNivelFormacion() {

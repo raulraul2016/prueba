@@ -20,17 +20,17 @@ public class Artesano {
     private String beca;
     private String enseñar;
     private String institucion;
-    private Integer id_persona;
-    private Integer id_formacion;
-    private Integer id_taller;
-    private Integer id_asociativismo;
-    private Integer id_localidad;
-    private Integer id_departamento;
+    private Personas personas;
+    private Formacion formacion;
+    private Taller taller;
+    private Asociativismo asociativismo;
+    private Localidad localidad;
+    private Departamento departamento;
 
     public Artesano() {
     }
 
-    public Artesano(Long id_artesano, String descripcion, String disp_viajar, String disp_horaria, String monotributista, String subsidio, String beca, String enseñar, String institucion, Integer id_persona, Integer id_formacion, Integer id_taller, Integer id_asociativismo, Integer id_localidad, Integer id_departamento) {
+    public Artesano(Long id_artesano, String descripcion, String disp_viajar, String disp_horaria, String monotributista, String subsidio, String beca, String enseñar, String institucion, Personas personas, Formacion formacion, Taller taller, Asociativismo asociativismo, Localidad localidad, Departamento departamento) {
         this.id_artesano = id_artesano;
         this.descripcion = descripcion;
         this.disp_viajar = disp_viajar;
@@ -40,13 +40,15 @@ public class Artesano {
         this.beca = beca;
         this.enseñar = enseñar;
         this.institucion = institucion;
-        this.id_persona = id_persona;
-        this.id_formacion = id_formacion;
-        this.id_taller = id_taller;
-        this.id_asociativismo = id_asociativismo;
-        this.id_localidad = id_localidad;
-        this.id_departamento = id_departamento;
+        this.personas = personas;
+        this.formacion = formacion;
+        this.taller = taller;
+        this.asociativismo = asociativismo;
+        this.localidad = localidad;
+        this.departamento = departamento;
     }
+
+    
 
     public Long getId_artesano() {
         return id_artesano;
@@ -120,52 +122,54 @@ public class Artesano {
         this.institucion = institucion;
     }
 
-    public Integer getId_persona() {
-        return id_persona;
+    public Personas getPersonas() {
+        return personas;
     }
 
-    public void setId_persona(Integer id_persona) {
-        this.id_persona = id_persona;
+    public void setPersonas(Personas personas) {
+        this.personas = personas;
     }
 
-    public Integer getId_formacion() {
-        return id_formacion;
+    public Formacion getFormacion() {
+        return formacion;
     }
 
-    public void setId_formacion(Integer id_formacion) {
-        this.id_formacion = id_formacion;
+    public void setFormacion(Formacion formacion) {
+        this.formacion = formacion;
     }
 
-    public Integer getId_taller() {
-        return id_taller;
+    public Taller getTaller() {
+        return taller;
     }
 
-    public void setId_taller(Integer id_taller) {
-        this.id_taller = id_taller;
+    public void setTaller(Taller taller) {
+        this.taller = taller;
     }
 
-    public Integer getId_asociativismo() {
-        return id_asociativismo;
+    public Asociativismo getAsociativismo() {
+        return asociativismo;
     }
 
-    public void setId_asociativismo(Integer id_asociativismo) {
-        this.id_asociativismo = id_asociativismo;
+    public void setAsociativismo(Asociativismo asociativismo) {
+        this.asociativismo = asociativismo;
     }
 
-    public Integer getId_localidad() {
-        return id_localidad;
+    public Localidad getLocalidad() {
+        return localidad;
     }
 
-    public void setId_localidad(Integer id_localidad) {
-        this.id_localidad = id_localidad;
+    public void setLocalidad(Localidad localidad) {
+        this.localidad = localidad;
     }
 
-    public Integer getId_departamento() {
-        return id_departamento;
+    public Departamento getDepartamento() {
+        return departamento;
     }
 
-    public void setId_departamento(Integer id_departamento) {
-        this.id_departamento = id_departamento;
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
     }
+
+   
     
 }

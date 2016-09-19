@@ -113,7 +113,9 @@ public class ControladorArtesano {
             
             stmt.setLong(1, artesano.getId_artesano());
             
-        } catch (Exception e) {
-        }
+            stmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorArtesano.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }
 }

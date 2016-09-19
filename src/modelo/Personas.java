@@ -9,8 +9,6 @@ package modelo;
  *
  * @author bangho
  */
-public class DetalleCurso {
-    
-        
+public class Personas {
     
 }

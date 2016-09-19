@@ -563,7 +563,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 
 //        String tipoHerremienta = jtfTipoHerramienta.getText();
 //        String descripHerramienta= jtfDescripcionHerr.getText();
-          her.getdHerramienta();
+        her.getdHerramienta();
         //her.setTipoHerramienta(tipoHerremienta);
 //        her.setDescripcion(descripHerramienta);
 
@@ -592,11 +592,10 @@ public class FrmCarga extends javax.swing.JInternalFrame {
     private void jbRudimentariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRudimentariaActionPerformed
 
         // Boton Rudimentaria
-            
         tipoHerramienta.add(1, jbRudimentaria.getText());
         jlTipoHerramientas.setModel(tipoHerramienta);
-            
-         //hacer metodo de ventana emergente!!!   
+
+        //hacer metodo de ventana emergente!!!   
         int resp = JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Rudimentaria a la Lista?");
         if (JOptionPane.OK_OPTION == resp) {
 
@@ -607,7 +606,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
             this.desktopIcon.add(adh);
             System.out.println("Se agrego una herramienta Rudimentaria");
         } else {
-            
+
             JOptionPane.showMessageDialog(null, "Seleccione otro tipo de Herramienta si lo necesita");
         }
 
@@ -667,24 +666,17 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         modelo.addColumn("Email");
         modelo.addColumn("Estado Civil");
 
-        
     }
 
     private void cargaFilas() {
 
         try {
 
-            Class.forName("org.postgresql.Driver");
-            String url = "jdbc:postgresql://localhost:5432/mercartenueva";
-            conexion = DriverManager.getConnection(url, "postgres", "camello");
-            //JOptionPane.showConfirmDialog(null, "Conexión Exitosa");
-            System.out.println("Conectado");
-
             String query = "SELECT fecha_carga, lugar_carga, id_personas, apellido_nombre, domicilio, lugar_nacimiento,"
                     + "edad, dni, correo_electronico, estado_civil FROM datos_carga , personas "
                     + "WHERE datos_carga.id_personas = personas.id_persona";
 
-            stmt = conexion.prepareStatement(query);
+            stmt = conexion.getConexion().prepareStatement(query);
 
             rs = stmt.executeQuery();
 
@@ -715,8 +707,6 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         } catch (SQLException error) {
             JOptionPane.showConfirmDialog(null, error);
 
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FrmCarga.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -752,7 +742,6 @@ public class FrmCarga extends javax.swing.JInternalFrame {
                 mod.addRow(fila);
 
             }
-
 
         } catch (Exception e) {
             System.out.println(e);
