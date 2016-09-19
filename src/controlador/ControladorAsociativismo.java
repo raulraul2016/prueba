@@ -1,6 +1,7 @@
 
 package controlador;
 
+import conexion.Conexion;
 import java.sql.DriverManager;
 import modelo.Asociativismo;
 import java.sql.Connection;
@@ -11,33 +12,23 @@ import java.sql.PreparedStatement;
  */
 public class ControladorAsociativismo {
     
-    public static String url;
-    public static Connection conexion;
+    private static String url;
+    private static final Conexion conexion = new Conexion();
 
     public ControladorAsociativismo() {
-    
-          try {
-             Class.forName("org.postgresql.Driver");
-             url= "jdbc:postgresql://localhost:5432/mercartenueva";
-            this.conexion= DriverManager.getConnection(url,"postgres", "molina");
-            System.out.println("conectado");
-        } catch (Exception e) {
-        }
     }
-    
 
-    
-    public void agregar(Object o){
+    public void agregar(Asociativismo asociativismo){
         
         try {
-            Asociativismo Asoc = (Asociativismo) o;
+            
             String query = "insert into asociativismos (tipo_asociativismo, descripcion_legal_constituido, descripcion) values (?, ?, ?)";
             PreparedStatement stmt;
-            stmt = conexion.prepareStatement(query);
+            stmt = conexion.getConexion().prepareStatement(query);
             
-            stmt.setString(1, Asoc.getTipo_asocit());
-            stmt.setString(2, Asoc.getDescripcionAciocit());
-            stmt.setString(3, Asoc.getDescripLegal());
+            stmt.setString(1, asociativismo.getTipo_asocit());
+            stmt.setString(2, asociativismo.getDescripcionAciocit());
+            stmt.setString(3, asociativismo.getDescripLegal());
             
             stmt.execute();
             
@@ -45,16 +36,16 @@ public class ControladorAsociativismo {
             System.out.println(e.getMessage());
         }
     }
-    public void modificar (Object o, String id){
+    public void modificar (Asociativismo asociativismo){
         
         try {
             
-            Asociativismo Asoc = (Asociativismo) o;
+            
             String query = "update asociat (id_asociativismo, tipo_asociativismo) values (?, ?)";
             PreparedStatement stmt;
-            stmt = conexion.prepareStatement(query);
+            stmt = conexion.getConexion().prepareStatement(query);
             
-            stmt.setLong(1, Asoc.getId_asocit());
+            stmt.setLong(1, asociativismo.getId_asocit());
             
             stmt.executeQuery();
             
@@ -63,15 +54,15 @@ public class ControladorAsociativismo {
         }
     }    
         
-     public void eliminar(Object o, String id){
+     public void eliminar(Asociativismo asociativismo){
          
          try {
-             Asociativismo Asoc = (Asociativismo) o;
+             
              String query = "delete from asociat where id = ?";
              PreparedStatement stmt;
-             stmt = conexion.prepareStatement(query);
+             stmt = conexion.getConexion().prepareStatement(query);
              
-             stmt.setLong(1, Asoc.getId_asocit());
+             stmt.setLong(1, asociativismo.getId_asocit());
              
              stmt.executeQuery();
          } catch (Exception e) {
