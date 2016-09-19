@@ -41,7 +41,7 @@ public class ControladorLocalidad {
     public void modificar(Localidad localidad) {
 
         try {
-            String query = "UPDATE localidades SET id_localidad=?, localidad=?, descripcion=? WHERE id_localidad=?";
+            String query = "UPDATE localidades SET localidad=?, descripcion=? WHERE id_localidad=?";
 
             PreparedStatement stmt;
 

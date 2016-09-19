@@ -1,10 +1,14 @@
 package controlador;
 
 //import static Controladores.ControladorDatoPersonalDatoCarga.url;
+import conexion.Conexion;
 import modelo.Rubro;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -12,21 +16,13 @@ import java.sql.PreparedStatement;
  */
 public class ControladorRubro {
 
-    public static String url;
-    public static Connection conexion;
+    private static String url;
+    private static Conexion conexion = new Conexion();
     
     
     
     public ControladorRubro() {
-        
-         try {
-             Class.forName("org.postgresql.Driver");
-             url= "jdbc:postgresql://localhost:5432/mercartenueva";
-            this.conexion= DriverManager.getConnection(url,"postgres", "camello");
-            System.out.println("conectado");
-        } catch (Exception e) {
-        }
-        
+                
     }
     
     public void agregar(Object o) {
@@ -37,7 +33,7 @@ public class ControladorRubro {
               Rubro Rubro= (Rubro) o;
               String query= "insert into rubros (id_especialidad, id_aprendizaje, tipo_rubro, descripcion) values ((select id_especialidad from especialidades where id_especilidades = ?), (select id_aprendizaje from aprendizajes where id_aprendizaje = ?),?,?)";
               PreparedStatement stmt;
-              stmt = conexion.prepareStatement(query);
+              stmt = conexion.getConexion().prepareStatement(query);
               
               stmt.setLong(1, Rubro.getId_especialidad());
               stmt.setLong(2, Rubro.getId_aprendizaje());
@@ -54,4 +50,42 @@ public class ControladorRubro {
         }
   }
     
+    
+    public void modificar(Rubro rubro){
+        
+        try {
+            String query = "INSERT INTO rubros(tipo_rubro, descripcion) VALUES (?, ?)";
+            
+            PreparedStatement stmt;
+            
+            stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setString(1, rubro.getTipoRubro());
+            stmt.setString(2, rubro.getDescripcionRubro());
+            
+            stmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorRubro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public void eliminar(Rubro rubro){
+        
+        try {
+            String query = "DELETE FROM rubro WHERE id_rubro = ?";
+            
+            PreparedStatement stmt;
+            
+            stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setLong(1, rubro.getId());
+            
+            stmt.execute();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorRubro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
 }

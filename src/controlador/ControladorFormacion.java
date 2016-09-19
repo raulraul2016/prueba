@@ -42,7 +42,7 @@ public class ControladorFormacion {
     public void modificar(Formacion formacion){
         
         try {
-            String query = "UPDATE formaciones SET id_formacion=?, nivel_formacion=?, descripcion=?\n" +
+            String query = "UPDATE formaciones SET nivel_formacion=?, descripcion=?\n" +
                     " WHERE id_formacion=?";
             
             PreparedStatement stmt;

@@ -7,6 +7,7 @@ package controlador;
 
 import conexion.Conexion;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,20 +22,19 @@ public class ControladorDatosCarga {
     private static String url;
     private  static final Conexion conexion = new Conexion();
 
-    public void agregar(Object o) {
+    public void agregar(DatosCarga datosCarga) {
         PreparedStatement stmt;
-        String query;
+        
         try {
             
-            DatosCarga DatoC = (DatosCarga) o;
-            query = "insert into datos_carga (id_personas, fecha_carga, lugar_carga ) "
+            String query = "insert into datos_carga (id_personas, fecha_carga, lugar_carga ) "
                     + "VALUES ((SELECT id_persona FROM personas WHERE dni=?), ?, ?)";
 
             stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.setLong(1, DatoC.getId_personas());
-            stmt.setString(2, DatoC.getFecha_carga());
-            stmt.setString(3, DatoC.getLugarCarga());
+            stmt.setLong(1, datosCarga.getId_personas());
+            stmt.setString(2, datosCarga.getFecha_carga());
+            stmt.setString(3, datosCarga.getLugarCarga());
 
             stmt.execute();
 
@@ -45,18 +45,20 @@ public class ControladorDatosCarga {
     }
 
     
-    public void modificar (Object o){
+    public void modificar (DatosCarga datosCarga){
         
         try {
-            DatosCarga DatoC = (DatosCarga) o;
-            
-            String query = "UPDATE datos_carga SET lugar_carga=?, id_dato_carga=?, id_personas=?, fecha_carga=?\n" +
+                        
+            String query = "UPDATE datos_carga SET lugar_carga = ?, fecha_carga = ? \n" +
                            " WHERE id_dato_carga = ?";
             
             PreparedStatement stmt;
             stmt = conexion.getConexion().prepareStatement(query);
             
-            stmt.setString(1, DatoC.getLugarCarga());
+            stmt.setString(1, datosCarga.getLugarCarga());
+            stmt.setDate(2, Date.valueOf(datosCarga.getFecha_carga()));
+            
+            stmt.execute();
         } catch (Exception e) {
         }
     }

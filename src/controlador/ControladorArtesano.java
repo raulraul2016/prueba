@@ -70,7 +70,7 @@ public class ControladorArtesano {
         
         try {
             
-            String query = "UPDATE public.artesanos SET id_artesano=?, descripcion=?,"
+            String query = "UPDATE public.artesanos SET descripcion=?,"
                + " disponibilidad_viajar=?, disponibilidad_horaria=?,monotributista=?,"
                + " subsidio=?, beca=?, institucion=?, \"enseñar\"=?,id_persona=?,"
                + " id_formacion=?, id_taller=?, id_asociativismo=?, id_localidad=?,"

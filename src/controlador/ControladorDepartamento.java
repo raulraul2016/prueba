@@ -46,7 +46,7 @@ public class ControladorDepartamento {
     public void modificar(Departamento departamento){
         
         try {
-            String query = "UPDATE departamentos SET id_departamento=?, departamento=?, descripcion=?\n" +
+            String query = "UPDATE departamentos SET departamento=?, descripcion=?\n" +
                     " WHERE id_departamento = ?";
             
             PreparedStatement stmt;

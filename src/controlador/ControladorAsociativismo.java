@@ -22,7 +22,8 @@ public class ControladorAsociativismo {
         
         try {
             
-            String query = "insert into asociativismos (tipo_asociativismo, descripcion_legal_constituido, descripcion) values (?, ?, ?)";
+            String query = "insert into asociativismos (tipo_asociativismo, descripcion_legal_constituido, "
+                         + "descripcion) values (?, ?, ?)";
             PreparedStatement stmt;
             stmt = conexion.getConexion().prepareStatement(query);
             
@@ -41,11 +42,14 @@ public class ControladorAsociativismo {
         try {
             
             
-            String query = "update asociat (id_asociativismo, tipo_asociativismo) values (?, ?)";
+            String query = "UPDATE asociativismos SET tipo_asociativismo = ?, descripcion_legal_constituido = ?, \n" +
+                           "descripcion = ? WHERE id_asociativismo = ?";
             PreparedStatement stmt;
             stmt = conexion.getConexion().prepareStatement(query);
             
-            stmt.setLong(1, asociativismo.getId_asocit());
+            stmt.setString(1, asociativismo.getTipo_asocit());
+            stmt.setString(2, asociativismo.getDescripcionAciocit());
+            stmt.setString(3, asociativismo.getDescripLegal());
             
             stmt.executeQuery();
             
@@ -58,7 +62,7 @@ public class ControladorAsociativismo {
          
          try {
              
-             String query = "delete from asociat where id = ?";
+             String query = "delete from asociat where id_asociativismo = ?";
              PreparedStatement stmt;
              stmt = conexion.getConexion().prepareStatement(query);
              

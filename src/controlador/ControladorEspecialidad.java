@@ -35,7 +35,7 @@ public class ControladorEspecialidad {
     public void modificar(Especialidad especialidad) {
 
         try {
-            String query = "UPDATE especialidades SET id_especialidad=?, tipo_especialidad=?, descripcion=?\n"
+            String query = "UPDATE especialidades SET tipo_especialidad=?, descripcion=?\n"
                     + " WHERE id_especialidad=?";
 
             PreparedStatement stmt;
