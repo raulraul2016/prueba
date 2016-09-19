@@ -11,6 +11,8 @@ import modelo.Formacion;
 import controlador.ControladorAprendizaje;
 import controlador.ControladorEspecialidad;
 import controlador.ControladorRubro;
+import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  *
@@ -21,17 +23,25 @@ public class AbmActividades extends javax.swing.JInternalFrame {
     Especialidad especialidad;
     Aprendizaje aprendizaje;
     Formacion formacion;
-    
-    
-   
+    JRadioButton jrbCursoSii;
+    JRadioButton jrbCursoNoo;
+    ButtonGroup gb;
+
     public AbmActividades() {
         initComponents();
-        
+
         especialidad = new Especialidad();
         aprendizaje = new Aprendizaje();
         formacion = new Formacion();
-        
-        
+        jrbCursoSii = new JRadioButton();
+        jrbCursoNoo = new JRadioButton();
+        gb = new ButtonGroup();
+        //gb.add(jrbCursoSii);
+        //gb.add(jrbCursoNoo);
+        gb.clearSelection();
+        gb.add(jrbCursoSii);
+        gb.add(jrbCursoNoo);
+
     }
 
     /**
@@ -43,6 +53,7 @@ public class AbmActividades extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel6 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -87,17 +98,11 @@ public class AbmActividades extends javax.swing.JInternalFrame {
         jcbFormacion = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbActividades = new javax.swing.JTable();
-        jPanel7 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
         jPanel5 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jCheckBoxSi = new javax.swing.JCheckBox();
-        jCheckBoxNo = new javax.swing.JCheckBox();
+        jrbCursoSi = new javax.swing.JRadioButton();
+        jbrCursoNo = new javax.swing.JRadioButton();
         jbAgregarRubro = new javax.swing.JButton();
         jbModificarRubro = new javax.swing.JButton();
         jbCancelarRubro = new javax.swing.JButton();
@@ -420,48 +425,6 @@ public class AbmActividades extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtbActividades);
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Rubro"));
-
-        jCheckBox1.setText("Tradicional");
-
-        jCheckBox2.setText("Etnografia/Ondigena");
-
-        jCheckBox3.setText("De proyeccion folklorica");
-
-        jCheckBox4.setText("Urbana");
-
-        jCheckBox5.setText("Arte popular");
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox3)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox4)
-                    .addComponent(jCheckBox5))
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCheckBox1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(jCheckBox5)
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -476,13 +439,8 @@ public class AbmActividades extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -505,8 +463,7 @@ public class AbmActividades extends javax.swing.JInternalFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(187, 187, 187)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -521,19 +478,14 @@ public class AbmActividades extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Realizo cursos de perfeccionamiento");
 
-        jCheckBoxSi.setText("Si");
-        jCheckBoxSi.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jCheckBoxSiStateChanged(evt);
-            }
-        });
-        jCheckBoxSi.addActionListener(new java.awt.event.ActionListener() {
+        jrbCursoSi.setText("Si");
+        jrbCursoSi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxSiActionPerformed(evt);
+                jrbCursoSiActionPerformed(evt);
             }
         });
 
-        jCheckBoxNo.setText("No");
+        jbrCursoNo.setText("No");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -543,10 +495,10 @@ public class AbmActividades extends javax.swing.JInternalFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addContainerGap()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBoxSi)
-                            .addComponent(jCheckBoxNo))
+                            .addComponent(jrbCursoSi)
+                            .addComponent(jbrCursoNo))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -556,10 +508,10 @@ public class AbmActividades extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBoxSi)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBoxNo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jrbCursoSi)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbrCursoNo)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jbAgregarRubro.setText("Agregar");
@@ -661,15 +613,13 @@ public class AbmActividades extends javax.swing.JInternalFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(jbAgregarRubro)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbModificarRubro))
-                            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(48, 48, 48)
+                        .addComponent(jbAgregarRubro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbModificarRubro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbCancelarRubro))
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -705,7 +655,7 @@ public class AbmActividades extends javax.swing.JInternalFrame {
         String formac = jcbFormacion.getSelectedItem().toString();
 
         especialidad.setTipoEspecialidad(espec);
-        if(espec.equals("")){
+        if (espec.equals("")) {
 
             String otra = jtfOtrosEspec.getText();
         }
@@ -722,40 +672,28 @@ public class AbmActividades extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jCheckBoxSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxSiActionPerformed
-        // TODO add your handling code here:
-        
-        
-    }//GEN-LAST:event_jCheckBoxSiActionPerformed
+    private void jrbCursoSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbCursoSiActionPerformed
 
-    private void jCheckBoxSiStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBoxSiStateChanged
-        
-        if(jCheckBoxSi.isSelected() == true){
+        if(jrbCursoSii.isSelected()){
             
-            
+            FrmVentanaCurso frmVentanaCurso = new FrmVentanaCurso();
+            frmVentanaCurso.setVisible(true);
+            this.desktopIcon.add(frmVentanaCurso);
         }
-    }//GEN-LAST:event_jCheckBoxSiStateChanged
- 
-    public void botonDesactivado(){
-        
-        
+    }//GEN-LAST:event_jrbCursoSiActionPerformed
+
+    public void botonDesactivado() {
+
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBoxNo;
     private javax.swing.JCheckBox jCheckBoxPremiosNo;
     private javax.swing.JCheckBox jCheckBoxPremiosSi;
-    private javax.swing.JCheckBox jCheckBoxSi;
     private javax.swing.JCheckBox jCheckBoxTruqueNo;
     private javax.swing.JCheckBox jCheckBoxTruqueSi;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -787,7 +725,6 @@ public class AbmActividades extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
@@ -798,6 +735,7 @@ public class AbmActividades extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbModificarRubro;
     private javax.swing.JButton jbTrueque;
+    private javax.swing.JRadioButton jbrCursoNo;
     private javax.swing.JComboBox jcbAprendizaje;
     private javax.swing.JComboBox jcbEspecialidad;
     private javax.swing.JComboBox jcbFormacion;
@@ -805,6 +743,7 @@ public class AbmActividades extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jcbObtencionMatPri;
     private javax.swing.JComboBox<String> jcbRubro;
     private javax.swing.JComboBox<String> jcbTipoMatPri;
+    private javax.swing.JRadioButton jrbCursoSi;
     private javax.swing.JTable jtbActividades;
     private javax.swing.JTextField jtfMateriaPrima;
     private javax.swing.JTextField jtfOtorgo;

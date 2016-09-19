@@ -615,6 +615,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
     //}
     private void jbRudimentariaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRudimentariaMouseClicked
 
+        
     }//GEN-LAST:event_jbRudimentariaMouseClicked
 
     private void jbManualesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbManualesActionPerformed
