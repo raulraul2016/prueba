@@ -7,6 +7,9 @@ package controlador;
 
 import conexion.Conexion;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.DetalleHerramienta;
 
 /**
@@ -18,39 +21,69 @@ public class ControladorDetalleHerramienta {
     private static String url;
     private static final Conexion conexion = new Conexion();
 
-    public void agregar(Object o) {
+    public void agregar(DetalleHerramienta detalleHerramienta) {
 
         try {
 
-            DetalleHerramienta detalleTipoHerramienta = (DetalleHerramienta) o;
-            String query = "insert into detalle_herramienta (detalle_herramienta) values (?)";
+            String query = "INSERT INTO herramientas(descripcion, nombre_herramienta, ) VALUES (?, ?)";
+
             PreparedStatement stmt;
             stmt = conexion.getConexion().prepareStatement(query);
 
-//            stmt.setArray(1, (Array) detalleTipoHerramienta.getDetalleHerramienta());
-            //stmt.setLong(1, detalleTipoHerramienta.getId_detalle_herramienta());
-            stmt.setString(1, detalleTipoHerramienta.getDetalleHerramienta());
-            System.out.println("El detalla de la herramienta es:" + detalleTipoHerramienta.toString());
+            stmt.setString(1, detalleHerramienta.getTipo_herramienta());
+            stmt.setString(2, detalleHerramienta.getNombre_Herramienta());
+
+            stmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorDetalleHerramienta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void modificar(DetalleHerramienta detalleHerramienta) {
+
+        try {
+            String query = "UPDATE herramientas SET descripcion=?, nombre_herramienta=? WHERE id_herramienta=?";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.setString(1, detalleHerramienta.getNombre_Herramienta());
+            stmt.setString(2, detalleHerramienta.getTipo_herramienta());
+
             stmt.execute();
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorDetalleHerramienta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public int mostrar(int id) {
+    public void eliminar(DetalleHerramienta detalleHerramienta) {
 
-        DetalleHerramienta detalleTipoHerramienta = new DetalleHerramienta();
-        
+        try {
+            String query = "DELETE FROM herramientas WHERE id_herramienta = ?";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.setLong(1, detalleHerramienta.getId_detalle_herramienta());
+
+            stmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorDetalleHerramienta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void mostrar(DetalleHerramienta detalleHerramienta) {
+
         try {
             String query = "select * from detalle_herramienta where id = ?";
             PreparedStatement stmt;
 
             stmt = conexion.getConexion().prepareStatement(query);
-
-//            stmt.setArray(1, (Array) detalleTipoHerramienta.getDetalleHerramienta().get(id));
-            stmt.setLong(1, detalleTipoHerramienta.getId_detalle_herramienta());
-            stmt.setString(2, detalleTipoHerramienta.getDetalleHerramienta());
 
             stmt.executeQuery();
 
@@ -60,6 +93,6 @@ public class ControladorDetalleHerramienta {
             System.out.println(e.getMessage());
         }
 
-        return id;
+        
     }
 }

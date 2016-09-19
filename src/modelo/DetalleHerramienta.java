@@ -14,16 +14,18 @@ import java.util.ArrayList;
 public class DetalleHerramienta {
     
     private Long id_detalle_herramienta;
-    private String detalleHerramienta;
+    private String nombre_Herramienta;
+    private String tipo_herramienta;
     //Cargo los Detalles de las Herramientas en un jtf y los paso
     //a una jList. 
 
     public DetalleHerramienta() {
     }
 
-    public DetalleHerramienta(Long id_detalle_herramienta, String detalleHerramienta) {
+    public DetalleHerramienta(Long id_detalle_herramienta, String nombre_Herramienta, String tipo_herramienta) {
         this.id_detalle_herramienta = id_detalle_herramienta;
-        this.detalleHerramienta = detalleHerramienta;
+        this.nombre_Herramienta = nombre_Herramienta;
+        this.tipo_herramienta = tipo_herramienta;
     }
 
     public Long getId_detalle_herramienta() {
@@ -34,19 +36,20 @@ public class DetalleHerramienta {
         this.id_detalle_herramienta = id_detalle_herramienta;
     }
 
-    public String getDetalleHerramienta() {
-        return detalleHerramienta;
+    public String getNombre_Herramienta() {
+        return nombre_Herramienta;
     }
 
-    public void setDetalleHerramienta(String detalleHerramienta) {
-        this.detalleHerramienta = detalleHerramienta;
+    public void setNombre_Herramienta(String nombre_Herramienta) {
+        this.nombre_Herramienta = nombre_Herramienta;
     }
 
-    @Override
-    public String toString() {
-        return  detalleHerramienta;
+    public String getTipo_herramienta() {
+        return tipo_herramienta;
     }
 
-    
-    
+    public void setTipo_herramienta(String tipo_herramienta) {
+        this.tipo_herramienta = tipo_herramienta;
+    }
+
 }
