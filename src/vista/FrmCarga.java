@@ -592,7 +592,12 @@ public class FrmCarga extends javax.swing.JInternalFrame {
     private void jbRudimentariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRudimentariaActionPerformed
 
         // Boton Rudimentaria
-        tipoHerramienta.add(1, jbRudimentaria.getText());
+        if(tipoHerramienta.getSize()>0 ){
+            tipoHerramienta.add(tipoHerramienta.getSize(), jbRudimentaria.getText());
+        }else{
+            tipoHerramienta.add(0, jbRudimentaria.getName());
+        }
+                
         jlTipoHerramientas.setModel(tipoHerramienta);
 
         //hacer metodo de ventana emergente!!!   
