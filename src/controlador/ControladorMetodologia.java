@@ -24,25 +24,37 @@ public class ControladorMetodologia {
                     + "            precio_producto, cantidad_producto)\n"
                     + "    VALUES (?, ?, ?, \n"
                     + "            ?);";
-            
+
             PreparedStatement stmt;
-            
+
             stmt = conexion.getConexion().prepareStatement(query);
-            
+
             stmt.setString(1, metodologia.getDescripcion_trabajo());
             stmt.setString(2, metodologia.getDescripcion_tiempo_produ());
             stmt.setDouble(3, metodologia.getPrecio_producto());
             stmt.setInt(4, metodologia.getCantidad_producto());
-            
+
             stmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ControladorMetodologia.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
-    
-    public void modificar(Metodologia metodologia){
+    public void modificar(Metodologia metodologia) {
+
+        try {
+            String query = "UPDATE public.metodologias\n"
+                    + "   SET descripcion_trabajo=?, descripcion_tiempo_produ=?, \n"
+                    + "       precio_producto=?, cantidad_producto=?\n"
+                    + " WHERE id_metodologia=?";
+            
+            PreparedStatement stmt;
+            
+            stmt = conexion.getConexion().prepareStatement(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorMetodologia.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
     }
