@@ -139,20 +139,18 @@ public class FrmDetalleHerramienta extends javax.swing.JInternalFrame {
     public void agregar(){
         String detelleH = jtfDHerramienta.getText();
         
-        jtDHerramienta.add(detelleH);
-        
         
     }
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
 
         // Código boton agregar
-        agregarLista();
+        
 
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
 
-        eliminaLista();
+        
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed

@@ -207,7 +207,8 @@ public class AbmDetalleHerramienta extends javax.swing.JFrame {
         dh = new DetalleHerramienta();
         String texto = jtfDHerramienta.getText();
         
-        dh.setDetalleHerramienta(texto);
+        //dh.setDetalleHerramienta(texto);
+        dh.setNombre_Herramienta(texto);
         cdh.agregar(dh);
         
         actualizaTabla();
