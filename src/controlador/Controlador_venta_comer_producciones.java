@@ -64,4 +64,23 @@ public class Controlador_venta_comer_producciones {
 
     }
 
+    public void eliminar(Venta_comer_producciones venta_comer_producciones) {
+
+        try {
+            String query = "DELETE FROM venta_comer_producciones_artesano\n"
+                    + " WHERE id_venta_comer_produ=?";
+            
+            PreparedStatement stmt;
+            
+            stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setLong(1, venta_comer_producciones.getId_venta_comer_produ());
+            
+            stmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(Controlador_venta_comer_producciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
 }
