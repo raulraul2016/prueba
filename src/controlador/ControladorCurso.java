@@ -6,11 +6,13 @@
 package controlador;
 
 import conexion.Conexion;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Curso;
+import modelo.Institucion;
 
 /**
  *
@@ -34,6 +36,7 @@ public class ControladorCurso {
 
             stmt.setString(1, curso.getNombre_curso());
             stmt.setString(2, curso.getDescripcion());
+            stmt.setLong(3, curso.getInstitucion().getId_institucion());
             stmt.setDate(4, curso.getFecha_entrega());
 
             stmt.execute();
@@ -46,17 +49,19 @@ public class ControladorCurso {
     public void modificar(Curso curso) {
         try {
             String query = "UPDATE cursos_perfeccionamiento\n"
-                    + " SET nombre_curso=?, descripcion=?, \n"
-                    + " fecha_entrega=?\n"
+                    + " SET nombre_curso=?, descripcion=?,id_institucion\n"
+                    + " fecha_entrega=?, \n"
                     + " WHERE id_curso_perfeccionamiento=?";
 
             PreparedStatement stmt;
 
             stmt = conexion.getConexion().prepareStatement(query);
-            
+
             stmt.setString(1, curso.getNombre_curso());
-            stmt.setString(3, curso.getDescripcion());
-            stmt.setLong(4, curso.getId_cusro_perfeccionamiento());
+            stmt.setString(2, curso.getDescripcion());
+            stmt.setLong(3, Long.valueOf(curso.getInstitucion().getId_institucion()));
+            stmt.setDate(4, (curso.getFecha_entrega()));
+            stmt.setLong(5, curso.getId_cusro_perfeccionamiento());
 
             stmt.execute();
         } catch (SQLException ex) {

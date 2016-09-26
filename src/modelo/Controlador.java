@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import controlador.ControladorCurso;
+
 /**
  *
  * @author bangho
@@ -14,6 +16,10 @@ public class Controlador {
     public static void main(String[] args) {
         // TODO code application logic here
 
-      
+        Curso cu = new Curso();
+        ControladorCurso ccu = new ControladorCurso();
+        
+        
+
     }
 }
