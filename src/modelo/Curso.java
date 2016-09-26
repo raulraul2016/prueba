@@ -1,25 +1,28 @@
-
 package modelo;
+
+import java.sql.Date;
 
 /**
  *
  * @author bangho
  */
 public class Curso {
-    
+
     private Long id_cusro_perfeccionamiento;
-    private String tipo_curso;
-    private String institucion;
+    private String nombre_curso;
+    private Date fecha_entrega;
     private String descripcion;
+    private Institucion institucion;
 
     public Curso() {
     }
 
-    public Curso(Long id_cusro_perfeccionamiento, String tipo_curso, String institucion, String descripcion) {
+    public Curso(Long id_cusro_perfeccionamiento, String nombre_curso, Date fecha_entrega, String descripcion, Institucion institucion) {
         this.id_cusro_perfeccionamiento = id_cusro_perfeccionamiento;
-        this.tipo_curso = tipo_curso;
-        this.institucion = institucion;
+        this.nombre_curso = nombre_curso;
+        this.fecha_entrega = fecha_entrega;
         this.descripcion = descripcion;
+        this.institucion = institucion;
     }
 
     public Long getId_cusro_perfeccionamiento() {
@@ -30,20 +33,20 @@ public class Curso {
         this.id_cusro_perfeccionamiento = id_cusro_perfeccionamiento;
     }
 
-    public String getTipo_curso() {
-        return tipo_curso;
+    public String getNombre_curso() {
+        return nombre_curso;
     }
 
-    public void setTipo_curso(String tipo_curso) {
-        this.tipo_curso = tipo_curso;
+    public void setNombre_curso(String nombre_curso) {
+        this.nombre_curso = nombre_curso;
     }
 
-    public String getInstitucion() {
-        return institucion;
+    public Date getFecha_entrega() {
+        return fecha_entrega;
     }
 
-    public void setInstitucion(String institucion) {
-        this.institucion = institucion;
+    public void setFecha_entrega(Date fecha_entrega) {
+        this.fecha_entrega = fecha_entrega;
     }
 
     public String getDescripcion() {
@@ -53,8 +56,13 @@ public class Curso {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
-    
 
-    
+    public Institucion getInstitucion() {
+        return institucion;
+    }
+
+    public void setInstitucion(Institucion institucion) {
+        this.institucion = institucion;
+    }
+
 }

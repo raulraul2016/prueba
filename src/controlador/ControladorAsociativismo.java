@@ -2,9 +2,7 @@
 package controlador;
 
 import conexion.Conexion;
-import java.sql.DriverManager;
 import modelo.Asociativismo;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 /**
  *

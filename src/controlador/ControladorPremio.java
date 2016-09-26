@@ -71,7 +71,7 @@ public class ControladorPremio {
 
             stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.setLong(1, premio.getId_premio());
+            stmt.setLong(1, Long.valueOf(premio.getId_premio()));
 
             stmt.execute();
         } catch (SQLException ex) {

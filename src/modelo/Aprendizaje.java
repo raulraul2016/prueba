@@ -1,27 +1,27 @@
 package modelo;
 
-
 public class Aprendizaje {
-    
-    Long id;
+
+    Long id_aprendizaje;
     String TipoAprendizaje;
     String Descripcion;
 
     public Aprendizaje() {
     }
 
-    public Aprendizaje(Long id, String TipoAprendizaje, String Descripcion) {
-        this.id = id;
+    public Aprendizaje(Long id_aprendizaje, String TipoAprendizaje, String Descripcion) {
+
+        this.id_aprendizaje = id_aprendizaje;
         this.TipoAprendizaje = TipoAprendizaje;
         this.Descripcion = Descripcion;
     }
-    
-    public Long getId() {
-        return id;
+
+    public Long getId_aprendizaje() {
+        return id_aprendizaje;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId_aprendizaje(Long id_aprendizaje) {
+        this.id_aprendizaje = id_aprendizaje;
     }
 
     public String getTipoAprendizaje() {
@@ -39,5 +39,5 @@ public class Aprendizaje {
     public void setDescripcion(String Descripcion) {
         this.Descripcion = Descripcion;
     }
-       
+
 }

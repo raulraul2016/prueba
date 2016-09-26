@@ -43,7 +43,8 @@ public class ControladorAprendizaje {
     public void modificar(Aprendizaje aprendizaje) {
 
         try {
-            String query = "UPDATE aprendizajes SET tipo_aprendizaje=?, descripcion=? WHERE id_aprendizaje=?";
+            String query = "UPDATE aprendizajes SET tipo_aprendizaje=?, descripcion=?"
+                    + " WHERE id_aprendizaje=?";
 
             PreparedStatement stmt;
 
@@ -51,6 +52,7 @@ public class ControladorAprendizaje {
 
             stmt.setString(1, aprendizaje.getTipoAprendizaje());
             stmt.setString(2, aprendizaje.getDescripcion());
+            stmt.setLong(3, aprendizaje.getId_aprendizaje());
 
             stmt.execute();
         } catch (SQLException ex) {
@@ -61,14 +63,15 @@ public class ControladorAprendizaje {
     public void eliminar(Aprendizaje aprendizaje) {
 
         try {
-            String query = "DELETE FROM aprendizaje WHERE id_aprendizaje";
+            String query = "DELETE FROM aprendizajes WHERE id_aprendizaje=?";
 
             PreparedStatement stmt;
 
             stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.setString(1, aprendizaje.getTipoAprendizaje());
-            stmt.setString(2, aprendizaje.getDescripcion());
+            //stmt.setLong(1, aprendizaje.getId_aprendizaje());
+            
+            stmt.setLong(1, aprendizaje.getId_aprendizaje());
 
             stmt.execute();
         } catch (SQLException ex) {

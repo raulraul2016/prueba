@@ -57,7 +57,6 @@ public class Premio {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
-    
+
     
 }
