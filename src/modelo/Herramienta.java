@@ -1,7 +1,6 @@
 package modelo;
 
 import java.util.ArrayList;
-import modelo.DetalleHerramienta;
 
 /**
  *
@@ -10,13 +9,19 @@ import modelo.DetalleHerramienta;
 public class Herramienta {
 
     private Long id;
-    private ArrayList<DetalleHerramienta> dHerramienta;
+    private String nombreHerramienta;
+    private TipoHerramienta tipoHerramienta;
+    private String descripcion;
+    private ArrayList<TipoHerramienta> dHerramienta;
 
     public Herramienta() {
     }
 
-    public Herramienta(Long id, ArrayList<DetalleHerramienta> dHerramienta) {
+    public Herramienta(Long id, String nombreHerramienta, TipoHerramienta tipoHerramienta, String descripcion, ArrayList<TipoHerramienta> dHerramienta) {
         this.id = id;
+        this.nombreHerramienta = nombreHerramienta;
+        this.tipoHerramienta = tipoHerramienta;
+        this.descripcion = descripcion;
         this.dHerramienta = dHerramienta;
     }
 
@@ -28,12 +33,37 @@ public class Herramienta {
         this.id = id;
     }
 
-    public ArrayList<DetalleHerramienta> getdHerramienta() {
+    public String getNombreHerramienta() {
+        return nombreHerramienta;
+    }
+
+    public void setNombreHerramienta(String nombreHerramienta) {
+        this.nombreHerramienta = nombreHerramienta;
+    }
+
+    public TipoHerramienta getTipoHerramienta() {
+        return tipoHerramienta;
+    }
+
+    public void setTipoHerramienta(TipoHerramienta tipoHerramienta) {
+        this.tipoHerramienta = tipoHerramienta;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public ArrayList<TipoHerramienta> getdHerramienta() {
         return dHerramienta;
     }
 
-    public void setdHerramienta(ArrayList<DetalleHerramienta> dHerramienta) {
+    public void setdHerramienta(ArrayList<TipoHerramienta> dHerramienta) {
         this.dHerramienta = dHerramienta;
     }
 
+    
 }

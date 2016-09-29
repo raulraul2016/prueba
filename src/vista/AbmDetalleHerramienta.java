@@ -5,7 +5,7 @@
  */
 package vista;
 
-import controlador.ControladorDetalleHerramienta;
+import controlador.ControladorTipoHerramienta;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.DetalleHerramienta;
+import modelo.TipoHerramienta;
 
 
 /**
@@ -28,7 +28,7 @@ public class AbmDetalleHerramienta extends javax.swing.JFrame {
     //DefaultListModel modeloL;
     Connection conexion;
     DefaultTableModel modelo;
-    DetalleHerramienta dh;
+    TipoHerramienta dh;
     ResultSet rs;
     PreparedStatement stmt;
     ResultSetMetaData rsm;
@@ -40,7 +40,7 @@ public class AbmDetalleHerramienta extends javax.swing.JFrame {
         initComponents();
         //modeloL = new DefaultListModel();
         //jlHerrRudimentaria.setModel(modeloL);
-        dh = new DetalleHerramienta();
+        dh = new TipoHerramienta();
         modelo = new DefaultTableModel();
         
         
@@ -203,12 +203,12 @@ public class AbmDetalleHerramienta extends javax.swing.JFrame {
 
     public void agregarLista(){
         
-        ControladorDetalleHerramienta cdh = new ControladorDetalleHerramienta();
-        dh = new DetalleHerramienta();
+        ControladorTipoHerramienta cdh = new ControladorTipoHerramienta();
+        dh = new TipoHerramienta();
         String texto = jtfDHerramienta.getText();
         
         //dh.setDetalleHerramienta(texto);
-        dh.setNombre_Herramienta(texto);
+//        dh.setNombre_Herramienta(texto);
         cdh.agregar(dh);
         
         actualizaTabla();
@@ -369,15 +369,15 @@ public class AbmDetalleHerramienta extends javax.swing.JFrame {
             
             System.out.println(ex);
 
-            Logger.getLogger(DetalleHerramienta.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TipoHerramienta.class.getName()).log(Level.SEVERE, null, ex);
         }
        
     }
     
     public void nombreFila(){
         
-       dh = new DetalleHerramienta();
-       ControladorDetalleHerramienta cdh = new ControladorDetalleHerramienta(); 
+       dh = new TipoHerramienta();
+       ControladorTipoHerramienta cdh = new ControladorTipoHerramienta(); 
        modelo.addColumn("Orden");
        modelo.addColumn("Detalle Herramienta");
        

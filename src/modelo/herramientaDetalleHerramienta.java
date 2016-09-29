@@ -13,12 +13,12 @@ public class herramientaDetalleHerramienta {
     
     private Long id_herramientaDetHerramienta;
     private Herramienta herramienta;
-    private DetalleHerramienta detalleHerramienta;
+    private TipoHerramienta detalleHerramienta;
 
     public herramientaDetalleHerramienta() {
     }
 
-    public herramientaDetalleHerramienta(Long id_herramientaDetHerramienta, Herramienta herramienta, DetalleHerramienta detalleHerramienta) {
+    public herramientaDetalleHerramienta(Long id_herramientaDetHerramienta, Herramienta herramienta, TipoHerramienta detalleHerramienta) {
         this.id_herramientaDetHerramienta = id_herramientaDetHerramienta;
         this.herramienta = herramienta;
         this.detalleHerramienta = detalleHerramienta;
@@ -40,11 +40,11 @@ public class herramientaDetalleHerramienta {
         this.herramienta = herramienta;
     }
 
-    public DetalleHerramienta getDetalleHerramienta() {
+    public TipoHerramienta getDetalleHerramienta() {
         return detalleHerramienta;
     }
 
-    public void setDetalleHerramienta(DetalleHerramienta detalleHerramienta) {
+    public void setDetalleHerramienta(TipoHerramienta detalleHerramienta) {
         this.detalleHerramienta = detalleHerramienta;
     }
     
