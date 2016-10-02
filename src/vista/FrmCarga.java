@@ -422,8 +422,18 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         });
 
         JbElectricas.setText("Electricas");
+        JbElectricas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JbElectricasActionPerformed(evt);
+            }
+        });
 
         jbMaquinarias.setText("Maquinarias");
+        jbMaquinarias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbMaquinariasActionPerformed(evt);
+            }
+        });
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Herramientas del Artesano"));
 
@@ -859,15 +869,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 
         // Boton Rudimentaria
         DefaultTableModel mod = new DefaultTableModel();
-        
-        
 
-//        if(tipoHerramienta.getSize()>0 ){
-//            tipoHerramienta.add(tipoHerramienta.getSize(), jbRudimentaria.getText());
-//        }else{
-//            tipoHerramienta.add(0, jbRudimentaria.getName());
-//        }
-//        jlTipoHerramientas.setModel(tipoHerramienta);
         //hacer metodo de ventana emergente!!!   
         int resp = JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Rudimentaria a la Lista?");
         if (JOptionPane.OK_OPTION == resp) {
@@ -894,33 +896,60 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 
     private void jbManualesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbManualesActionPerformed
 
-        // Boton Manuales
-        bandera = 0;
-        AbmDetalleHerramienta adh = new AbmDetalleHerramienta();
-        adh.setTitle("Herramientas Manuales");
-        adh.setLocationRelativeTo(null);
-        bandera = 1;
-        if (bandera == 1) {
-            JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Manuales a la Lista");
-            adh.setVisible(true);
-            this.desktopIcon.add(adh);
-            if (jbRudimentaria.isSelected()) {
+        int resp = JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Manual a la lista");
+        if (JOptionPane.OK_OPTION == resp) {
 
-                // caraga elementos a jList
-                listaHerramienta = new DefaultListModel();
-    }//GEN-LAST:event_jbManualesActionPerformed
+            FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
+            fdh.setTitle("Herrameintas Manuales");
+            fdh.setLocationRelativeTo(null);
+            fdh.setVisible(true);
+            this.desktopIcon.add(fdh);
+            System.out.println("Se agrego una herramienta Manual");
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione otro tipo de Herramienta si lo Necesita");
+
         }
-    }
-//    public static int diferenciaEnDias2(Date fechaMayor, Date fechaMenor) {
-//    
-//        long diferenciaEn_ms;
-//        
-//        //diferenciaEn_ms = (fechaMayor.getTime - fechaMenor.getTime());
-//        diferenciaEn_ms = fechaMayor.getTime() - fechaMenor.getTime();
-//                
-//        long dias = (diferenciaEn_ms / (1000 * 60 * 60 * 24));
-//        return (int) dias;
-//        }
+
+    }//GEN-LAST:event_jbManualesActionPerformed
+
+    private void JbElectricasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbElectricasActionPerformed
+
+        // Boton Electricas
+        DefaultTableModel mod = new DefaultTableModel();
+
+        int resp = JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Electrica a la lista");
+        if (JOptionPane.OK_OPTION == resp) {
+
+            FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
+            fdh.setTitle("Herramientas Electricas");
+            fdh.setLocationRelativeTo(null);
+            fdh.setVisible(true);
+            this.desktopIcon.add(fdh);
+            System.out.println("Se agrego una herramienta Electrica");
+        } else {
+
+            JOptionPane.showMessageDialog(null, "Seleccione otro tipo de Herramienta si lo necesita");
+        }
+
+    }//GEN-LAST:event_JbElectricasActionPerformed
+
+    private void jbMaquinariasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMaquinariasActionPerformed
+
+        // Boton Maquinarias
+        DefaultTableModel mod = new DefaultTableModel();
+
+        int resp = JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Maquinaria a la lista");
+        if (JOptionPane.OK_OPTION == resp) {
+            FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
+            fdh.setTitle("Herramienta Maquinaria");
+            fdh.setLocationRelativeTo(null);
+            fdh.setVisible(true);
+            this.desktopIcon.add(fdh);
+            System.out.println("Se agrego una herramienta Maquinaria");
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione otro tipo de Herramienta si lo necesita");
+        }
+    }//GEN-LAST:event_jbMaquinariasActionPerformed
 
     public void nombreFila() {
 

@@ -638,11 +638,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Electricas"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JbElectricasActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbMaquinarias">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Maquinarias"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbMaquinariasActionPerformed"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JPanel" name="jPanel6">
               <Properties>

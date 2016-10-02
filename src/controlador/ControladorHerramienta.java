@@ -83,8 +83,10 @@ public class ControladorHerramienta {
 
     public Herramienta extraer(Long id) {
 
+        Herramienta herramienta = new Herramienta();
+
         try {
-            Herramienta herramienta = new Herramienta();
+
             ControladorTipoHerramienta cth = new ControladorTipoHerramienta();
             String query = "SELECT id_herramienta, nombre_herramienta, id_tipo_herramienta, descripcion";
 
@@ -109,6 +111,7 @@ public class ControladorHerramienta {
         } catch (SQLException ex) {
             Logger.getLogger(ControladorHerramienta.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
 
     public void extraerTodo(Herramienta herramienta) {
