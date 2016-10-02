@@ -6,8 +6,11 @@
 package controlador;
 
 import conexion.Conexion;
+import java.awt.List;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.TipoHerramienta;
@@ -81,21 +84,57 @@ public class ControladorTipoHerramienta {
 
     }
 
-    public void mostrar(TipoHerramienta detalleHerramienta) {
+    public TipoHerramienta extraer(Long id) {
 
+        TipoHerramienta th = new TipoHerramienta();
         try {
             String query = "SELECT id_tipo_herramienta, nombre_tipo_herramienta\n"
-                    + "  FROM tipo_herramienta";
+                    + "  FROM tipo_herramienta WHERE id_tipo_herramienta = ?";
 
             PreparedStatement stmt;
 
             stmt = conexion.getConexion().prepareStatement(query);
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
 
-            stmt.executeQuery();
+            while (rs.next()) {
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+                th.setTipo_herramienta(rs.getLong(1));
+                th.setNombre_tipo_herramienta(rs.getString(2));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorTipoHerramienta.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
+
+    }
+
+    public List<TipoHerramienta> ExtraerTodos() {
+
+        ArrayList<TipoHerramienta> arrayTipoHerramienta = new ArrayList<TipoHerramienta>();
+        try {
+
+            String query = "Select * from tipo_herramienta";
+
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                TipoHerramienta th = new TipoHerramienta();
+                th.setTipo_herramienta(Long.valueOf(rs.getLong(1)));
+                th.setNombre_tipo_herramienta(rs.getString(2));
+                arrayTipoHerramienta.add(th);
+            }
+            conexion.cerrarConexion();
+
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorTipoHerramienta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
 
     }
 }

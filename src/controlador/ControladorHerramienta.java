@@ -1,15 +1,13 @@
 package controlador;
 
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import conexion.Conexion;
-import java.sql.Array;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Herramienta;
+import modelo.TipoHerramienta;
 
 public class ControladorHerramienta {
 
@@ -69,18 +67,64 @@ public class ControladorHerramienta {
         try {
             String query = "DELETE FROM herramientas\n"
                     + " WHERE id_herramienta = ? ";
-            
+
             PreparedStatement stmt;
-            
+
             stmt = conexion.getConexion().prepareStatement(query);
-            
+
             stmt.setLong(1, Long.valueOf(herramienta.getId()));
-            
+
             stmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ControladorHerramienta.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
+    }
+
+    public Herramienta extraer(Long id) {
+
+        try {
+            Herramienta herramienta = new Herramienta();
+            ControladorTipoHerramienta cth = new ControladorTipoHerramienta();
+            String query = "SELECT id_herramienta, nombre_herramienta, id_tipo_herramienta, descripcion";
+
+            PreparedStatement stmt;
+
+            ResultSet rs = null;
+
+            while (rs.next()) {
+
+                try {
+                    herramienta.setId(rs.getLong("id_herramienta"));
+                    herramienta.setNombreHerramienta(rs.getString("nombre_herramienta"));
+                    herramienta.setTipoHerramienta(cth.extraer(rs.getLong("id_tipo_herramienta")));
+                    herramienta.setDescripcion(rs.getString("descripcion"));
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorHerramienta.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorHerramienta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void extraerTodo(Herramienta herramienta) {
+
+        try {
+            String query = "SEECT * FROM herramientas";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.executeQuery();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorHerramienta.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 }

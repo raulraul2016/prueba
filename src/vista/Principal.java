@@ -31,6 +31,7 @@ public class Principal extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         Actividades = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -40,16 +41,19 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         fileMenu.setMnemonic('f');
-        fileMenu.setText("File");
+        fileMenu.setText("Artesano");
 
         openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Datos");
+        openMenuItem.setText("Cargar");
         openMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openMenuItemActionPerformed(evt);
             }
         });
         fileMenu.add(openMenuItem);
+
+        jMenuItem2.setText("Mostrar Todos");
+        fileMenu.add(jMenuItem2);
 
         exitMenuItem.setMnemonic('x');
         exitMenuItem.setText("Exit");
@@ -62,7 +66,7 @@ public class Principal extends javax.swing.JFrame {
 
         menuBar.add(fileMenu);
 
-        Actividades.setText("Actividades");
+        Actividades.setText("Mantenimiento");
 
         jMenuItem1.setText("Actividad");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -156,6 +160,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
