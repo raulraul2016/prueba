@@ -106,35 +106,35 @@ public class ControladorTipoHerramienta {
         } catch (SQLException ex) {
             Logger.getLogger(ControladorTipoHerramienta.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return th;
 
     }
 
-    public List<TipoHerramienta> ExtraerTodos() {
-
-        ArrayList<TipoHerramienta> arrayTipoHerramienta = new ArrayList<TipoHerramienta>();
-        try {
-
-            String query = "Select * from tipo_herramienta";
-
-            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
-
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-
-                TipoHerramienta th = new TipoHerramienta();
-                th.setTipo_herramienta(Long.valueOf(rs.getLong(1)));
-                th.setNombre_tipo_herramienta(rs.getString(2));
-                arrayTipoHerramienta.add(th);
-            }
-            conexion.cerrarConexion();
-
-            return null;
-        } catch (SQLException ex) {
-            Logger.getLogger(ControladorTipoHerramienta.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-
-    }
+//    public List<TipoHerramienta> extraerTodos() {
+//
+//        ArrayList<TipoHerramienta> arrayTipoHerramienta = new ArrayList<TipoHerramienta>();
+//        try {
+//
+//            String query = "Select * from tipo_herramienta";
+//
+//            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+//
+//            ResultSet rs = stmt.executeQuery();
+//
+//            while (rs.next()) {
+//
+//                TipoHerramienta th = new TipoHerramienta();
+//                th.setTipo_herramienta(Long.valueOf(rs.getLong(1)));
+//                th.setNombre_tipo_herramienta(rs.getString(2));
+//                arrayTipoHerramienta.add(th);
+//            }
+//            conexion.cerrarConexion();
+//
+//            return null;
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ControladorTipoHerramienta.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return arrayTipoHerramienta;
+//
+//    }
 }

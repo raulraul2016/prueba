@@ -10,76 +10,55 @@ import java.util.ArrayList;
 import javax.swing.JDesktopPane;
 import javax.swing.table.AbstractTableModel;
 import modelo.Herramienta;
+import modelo.TipoHerramienta;
 
 /**
  *
  * @author bangho
  */
-public class GrillaHerramienta {
+public class GrillaHerramienta extends AbstractTableModel {
 
-    private JDesktopPane desktopPane;
-    //Declaro la Grilla de Datos
-    public GrillaHerramienta grillaHerramienta;
-    public Herramienta herramienta;
-    //Declaro e Instancio el Controlador
-    ControladorHerramienta che = new ControladorHerramienta();
-    
-    
-    public void setDesktopPane(JDesktopPane desktopPane){
-        this.desktopPane=desktopPane;
+    ArrayList<Herramienta> herramientas;
+    String titulos[] = {"Nombre de Herramienta"};
+
+    public ArrayList<Herramienta> getHerramientas() {
+        return herramientas;
     }
-    public JDesktopPane getDesktopPane(){
-        return this.desktopPane;
+
+    public void setHerramientas(ArrayList<Herramienta> herramientas) {
+        this.herramientas = herramientas;
     }
-    /**
-     * Creates new form AbmAreaConocimiento
-     */
-    public GestionAreaConocimiento() {
-        initComponents();
-        cargarGrilla();
+
+    public GrillaHerramienta(ArrayList<Herramienta> herramientas) {
+        this.herramientas = herramientas;
     }
-    
-    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
-        // TODO add your handling code here:
-        if(jtGrilla.getSelectedRow()<0){
-        JOptionPane.showMessageDialog(null,"Falta seleccionar Area de Conocimiento","Error",JOptionPane.ERROR_MESSAGE);
-       }else{
-        AreaConocimiento ac=grillaAreaConocimiento.getRow(jtGrilla.getSelectedRow());
-        
-        AbmAreaConocimiento aac=new AbmAreaConocimiento(digesto.util.Util.SIS_OP_MODIFICAR, ac);
-        aac.setGac(this);
-        this.desktopPane.add(aac);
-        aac.setVisible(true);
+
+    @Override
+    public int getRowCount() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return herramientas.size();
+    }
+
+    @Override
+    public int getColumnCount() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return 2;
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        switch(columnIndex){
+            
+            case 0: return herramientas.get(rowIndex).getId();
+            case 1: return herramientas.get(rowIndex).getNombreHerramienta();
+            default:return null;
         }
-    }//GEN-LAST:event_jbModificarActionPerformed
-
-    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-       grillaAreaConocimiento=new GrillaAreaConocimiento((ArrayList<AreaConocimiento>) acc.extraerTodos());
-       
-       if(jtGrilla.getSelectedRow()<0){
-       JOptionPane.showMessageDialog(null,"Falta seleccionar Area de Conocimiento","Error",JOptionPane.ERROR_MESSAGE);
-       }else{
-       AreaConocimiento ac=grillaAreaConocimiento.getRow(jtGrilla.getSelectedRow());
-       acc.borrar(ac);
-       cargarGrilla();
-       }
-    }//GEN-LAST:event_jbEliminarActionPerformed
-
-    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-        // TODO add your handling code here:
-         aac=new AbmAreaConocimiento(digesto.util.Util.SIS_OP_NUEVO, new AreaConocimiento());
-            aac.setGac(this);
-         this.desktopPane.add(aac);
-        aac.setVisible(true);
-    }//GEN-LAST:event_jbNuevoActionPerformed
-
-    private void jbCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCerrarActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_jbCerrarActionPerformed
-
-    public void cargarGrilla(){
-       grillaAreaConocimiento=new GrillaAreaConocimiento((ArrayList<AreaConocimiento>) acc.extraerTodos());
-       jtGrilla.setModel(grillaAreaConocimiento);
     }
+
+    @Override
+    public String toString() {
+        return "GrillaHerramienta{" + "titulos=" + titulos + '}';
+    }
+     
 }
