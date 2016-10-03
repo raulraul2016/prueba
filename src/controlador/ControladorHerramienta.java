@@ -4,10 +4,10 @@ import conexion.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Herramienta;
-import modelo.TipoHerramienta;
 
 public class ControladorHerramienta {
 
@@ -114,7 +114,9 @@ public class ControladorHerramienta {
         return null;
     }
 
-    public void extraerTodo(Herramienta herramienta) {
+    public ArrayList <Herramienta> extraerTodo() {
+        
+        ArrayList <Herramienta> arrayHerramienta = new ArrayList <Herramienta>();
 
         try {
             String query = "SEECT * FROM herramientas";
@@ -128,6 +130,7 @@ public class ControladorHerramienta {
         } catch (SQLException ex) {
             Logger.getLogger(ControladorHerramienta.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return arrayHerramienta;
 
     }
 }

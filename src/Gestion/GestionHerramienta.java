@@ -6,8 +6,11 @@
 package Gestion;
 
 import controlador.ControladorHerramienta;
+import grilla.GrillaHerramienta;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JDesktopPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Herramienta;
 import modelo.TipoHerramienta;
@@ -18,21 +21,30 @@ import modelo.TipoHerramienta;
  */
 public class GestionHerramienta extends javax.swing.JInternalFrame {
 
-    Herramienta herramienta;
-    ControladorHerramienta che;
+    JDesktopPane desktopPane;
+    Herramienta herramienta;// clase
+    ControladorHerramienta che;//controlador
+    GrillaHerramienta grillaHerramienta;
     PreparedStatement stmt;
     DefaultComboBoxModel<TipoHerramienta> therramienta = new DefaultComboBoxModel<>();
     DefaultTableModel modelo;
 
-    /**
-     * Creates new form GestionHerramienta
-     */
+    public JDesktopPane getDesktopPane() {
+        return desktopPane;
+    }
+
+    public void setDesktopPane(JDesktopPane desktopPane) {
+        this.desktopPane = desktopPane;
+    }
+
     public GestionHerramienta() {
         initComponents();
-
         herramienta = new Herramienta();
         che = new ControladorHerramienta();
         modelo = new DefaultTableModel();
+        
+        grillaHerramienta = new GrillaHerramienta ((ArrayList <Herramienta>) che.extraerTodo());
+        jtbHerramientas.setModel(grillaHerramienta);
     }
 
     /**
@@ -190,16 +202,18 @@ public class GestionHerramienta extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Boton agregar
 
-        String nombreHerramienta = jtfNombreHerramienta.getText();
-        String tipoHerramienta = jcbTipoHerramienta.getSelectedItem().toString();
-        String descripcionHerramienta = jtfDescripcionHerramienta.getText();
-
-        herramienta.setNombreHerramienta(nombreHerramienta);
-        herramienta.setTipoHerramienta((TipoHerramienta) jcbTipoHerramienta.getSelectedItem());
-        herramienta.setDescripcion(descripcionHerramienta);
-
-        ControladorHerramienta che = new ControladorHerramienta();
-        che.agregar(herramienta);
+        
+        
+//        String nombreHerramienta = jtfNombreHerramienta.getText();
+//        String tipoHerramienta = jcbTipoHerramienta.getSelectedItem().toString();
+//        String descripcionHerramienta = jtfDescripcionHerramienta.getText();
+//
+//        herramienta.setNombreHerramienta(nombreHerramienta);
+//        herramienta.setTipoHerramienta((TipoHerramienta) jcbTipoHerramienta.getSelectedItem());
+//        herramienta.setDescripcion(descripcionHerramienta);
+//
+//        ControladorHerramienta che = new ControladorHerramienta();
+//        che.agregar(herramienta);
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -210,8 +224,6 @@ public class GestionHerramienta extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jButton2ActionPerformed
     public void cargarTabla() {
-        
-        
 
     }
 

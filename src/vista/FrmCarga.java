@@ -21,7 +21,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
-import javax.swing.DefaultListModel;
+import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 
 public class FrmCarga extends javax.swing.JInternalFrame {
@@ -42,6 +42,12 @@ public class FrmCarga extends javax.swing.JInternalFrame {
     ResultSet rs;
     ResultSetMetaData rsm;
     Integer bandera = 0;
+    
+    JDesktopPane desktopPane;
+
+    public void setDesktopPane(JDesktopPane desktopPane) {
+        this.desktopPane = desktopPane;
+    }
 
     ///////////////////////////////////////////////////
     public FrmCarga() {
@@ -112,6 +118,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jtbHerramientasArtesano = new javax.swing.JTable();
         jButton7 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jButton8 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
@@ -470,6 +477,13 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 
         jButton7.setText(">>");
 
+        jButton2.setText("+");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -497,10 +511,12 @@ public class FrmCarga extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton7)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addGap(11, 11, 11))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -508,7 +524,9 @@ public class FrmCarga extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(154, 154, 154)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -951,6 +969,16 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jbMaquinariasActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        // Boton agregar herramienta nueva
+        FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
+        //AbmActividades abmDetalleHerramienta=new AbmActividades();
+        fdh.setTitle("Detalle Herramienta");
+        desktopPane.add(fdh);
+        fdh.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public void nombreFila() {
 
         dp = new DatoPersonal();
@@ -1057,6 +1085,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
     private javax.swing.JButton JbElectricas;
     private javax.swing.ButtonGroup bgTipoHerram;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;

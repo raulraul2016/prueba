@@ -21,22 +21,20 @@ public class FrmDetalleHerramienta extends javax.swing.JInternalFrame {
 
     private static Conexion conexion = new Conexion();
     
-    DefaultTableModel modelo;
-    ArrayList<Herramienta> DetalleHerramienta;
+    DefaultTableModel modelo= new DefaultTableModel();
+    ArrayList<Herramienta> DetalleHerramienta= new ArrayList<>();
     PreparedStatement stmt;
     ResultSet rs;
     ResultSetMetaData rsm;
-    
+
+    public FrmDetalleHerramienta() {
+        initComponents();
+    }
 
     /**
      * Creates new form FrmDetalleHerramienta
      */
-    public FrmDetalleHerramienta() {
-        initComponents();
-        modelo = new DefaultTableModel();
-        DetalleHerramienta = new ArrayList<>();
-
-    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -191,7 +189,4 @@ public class FrmDetalleHerramienta extends javax.swing.JInternalFrame {
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
-    void setLocationRelativeTo(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
