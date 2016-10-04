@@ -1,10 +1,8 @@
 package controlador;
 
 import conexion.Conexion;
-import static controlador.ControladorEspecialidad.url;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -76,6 +74,24 @@ public class ControladorAprendizaje {
             stmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ControladorAprendizaje.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public Aprendizaje extraer(Long id){
+        
+        Aprendizaje aprendizaje = new Aprendizaje();
+        
+        String query = "SELECT id_aprendizaje, tipo_aprendizaje, descripcion";
+        
+        PreparedStatement stmt;
+        
+        ResultSet rs;
+        
+        while(rs.next()){
+            
+            aprendizaje.setTipoAprendizaje(rs.getString("id_aprendizaje"));
+            aprendizaje.setDescripcion(rs.getString(""));
+            aprendizaje.setTipoAprendizaje(query);
         }
     }
 
