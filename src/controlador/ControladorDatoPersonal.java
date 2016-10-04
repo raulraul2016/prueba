@@ -1,10 +1,10 @@
 package controlador;
 
 import conexion.Conexion;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.DatoPersonal;
@@ -101,13 +101,63 @@ public class ControladorDatoPersonal {
             Logger.getLogger(ControladorDatoPersonal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public DatoPersonal extraer(Long id) {
+
+        DatoPersonal dp = new DatoPersonal();
+        try {
+
+            String query = "SELECT id_persona, apellido_nombre, lugar_nacimiento, estado_civil, domicilio,"
+                    + "e_mail, telefono, edad, fecha_nacimiento, dni";
+
+            PreparedStatement stmt;
+
+            ResultSet rs = null;
+
+            while (rs.next()) {
+
+                try {
+                    dp.setId(rs.getLong("id_persona"));
+                    dp.setApeNom(rs.getString("apellido_nombre"));
+                    dp.setLugNac(rs.getString("lugar_nacimiento"));
+                    dp.setEstaCivil(rs.getString("estado_civil"));
+                    dp.setDomicilio(rs.getString("domicilio"));
+                    dp.setEmail(rs.getString("e_mail"));
+                    dp.setTel(rs.getString("telefono"));
+                    dp.setEdad(rs.getString("edad"));
+                    dp.setFechaNacimiento(rs.getString("fecha_nacimiento"));
+                    dp.setDni(rs.getInt("dni"));
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorDatoPersonal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorDatoPersonal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
     
- public DatoPersonal extraer(Long id){
-     
-     DatoPersonal dp = new DatoPersonal();
-     
-     String query = "SELECT id_persona, apellido_nombre, ";
-     
- }
+    public ArrayList <DatoPersonal> extraerTodo(){
+        
+        try {
+            ArrayList <DatoPersonal> arrayDatoPersonal = new ArrayList <DatoPersonal>();
+            
+            String query = "SELECT * FROM personas";
+            
+            PreparedStatement stmt;
+            
+            stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.executeQuery();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorDatoPersonal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
 }

@@ -107,7 +107,7 @@ public class ControladorHerramienta {
                 }
 
             }
-            return null;
+           
         } catch (SQLException ex) {
             Logger.getLogger(ControladorHerramienta.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -119,7 +119,7 @@ public class ControladorHerramienta {
         ArrayList <Herramienta> arrayHerramienta = new ArrayList <Herramienta>();
 
         try {
-            String query = "SEECT * FROM herramientas";
+            String query = "SELECT * FROM herramientas";
 
             PreparedStatement stmt;
 

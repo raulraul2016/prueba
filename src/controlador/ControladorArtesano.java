@@ -20,29 +20,29 @@ import modelo.Artesano;
  * @author bangho
  */
 public class ControladorArtesano {
-    
+
     private String url;
     private static final Conexion conexion = new Conexion();
 
     public ControladorArtesano() {
-    
+
     }
-    
-    public void agregar(Artesano artesano){
-        
+
+    public void agregar(Artesano artesano) {
+
         try {
-            
+
             String query = "INSERT INTO public.artesanos(descripcion,"
                     + " disponibilidad_viajar, disponibilidad_horaria,monotributista,"
                     + " subsidio, beca, institucion, \"enseñar\", id_persona,"
                     + "id_formacion, id_taller, id_asociativismo, id_localidad,"
                     + " id_departamento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,"
                     + "?, ?, ?, ?);";
-            
+
             PreparedStatement stmt;
-            
-            stmt =conexion.getConexion().prepareCall(query);
-            
+
+            stmt = conexion.getConexion().prepareCall(query);
+
             stmt.setString(1, artesano.getDescripcion());
             stmt.setString(2, artesano.getDisp_viajar());
             stmt.setString(3, artesano.getDisp_horaria());
@@ -57,30 +57,28 @@ public class ControladorArtesano {
             stmt.setObject(12, artesano.getAsociativismo());
             stmt.setObject(13, artesano.getLocalidad());
             stmt.setObject(14, artesano.getDepartamento());
-            
+
             stmt.execute();
-            
-        
-        
-    }   catch (SQLException ex) {
+
+        } catch (SQLException ex) {
             Logger.getLogger(ControladorArtesano.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void modificar (Artesano artesano){
-        
+
+    public void modificar(Artesano artesano) {
+
         try {
-            
+
             String query = "UPDATE public.artesanos SET descripcion=?,"
-               + " disponibilidad_viajar=?, disponibilidad_horaria=?,monotributista=?,"
-               + " subsidio=?, beca=?, institucion=?, \"enseñar\"=?,id_persona=?,"
-               + " id_formacion=?, id_taller=?, id_asociativismo=?, id_localidad=?,"
-               + " id_departamento=? WHERE id_artesano = ?";
-            
+                    + " disponibilidad_viajar=?, disponibilidad_horaria=?,monotributista=?,"
+                    + " subsidio=?, beca=?, institucion=?, \"enseñar\"=?,id_persona=?,"
+                    + " id_formacion=?, id_taller=?, id_asociativismo=?, id_localidad=?,"
+                    + " id_departamento=? WHERE id_artesano = ?";
+
             PreparedStatement stmt;
-            
+
             stmt = conexion.getConexion().prepareStatement(query);
-            
+
             stmt.setString(1, artesano.getDescripcion());
             stmt.setString(2, artesano.getDisp_viajar());
             stmt.setString(3, artesano.getDisp_horaria());
@@ -95,48 +93,49 @@ public class ControladorArtesano {
             stmt.setObject(12, artesano.getAsociativismo());
             stmt.setObject(13, artesano.getLocalidad());
             stmt.setObject(14, artesano.getDepartamento());
-            
+
             stmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ControladorArtesano.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }
-    
-    public void eliminar (Artesano artesano){
-        
+
+    public void eliminar(Artesano artesano) {
+
         try {
-            
+
             String query = "DELETE FROM public.artesanos WHERE id_artesano = ?";
-            
+
             PreparedStatement stmt;
-            
-            stmt =conexion.getConexion().prepareStatement(query);
-            
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
             stmt.setLong(1, artesano.getId_artesano());
-            
+
             stmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ControladorArtesano.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }
-    
-    public Artesano extraer(Long id){
-        
+
+    public Artesano extraer(Long id) {
+
         ControladorDatoPersonal cdp = new ControladorDatoPersonal();
-        
+
+        Artesano artesano = new Artesano();
+
         try {
-            Artesano artesano = new Artesano();
-            
+
             String query = "SELECT id_artesano, descripcion, disponibilidad_viajar, disponibilidad_horaria"
                     + "monotributista, subsidio, institucion, enseñar, id_persona, id_formacion, id_taller"
                     + "id_asociativismo, id_localidad, id_departamento";
-            
+
             PreparedStatement stmt;
-            
+
             ResultSet rs = null;
-            
-            while(rs.next()){
-                
+
+            while (rs.next()) {
+
                 try {
                     artesano.setId_artesano(rs.getLong("id_artesano"));
                     artesano.setDescripcion(rs.getString("descripcion"));
@@ -147,12 +146,12 @@ public class ControladorArtesano {
                     artesano.setInstitucion(rs.getString("institucion"));
                     artesano.setEnseñar(rs.getString("enseñar"));
                     //herramienta.setTipoHerramienta(cth.extraer(rs.getLong("id_tipo_herramienta")));
-                    artesano.setPersonas(cdp.extraer(rs.getInt("id_persona")));
-                    
+                    artesano.setPersonas(cdp.extraer(rs.getLong(""));
+
                 } catch (SQLException ex) {
                     Logger.getLogger(ControladorArtesano.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(ControladorArtesano.class.getName()).log(Level.SEVERE, null, ex);
