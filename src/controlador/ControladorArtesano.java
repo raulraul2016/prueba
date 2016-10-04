@@ -9,6 +9,7 @@ import conexion.Conexion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -117,5 +118,45 @@ public class ControladorArtesano {
         } catch (SQLException ex) {
             Logger.getLogger(ControladorArtesano.class.getName()).log(Level.SEVERE, null, ex);
         } 
+    }
+    
+    public Artesano extraer(Long id){
+        
+        ControladorDatoPersonal cdp = new ControladorDatoPersonal();
+        
+        try {
+            Artesano artesano = new Artesano();
+            
+            String query = "SELECT id_artesano, descripcion, disponibilidad_viajar, disponibilidad_horaria"
+                    + "monotributista, subsidio, institucion, enseñar, id_persona, id_formacion, id_taller"
+                    + "id_asociativismo, id_localidad, id_departamento";
+            
+            PreparedStatement stmt;
+            
+            ResultSet rs = null;
+            
+            while(rs.next()){
+                
+                try {
+                    artesano.setId_artesano(rs.getLong("id_artesano"));
+                    artesano.setDescripcion(rs.getString("descripcion"));
+                    artesano.setDisp_viajar(rs.getString("disponibilidad_viajar"));
+                    artesano.setDisp_horaria(rs.getString("disponibilidad_horaria"));
+                    artesano.setMonotributista(rs.getString("monotributista"));
+                    artesano.setSubsidio(rs.getString("subsidio"));
+                    artesano.setInstitucion(rs.getString("institucion"));
+                    artesano.setEnseñar(rs.getString("enseñar"));
+                    //herramienta.setTipoHerramienta(cth.extraer(rs.getLong("id_tipo_herramienta")));
+                    artesano.setPersonas(cdp.extraer(rs.getInt("id_persona")));
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorArtesano.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorArtesano.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

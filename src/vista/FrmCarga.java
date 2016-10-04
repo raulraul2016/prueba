@@ -42,7 +42,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
     ResultSet rs;
     ResultSetMetaData rsm;
     Integer bandera = 0;
-    
+
     JDesktopPane desktopPane;
 
     public void setDesktopPane(JDesktopPane desktopPane) {
@@ -919,7 +919,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 
             FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
             fdh.setTitle("Herrameintas Manuales");
-            fdh.setLocationRelativeTo(null);
+
             fdh.setVisible(true);
             this.desktopIcon.add(fdh);
             System.out.println("Se agrego una herramienta Manual");
@@ -940,7 +940,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 
             FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
             fdh.setTitle("Herramientas Electricas");
-            fdh.setLocationRelativeTo(null);
+
             fdh.setVisible(true);
             this.desktopIcon.add(fdh);
             System.out.println("Se agrego una herramienta Electrica");
@@ -960,7 +960,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         if (JOptionPane.OK_OPTION == resp) {
             FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
             fdh.setTitle("Herramienta Maquinaria");
-            fdh.setLocationRelativeTo(null);
+
             fdh.setVisible(true);
             this.desktopIcon.add(fdh);
             System.out.println("Se agrego una herramienta Maquinaria");
@@ -973,10 +973,10 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 
         // Boton agregar herramienta nueva
         FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
-        //AbmActividades abmDetalleHerramienta=new AbmActividades();
-        fdh.setTitle("Detalle Herramienta");
-        desktopPane.add(fdh);
-        fdh.setVisible(true);
+        AbmActividades abmDetalleHerramienta = new AbmActividades();
+        abmDetalleHerramienta.setTitle("Detalle Herramienta");
+        desktopPane.add(abmDetalleHerramienta);
+        abmDetalleHerramienta.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public void nombreFila() {

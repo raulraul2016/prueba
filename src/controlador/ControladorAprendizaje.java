@@ -4,6 +4,7 @@ import conexion.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Aprendizaje;
@@ -68,7 +69,6 @@ public class ControladorAprendizaje {
             stmt = conexion.getConexion().prepareStatement(query);
 
             //stmt.setLong(1, aprendizaje.getId_aprendizaje());
-            
             stmt.setLong(1, aprendizaje.getId_aprendizaje());
 
             stmt.execute();
@@ -76,23 +76,48 @@ public class ControladorAprendizaje {
             Logger.getLogger(ControladorAprendizaje.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public Aprendizaje extraer(Long id){
-        
+
+    public Aprendizaje extraer(Long id) {
+
         Aprendizaje aprendizaje = new Aprendizaje();
-        
-        String query = "SELECT id_aprendizaje, tipo_aprendizaje, descripcion";
-        
-        PreparedStatement stmt;
-        
-        ResultSet rs;
-        
-        while(rs.next()){
-            
-            aprendizaje.setTipoAprendizaje(rs.getString("id_aprendizaje"));
-            aprendizaje.setDescripcion(rs.getString(""));
-            aprendizaje.setTipoAprendizaje(query);
+
+        try {
+
+            String query = "SELECT id_aprendizaje, tipo_aprendizaje, descripcion";
+
+            PreparedStatement stmt;
+
+            ResultSet rs = null;
+
+            while (rs.next()) {
+
+                aprendizaje.setTipoAprendizaje(rs.getString("id_aprendizaje"));
+                aprendizaje.setDescripcion(rs.getString("tipo_aprendizaje"));
+                aprendizaje.setTipoAprendizaje("descripcion");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorAprendizaje.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
+    }
+
+    public ArrayList<Aprendizaje> extraerTodo() {
+
+        ArrayList<Aprendizaje> arrayAprendizaje = new ArrayList<Aprendizaje>();
+
+        try {
+
+            String query = "SELECT * FROM aprendizajes";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorAprendizaje.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayAprendizaje;
     }
 
 }
