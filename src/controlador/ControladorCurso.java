@@ -6,13 +6,12 @@
 package controlador;
 
 import conexion.Conexion;
-import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Curso;
-import modelo.Institucion;
 
 /**
  *
@@ -86,5 +85,29 @@ public class ControladorCurso {
             Logger.getLogger(ControladorCurso.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    public Curso extraer(){
+        
+        //ControladorIns
+        
+        Curso curso = new Curso();
+        
+        String query = "SELECT * FROM cursos_perfeccionamiento";
+        
+        PreparedStatement stmt;
+        
+        stmt = conexion.getConexion().prepareStatement(query);
+        
+        ResultSet rs;
+        
+        while(rs.next()){
+            
+            curso.setId_cusro_perfeccionamiento(rs.getLong("id_curso_perfeccionamiento"));
+            curso.setNombre_curso(rs.getString("nombre_curso"));
+            curso.setDescripcion(rs.getString("descripcion"));
+            curso.setInstitucion(null);
+            
+        }
     }
 }

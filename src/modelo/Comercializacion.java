@@ -10,10 +10,13 @@ package modelo;
  * @author Gonza
  */
 public class Comercializacion {
-    
+
     private Long id_comercializacion;
     private String destino_produccion;
     private String descripcion;
+
+    public Comercializacion() {
+    }
 
     public Comercializacion(Long id_comercializacion, String destino_produccion, String descripcion) {
         this.id_comercializacion = id_comercializacion;
@@ -44,7 +47,5 @@ public class Comercializacion {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
-    
-    
+
 }

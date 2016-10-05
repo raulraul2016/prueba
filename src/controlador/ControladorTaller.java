@@ -102,7 +102,7 @@ public class ControladorTaller {
                     taller.setId(Long.valueOf(rs.getLong("id")));
                     taller.setLugarProduccion(rs.getString("lugar_produccion"));
                     taller.setDescripcion(rs.getString("descripcion"));
-                    taller.setId_herramienta(che.extraer(rs.getInt("id_tipo_herramienta")));
+                    taller.setId_herramienta(che.extraer(Long.valueOf(rs.getLong("id_tipo_herramienta"))));
                     taller.setEstadoTaller(rs.getString("estado_taller"));
                 } catch (SQLException ex) {
                     Logger.getLogger(ControladorTaller.class.getName()).log(Level.SEVERE, null, ex);
@@ -114,11 +114,6 @@ public class ControladorTaller {
         }
         return taller;
     }
-    /*
-     public ArrayList<DatoPersonal> extraerTodo() {
-
-     ArrayList<DatoPersonal> arrayDatoPersonal = new ArrayList<DatoPersonal>();
-     */
 
     public ArrayList<Taller> extraerTodo() {
 
