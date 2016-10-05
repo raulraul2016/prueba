@@ -133,31 +133,32 @@ public class ControladorDatoPersonal {
 
             }
 
-            return null;
+            return dp;
         } catch (SQLException ex) {
             Logger.getLogger(ControladorDatoPersonal.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
 
     }
-    
-    public ArrayList <DatoPersonal> extraerTodo(){
-        
+
+    public ArrayList<DatoPersonal> extraerTodo() {
+
+        ArrayList<DatoPersonal> arrayDatoPersonal = new ArrayList<DatoPersonal>();
+
         try {
-            ArrayList <DatoPersonal> arrayDatoPersonal = new ArrayList <DatoPersonal>();
-            
+
             String query = "SELECT * FROM personas";
-            
+
             PreparedStatement stmt;
-            
+
             stmt = conexion.getConexion().prepareStatement(query);
-            
+
             stmt.executeQuery();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(ControladorDatoPersonal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return arrayDatoPersonal;
     }
 
 }

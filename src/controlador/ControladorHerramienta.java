@@ -107,16 +107,16 @@ public class ControladorHerramienta {
                 }
 
             }
-           
+
         } catch (SQLException ex) {
             Logger.getLogger(ControladorHerramienta.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
-    public ArrayList <Herramienta> extraerTodo() {
-        
-        ArrayList <Herramienta> arrayHerramienta = new ArrayList <Herramienta>();
+    public ArrayList<Herramienta> extraerTodo() {
+
+        ArrayList<Herramienta> arrayHerramienta = new ArrayList<Herramienta>();
 
         try {
             String query = "SELECT * FROM herramientas";
