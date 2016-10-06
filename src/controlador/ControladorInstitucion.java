@@ -9,6 +9,7 @@ import conexion.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Institucion;
@@ -78,40 +79,71 @@ public class ControladorInstitucion {
         try {
             String query = "DELETE FROM institucion\n"
                     + " WHERE id_institucion=?";
-            
+
             PreparedStatement stmt;
-            
+
             stmt = conexion.getConexion().prepareStatement(query);
-            
-            stmt.setLong(1, institucion.getId_institucion());
-            
+
+            stmt.setString(1, institucion.getNombre_institucion());
+            stmt.setLong(2, institucion.getId_institucion());
+
             stmt.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(ControladorInstitucion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public Institucion extraer(){
-        
+
+    public Institucion extraer() {
+
         ControladorDomicilio cdo = new ControladorDomicilio();
-        
+
         Institucion institucion = new Institucion();
-        
-        String query = "SELECT * FROM institucion";
-        
-        PreparedStatement stmt;
-        
-        stmt = conexion.getConexion().prepareStatement(query);
-        
-        ResultSet rs = stmt.executeQuery();
-        
-        while(rs.next()){
-            
-            institucion.setId_institucion(rs.getLong("id_institucion"));
-            institucion.setNombre_institucion(rs.getString("nombre_institucion"));
-            institucion.setObservacion(rs.getString("observacion"));
-            institucion.setDomicilio(null)
+
+        try {
+
+            String query = "SELECT * FROM institucion";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                try {
+                    institucion.setId_institucion(rs.getLong("id_institucion"));
+                    institucion.setNombre_institucion(rs.getString("nombre_institucion"));
+                    institucion.setObservacion(rs.getString("observacion"));
+                    institucion.setDomicilio(Long.valueOf(cdo.extraer().getId_domicilio()));
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorInstitucion.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorInstitucion.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return institucion;
+    }
+
+    public ArrayList<Institucion> extraerTodo() {
+
+        ArrayList<Institucion> arrayInstitucion = new ArrayList<Institucion>();
+
+        try {
+
+            String query = "SELECT * FROM institucion";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorInstitucion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayInstitucion;
     }
 
 }

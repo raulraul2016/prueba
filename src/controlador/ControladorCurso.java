@@ -9,6 +9,7 @@ import conexion.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Curso;
@@ -86,28 +87,55 @@ public class ControladorCurso {
         }
 
     }
-    
-    public Curso extraer(){
-        
-        //ControladorIns
-        
+
+    public Curso extraer(Long id) {
+
         Curso curso = new Curso();
-        
-        String query = "SELECT * FROM cursos_perfeccionamiento";
-        
-        PreparedStatement stmt;
-        
-        stmt = conexion.getConexion().prepareStatement(query);
-        
-        ResultSet rs;
-        
-        while(rs.next()){
-            
-            curso.setId_cusro_perfeccionamiento(rs.getLong("id_curso_perfeccionamiento"));
-            curso.setNombre_curso(rs.getString("nombre_curso"));
-            curso.setDescripcion(rs.getString("descripcion"));
-            curso.setInstitucion(null);
-            
+
+        try {
+
+            String query = "SELECT * FROM cursos_perfeccionamiento";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            ResultSet rs = null;
+
+            while (rs.next()) {
+
+                try {
+                    curso.setId_cusro_perfeccionamiento(rs.getLong("id_curso_perfeccionamiento"));
+                    curso.setNombre_curso(rs.getString("nombre_curso"));
+                    curso.setDescripcion(rs.getString("descripcion"));
+                    curso.setInstitucion(null);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorCurso.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorCurso.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return curso;
+    }
+
+    public ArrayList<Curso> extraerTodo() {
+
+        ArrayList<Curso> arrayCurso = new ArrayList<Curso>();
+
+        try {
+
+            String query = "SELECT * FROM cursos_perfeccionamiento";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorCurso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayCurso;
     }
 }

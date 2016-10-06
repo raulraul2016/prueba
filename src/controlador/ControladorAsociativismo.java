@@ -53,6 +53,7 @@ public class ControladorAsociativismo {
             stmt.setString(1, asociativismo.getTipo_asocit());
             stmt.setString(2, asociativismo.getDescripcionAciocit());
             stmt.setString(3, asociativismo.getDescripLegal());
+            stmt.setLong(4, asociativismo.getId_asocit());
 
             stmt.executeQuery();
 
@@ -107,22 +108,23 @@ public class ControladorAsociativismo {
         }
         return aso;
     }
-/*
-    public ArrayList<DatoPersonal> extraerTodo() {
+    /*
+     public ArrayList<DatoPersonal> extraerTodo() {
 
-        ArrayList<DatoPersonal> arrayDatoPersonal = new ArrayList<DatoPersonal>();
-    */
+     ArrayList<DatoPersonal> arrayDatoPersonal = new ArrayList<DatoPersonal>();
+     */
+
     public ArrayList<Asociativismo> extraerTodo() {
 
         ArrayList<Asociativismo> arrayAso = new ArrayList<Asociativismo>();
-        
+
         try {
             String query = "SELECT * FROM asociativismos";
-            
+
             PreparedStatement stmt;
-            
+
             stmt = conexion.getConexion().prepareStatement(query);
-            
+
             stmt.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(ControladorAsociativismo.class.getName()).log(Level.SEVERE, null, ex);
