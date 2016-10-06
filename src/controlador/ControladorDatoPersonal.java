@@ -28,7 +28,8 @@ public class ControladorDatoPersonal {
         try {
 
             String query = "insert into personas(apellido_nombre, lugar_nacimiento,estado_civil, "
-                    + "domicilio, e_mail, dni, telefono, edad, fecha_nacimiento) VALUES (?, ?, ?, ?,?, ?, ?, ?, ?)";
+                    + "domicilio, e_mail, dni, telefono, edad, fecha_nacimiento)"
+                    + "VALUES (?, ?, ?, ?,?, ?, ?, ?, ?)";
             PreparedStatement stmt;
 
             stmt = conexion.getConexion().prepareStatement(query);

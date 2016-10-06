@@ -57,6 +57,7 @@ public class ControladorComercializacion {
 
             stmt.setString(1, comercializacion.getDestino_produccion());
             stmt.setString(2, comercializacion.getDescripcion());
+            stmt.setLong(3, comercializacion.getId_comercializacion());
 
             stmt.execute();
         } catch (SQLException ex) {

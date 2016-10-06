@@ -1,10 +1,6 @@
 
 package modelo;
 
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
-import java.sql.Date;
-import java.text.DateFormat;
-
 /**
  *
  * @author bangho
@@ -14,18 +10,17 @@ public class DatosCarga {
     private Long id_dato_carga;
     private String fecha_carga;
     private String lugarCarga;
-    private Long id_personas;
+    private Personas personas;
 
     
     public DatosCarga() {
     }
-    
-    public DatosCarga(Long id_dato_carga, String fecha_carga, String lugarCarga) {
+
+    public DatosCarga(Long id_dato_carga, String fecha_carga, String lugarCarga, Personas personas) {
         this.id_dato_carga = id_dato_carga;
         this.fecha_carga = fecha_carga;
         this.lugarCarga = lugarCarga;
-        this.id_personas = id_personas;
-        
+        this.personas = personas;
     }
 
     public Long getId_dato_carga() {
@@ -52,12 +47,15 @@ public class DatosCarga {
         this.lugarCarga = lugarCarga;
     }
 
-    public Long getId_personas() {
-        return id_personas;
+    public Personas getPersonas() {
+        return personas;
     }
 
-    public void setId_personas(Long id_personas) {
-        this.id_personas = id_personas;
+    public void setPersonas(Personas personas) {
+        this.personas = personas;
     }
+    
+    
+
     
 }

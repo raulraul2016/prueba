@@ -5,12 +5,11 @@
  */
 package controlador;
 
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import conexion.Conexion;
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import modelo.DatoPersonal;
 import modelo.DatosCarga;
 
 /**
@@ -20,23 +19,29 @@ import modelo.DatosCarga;
 public class ControladorDatosCarga {
 
     private static String url;
-    private  static final Conexion conexion = new Conexion();
+    private static final Conexion conexion = new Conexion();
 
     public void agregar(DatosCarga datosCarga) {
+
         PreparedStatement stmt;
-        
+
+        ControladorDatoPersonal cdp = new ControladorDatoPersonal();
+
+        DatosCarga dc = new DatosCarga();
         try {
-            
-            String query = "insert into datos_carga (id_personas, fecha_carga, lugar_carga ) "
-                    + "VALUES ((SELECT id_persona FROM personas WHERE dni=?), ?, ?)";
+
+            String query = "INSERT INTO datos_carga(\n"
+                    + "            lugar_carga, id_dato_carga, id_personas, fecha_carga)\n"
+                    + "    VALUES (?, ?, ?, ?);";
 
             stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.setLong(1, datosCarga.getId_personas());
-            stmt.setString(2, datosCarga.getFecha_carga());
-            stmt.setString(3, datosCarga.getLugarCarga());
+            stmt.setString(1, datosCarga.getLugarCarga());
+            stmt.setLong(2, datosCarga.getId_dato_carga());
+            stmt.setLong(3, datosCarga.getPersonas(cdp.extraer(dc.getId_dato_carga("")));
+            stmt.setString(4, datosCarga.getFecha_carga());
 
-            stmt.execute();
+            stmt.executeQuery();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -44,20 +49,22 @@ public class ControladorDatosCarga {
 
     }
 
-    
-    public void modificar (DatosCarga datosCarga){
-        
+    public void modificar(DatosCarga datosCarga) {
+
+        ControladorDatoPersonal cdp = new ControladorDatoPersonal();
+
         try {
-                        
-            String query = "UPDATE datos_carga SET lugar_carga = ?, fecha_carga = ? \n" +
-                           " WHERE id_dato_carga = ?";
-            
+
+            String query = "UPDATE datos_carga SET lugar_carga = ?, id_personas, fecha_carga = ? \n"
+                    + " WHERE id_dato_carga = ?";
+
             PreparedStatement stmt;
             stmt = conexion.getConexion().prepareStatement(query);
-            
+
             stmt.setString(1, datosCarga.getLugarCarga());
-            stmt.setDate(2, Date.valueOf(datosCarga.getFecha_carga()));
-            
+            stmt.setString(2, datosCarga.getFecha_carga());
+            stmt.setInt(3, datosCarga.getPersonas(cdp.extraer());
+
             stmt.execute();
         } catch (Exception e) {
         }
