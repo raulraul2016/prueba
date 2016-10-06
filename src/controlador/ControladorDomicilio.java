@@ -9,6 +9,7 @@ import conexion.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Domicilio;
@@ -81,39 +82,71 @@ public class ControladorDomicilio {
         try {
             String query = "DELETE FROM domicilio\n"
                     + " WHERE id_domicilio=?";
-            
+
             PreparedStatement stmt;
-            
+
             stmt = conexion.getConexion().prepareStatement(query);
-            
+
             stmt.setLong(1, domicilio.getId_domicilio());
-            
+
             stmt.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(ControladorDomicilio.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
-    public Domicilio extraer(){
-        
+
+    public Domicilio extraer() {
+
         Domicilio domicilio = new Domicilio();
-        ControladorLocalidad cl = new ControladorLocalidad();
-        String query = "SELECT * FROM domicilio";
-        
-        PreparedStatement stmt;
-        
-        ResultSet rs = stmt.executeQuery();
-        
-        while(rs.next()){
-            
-            domicilio.setCalle(rs.getString("calle"));
-            domicilio.setNro(rs.getInt("nro"));
-            domicilio.setPais(rs.getString("pais"));
-            domicilio.setProvincia(rs.getString("provincia"));
-            domicilio.setObservacion(rs.getString("observacion"));
-            domicilio.setLocalidad(cl.);
+
+        try {
+
+            ControladorLocalidad cl = new ControladorLocalidad();
+            String query = "SELECT * FROM domicilio";
+
+            PreparedStatement stmt = null;
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                try {
+                    domicilio.setCalle(rs.getString("calle"));
+                    domicilio.setNro(rs.getInt("nro"));
+                    domicilio.setPais(rs.getString("pais"));
+                    domicilio.setProvincia(rs.getString("provincia"));
+                    domicilio.setObservacion(rs.getString("observacion"));
+                    domicilio.setLocalidad(cl.extraer().getId_locaclidad(rs.getInt("id_localidad")));
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorDomicilio.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorDomicilio.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return domicilio;
+    }
+
+    public ArrayList<Domicilio> extraerTodo() {
+
+        ArrayList<Domicilio> arrayDomicilio = new ArrayList<Domicilio>();
+
+        try {
+
+            String query = "SELECT * FROM domicilio";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorDomicilio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayDomicilio;
+
     }
 
 }
