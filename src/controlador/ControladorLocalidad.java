@@ -71,5 +71,19 @@ public class ControladorLocalidad {
             Logger.getLogger(ControladorLocalidad.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public Localidad extraer(){
+        
+        Localidad localidad = new Localidad();
+        
+        String query = "SELECT * FROM localidad";
+        
+        PreparedStatement stmt;
+        
+        stmt = conexion.getConexion().prepareStatement(query);
+        
+        stmt.setLong(1, localidad.getId_locaclidad());
+        stmt
+    }
 
 }
