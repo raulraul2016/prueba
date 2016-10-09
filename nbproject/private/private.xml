@@ -5,12 +5,13 @@
         <group>
             <file>file:/home/bangho/NetBeansProjects/prueba5/src/vista/AbmDetalleHerramientas.java</file>
             <file>file:/home/bangho/NetBeansProjects/prueba5/src/controlador/ControladorFormacion.java</file>
+            <file>file:/home/bangho/NetBeansProjects/prueba5/src/controlador/ControladorDatosCarga.java</file>
+            <file>file:/home/bangho/NetBeansProjects/prueba5/src/modelo/DatosCarga.java</file>
             <file>file:/home/bangho/NetBeansProjects/prueba5/src/controlador/ControladorArtesano.java</file>
+            <file>file:/home/bangho/NetBeansProjects/prueba5/src/controlador/ControladorDomicilio.java</file>
             <file>file:/home/bangho/NetBeansProjects/prueba5/src/controlador/ControladorHerramienta.java</file>
             <file>file:/home/bangho/NetBeansProjects/prueba5/src/modelo/Institucion.java</file>
             <file>file:/home/bangho/NetBeansProjects/prueba5/src/vista/FrmCarga.java</file>
-            <file>file:/home/bangho/NetBeansProjects/prueba5/src/controlador/ControladorComercializacion.java</file>
-            <file>file:/home/bangho/NetBeansProjects/prueba5/src/controlador/ControladorDatoPersonal.java</file>
             <file>file:/home/bangho/NetBeansProjects/prueba5/src/modelo/Domicilio.java</file>
             <file>file:/home/bangho/NetBeansProjects/prueba5/src/vista/Principal.java</file>
         </group>
