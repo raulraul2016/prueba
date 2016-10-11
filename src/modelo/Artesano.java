@@ -10,7 +10,7 @@ package modelo;
  * @author bangho
  */
 public class Artesano {
-    
+
     private Long id_artesano;
     private String descripcion;
     private String disp_viajar;//disponibilidad de viajar
@@ -47,8 +47,6 @@ public class Artesano {
         this.localidad = localidad;
         this.departamento = departamento;
     }
-
-    
 
     public Long getId_artesano() {
         return id_artesano;
@@ -170,6 +168,4 @@ public class Artesano {
         this.departamento = departamento;
     }
 
-   
-    
 }
