@@ -3,10 +3,10 @@ package controlador;
 //import static Controladores.ControladorAsociativismo.url;
 import conexion.Conexion;
 import modelo.Especialidad;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -52,20 +52,71 @@ public class ControladorEspecialidad {
         }
 
     }
-    
-    public void eliminar(Especialidad especialidad){
-        
+
+    public void eliminar(Especialidad especialidad) {
+
         try {
             String query = "DELETE FROM especialidades  WHERE id_especialidad = ?";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.setLong(1, especialidad.getIdEspecialidad());
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorEspecialidad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Especialidad extraer(Long id) {
+
+        Especialidad esp = new Especialidad();
+        
+        try {
+            String query = "SELECT id_especialidad, tipo_especialidad, descripcion\n"
+                    + "  FROM especialidades";
             
             PreparedStatement stmt;
             
             stmt = conexion.getConexion().prepareStatement(query);
             
-            stmt.setLong(1, especialidad.getIdEspecialidad());
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                
+                try {
+                    esp.setIdEspecialidad(rs.getLong("id_especialidad"));
+                    esp.setTipoEspecialidad(rs.getString("tipo_especialidad"));
+                    esp.setDescripcionEspecialidad(rs.getString("descripcion"));
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorEspecialidad.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ControladorEspecialidad.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return esp;
+    }
+    
+    public ArrayList<Especialidad> extraerTodo(){
+        
+        ArrayList<Especialidad>  arrayEspecialidad = new ArrayList<Especialidad>();
+        
+        try {
+            
+            
+            String query = "SELECT * FROM especialidad";
+            
+            PreparedStatement stmt;
+            
+            stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorEspecialidad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayEspecialidad;
+        
     }
 
 }

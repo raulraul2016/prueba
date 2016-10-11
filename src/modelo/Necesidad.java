@@ -11,15 +11,17 @@ public class Necesidad {
     private String tipo_necesidad;
     private String asistencia_tecnica;
     private String descripcion;
+    private String disponibilidad;
 
     public Necesidad() {
     }
 
-    public Necesidad(Long id_necesidad, String tipo_necesidad, String asistencia_tecnica, String descripcion) {
+    public Necesidad(Long id_necesidad, String tipo_necesidad, String asistencia_tecnica, String descripcion, String disponibilidad) {
         this.id_necesidad = id_necesidad;
         this.tipo_necesidad = tipo_necesidad;
         this.asistencia_tecnica = asistencia_tecnica;
         this.descripcion = descripcion;
+        this.disponibilidad = disponibilidad;
     }
 
     public Long getId_necesidad() {
@@ -53,7 +55,14 @@ public class Necesidad {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
-    
-    
+
+    public String getDisponibilidad() {
+        return disponibilidad;
+    }
+
+    public void setDisponibilidad(String disponibilidad) {
+        this.disponibilidad = disponibilidad;
+    }
+
+
 }

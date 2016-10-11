@@ -97,7 +97,7 @@ public class ControladorDomicilio {
 
     }
 
-    public Domicilio extraer() {
+    public Domicilio extraer(Long id) {
 
         Domicilio domicilio = new Domicilio();
         Localidad localidad = new Localidad();

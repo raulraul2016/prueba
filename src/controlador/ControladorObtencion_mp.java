@@ -1,4 +1,3 @@
-
 package controlador;
 
 import conexion.Conexion;
@@ -74,5 +73,13 @@ public class ControladorObtencion_mp {
         } catch (SQLException ex) {
             Logger.getLogger(ControladorObtencion_mp.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public Obtencion_mp extraer(Long id) {
+
+        Obtencion_mp obtencion_mp = new Obtencion_mp();
+
+        String query = "SELECT id_extraccion_mp, adquisicion_mp, descripcion, id_materia_prima\n"
+                + "  FROM materia_prima_extraccion";
     }
 }

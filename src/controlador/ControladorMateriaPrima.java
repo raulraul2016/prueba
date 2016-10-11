@@ -7,7 +7,9 @@ package controlador;
 
 import conexion.Conexion;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.MateriaPrima;
@@ -73,6 +75,56 @@ public class ControladorMateriaPrima {
         } catch (SQLException ex) {
             Logger.getLogger(ControladorMateriaPrima.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public MateriaPrima extraer(Long id) {
+
+        MateriaPrima mp = new MateriaPrima();
+
+        try {
+
+            String query = "SELECT id_materia_prima, tipo_materia_prima, descripcion\n"
+                    + "  FROM materias_prima";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                try {
+                    mp.setId_materia_prima(rs.getLong("id_materia_prima"));
+                    mp.setTipo_materia_prima(rs.getString("tipo_materia_prima"));
+                    mp.setDescripcion(rs.getString("descripcion"));
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorMateriaPrima.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorMateriaPrima.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return mp;
+    }
+
+    public ArrayList<MateriaPrima> extraerTodo() {
+
+        ArrayList<MateriaPrima> arrayMateriaPrima = new ArrayList<MateriaPrima>();
+
+        try {
+
+            String query = "SELECT * FROM materias_prima";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorMateriaPrima.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayMateriaPrima;
     }
 
 }

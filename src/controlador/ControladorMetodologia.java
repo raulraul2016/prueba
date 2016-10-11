@@ -2,7 +2,9 @@ package controlador;
 
 import conexion.Conexion;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Metodologia;
@@ -48,14 +50,86 @@ public class ControladorMetodologia {
                     + "   SET descripcion_trabajo=?, descripcion_tiempo_produ=?, \n"
                     + "       precio_producto=?, cantidad_producto=?\n"
                     + " WHERE id_metodologia=?";
-            
+
             PreparedStatement stmt;
-            
+
             stmt = conexion.getConexion().prepareStatement(query);
         } catch (SQLException ex) {
             Logger.getLogger(ControladorMetodologia.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
+    }
+
+    public void eliminar(Metodologia metodologia) {
+
+        try {
+            String query = "DELETE FROM metodologias\n"
+                    + " WHERE id_metodologia=?";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.setLong(1, metodologia.getId_metodologia());
+
+            stmt.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorMetodologia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Metodologia extraer(Long id) {
+
+        Metodologia metodologia = new Metodologia();
+
+        try {
+
+            String query = "SELECT id_metodologia, descripcion_trabajo, descripcion_tiempo_produ, \n"
+                    + "       precio_producto, cantidad_producto\n"
+                    + "  FROM metodologias";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                try {
+                    metodologia.setId_metodologia(rs.getLong("id_metodologia"));
+                    metodologia.setDescripcion_trabajo(rs.getString("descripcion_trabajo"));
+                    metodologia.setDescripcion_tiempo_produ("descripcion_tiempo_produ");
+                    metodologia.setPrecio_producto(rs.getDouble("precio_producto"));
+                    metodologia.setCantidad_producto(rs.getInt("cantidad_producto"));
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorMetodologia.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorMetodologia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return metodologia;
+    }
+
+    public ArrayList<Metodologia> extraerTodo() {
+
+        ArrayList<Metodologia> arrayMetodologia = new ArrayList<Metodologia>();
+
+        try {
+
+            String query = "SELECT * FROM metodologias";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorMetodologia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayMetodologia;
+
     }
 }
