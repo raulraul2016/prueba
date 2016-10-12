@@ -1,4 +1,3 @@
-
 package modelo;
 
 /**
@@ -6,21 +5,20 @@ package modelo;
  * @author bangho
  */
 public class DatosCarga {
-    
+
     private Long id_dato_carga;
     private String fecha_carga;
     private String lugarCarga;
-    private Personas personas;
+    private DatoPersonal datoPersonal;
 
-    
     public DatosCarga() {
     }
 
-    public DatosCarga(Long id_dato_carga, String fecha_carga, String lugarCarga, Personas personas) {
+    public DatosCarga(Long id_dato_carga, String fecha_carga, String lugarCarga, DatoPersonal datoPersonal) {
         this.id_dato_carga = id_dato_carga;
         this.fecha_carga = fecha_carga;
         this.lugarCarga = lugarCarga;
-        this.personas = personas;
+        this.datoPersonal = datoPersonal;
     }
 
     public Long getId_dato_carga() {
@@ -47,15 +45,12 @@ public class DatosCarga {
         this.lugarCarga = lugarCarga;
     }
 
-    public Personas getPersonas() {
-        return personas;
+    public DatoPersonal getDatoPersonal() {
+        return datoPersonal;
     }
 
-    public void setPersonas(Personas personas) {
-        this.personas = personas;
+    public void setDatoPersonal(DatoPersonal datoPersonal) {
+        this.datoPersonal = datoPersonal;
     }
-    
-    
 
-    
 }

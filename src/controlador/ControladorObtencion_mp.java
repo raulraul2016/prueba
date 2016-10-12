@@ -2,6 +2,7 @@ package controlador;
 
 import conexion.Conexion;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -79,7 +80,29 @@ public class ControladorObtencion_mp {
 
         Obtencion_mp obtencion_mp = new Obtencion_mp();
 
-        String query = "SELECT id_extraccion_mp, adquisicion_mp, descripcion, id_materia_prima\n"
-                + "  FROM materia_prima_extraccion";
+        try {
+
+            String query = "SELECT id_extraccion_mp, adquisicion_mp, descripcion"
+                    + " FROM materia_prima_forma_obtencion";
+
+            PreparedStatement stmt;
+
+            ResultSet rs = null;
+
+            while (rs.next()) {
+
+                try {
+                    obtencion_mp.setId_obtencion_mp(rs.getLong("id_extraccion_mp"));
+                    obtencion_mp.setTipo_obten_mat_pri(rs.getString("adquisicion_mp"));
+                    obtencion_mp.setDescripcion(rs.getString("descripcion"));
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorObtencion_mp.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorObtencion_mp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obtencion_mp;
     }
 }

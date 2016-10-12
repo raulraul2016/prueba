@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelo.Domicilio;
 import modelo.Institucion;
 
 /**
@@ -115,7 +116,7 @@ public class ControladorInstitucion {
                     institucion.setId_institucion(rs.getLong("id_institucion"));
                     institucion.setNombre_institucion(rs.getString("nombre_institucion"));
                     institucion.setObservacion(rs.getString("observacion"));
-                    institucion.setDomicilio(Long.valueOf(cdo.extraer().getId_domicilio()));
+                    institucion.setDomicilio(cdo.extraer(rs.getLong("id_domicilio")));
                 } catch (SQLException ex) {
                     Logger.getLogger(ControladorInstitucion.class.getName()).log(Level.SEVERE, null, ex);
                 }
