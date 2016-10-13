@@ -4,6 +4,7 @@ import conexion.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Obtencion_mp;
@@ -104,5 +105,25 @@ public class ControladorObtencion_mp {
             Logger.getLogger(ControladorObtencion_mp.class.getName()).log(Level.SEVERE, null, ex);
         }
         return obtencion_mp;
+    }
+
+    public ArrayList<Obtencion_mp> extraerTodo() {
+
+        ArrayList<Obtencion_mp> arrayObtencion_mp = new ArrayList<Obtencion_mp>();
+
+        try {
+
+            String query = "SELECT * FROM materia_prima_forma_obtencion";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorObtencion_mp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayObtencion_mp;
+
     }
 }

@@ -74,7 +74,7 @@ public class ControladorLocalidad {
         }
     }
 
-    public Localidad extraer() {
+    public Localidad extraer(Long id) {
 
         Localidad localidad = new Localidad();
 

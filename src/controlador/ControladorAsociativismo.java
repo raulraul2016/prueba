@@ -77,7 +77,7 @@ public class ControladorAsociativismo {
         }
     }
 
-    public Asociativismo extraer() {
+    public Asociativismo extraer(Long id) {
 
         Asociativismo aso = new Asociativismo();
 

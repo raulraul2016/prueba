@@ -32,12 +32,13 @@ public class ControladorArtesano {
 
         try {
 
-            String query = "INSERT INTO public.artesanos(descripcion,"
-                    + " disponibilidad_viajar, disponibilidad_horaria,monotributista,"
-                    + " subsidio, beca, institucion, \"enseñar\", id_persona,"
-                    + "id_formacion, id_taller, id_asociativismo, id_localidad,"
-                    + " id_departamento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,"
-                    + "?, ?, ?, ?);";
+            String query = "INSERT INTO artesanos(\n"
+                    + "            descripcion, disponibilidad_viajar, disponibilidad_horaria, \n"
+                    + "            monotributista, subsidio, beca, institucion, \"enseñar\", id_dato_personal, \n"
+                    + "            id_formacion, id_taller, id_asociativismo, id_localidad, id_departamento)\n"
+                    + "    VALUES (?, ?, ?, ?, \n"
+                    + "            ?, ?, ?, ?, ?, ?, \n"
+                    + "            ?, ?, ?, ?)";
 
             PreparedStatement stmt;
 
@@ -51,7 +52,7 @@ public class ControladorArtesano {
             stmt.setString(6, artesano.getBeca());
             stmt.setString(6, artesano.getInstitucion());
             stmt.setString(8, artesano.getEnseñar());
-            stmt.setObject(9, artesano.getPersonas());
+            stmt.setLong(9, artesano.getDatoPersonal().getId());
             stmt.setObject(10, artesano.getFormacion());
             stmt.setObject(11, artesano.getTaller());
             stmt.setObject(12, artesano.getAsociativismo());
@@ -69,11 +70,12 @@ public class ControladorArtesano {
 
         try {
 
-            String query = "UPDATE public.artesanos SET descripcion=?,"
-                    + " disponibilidad_viajar=?, disponibilidad_horaria=?,monotributista=?,"
-                    + " subsidio=?, beca=?, institucion=?, \"enseñar\"=?,id_persona=?,"
-                    + " id_formacion=?, id_taller=?, id_asociativismo=?, id_localidad=?,"
-                    + " id_departamento=? WHERE id_artesano = ?";
+            String query = "UPDATE artesanos\n"
+                    + "   SET descripcion=?, disponibilidad_viajar=?, disponibilidad_horaria=?, \n"
+                    + "       monotributista=?, subsidio=?, beca=?, institucion=?, \"enseñar\"=?, \n"
+                    + "       id_dato_personal=?, id_formacion=?, id_taller=?, id_asociativismo=?, \n"
+                    + "       id_localidad=?, id_departamento=?\n"
+                    + " WHERE id_artesano=?";
 
             PreparedStatement stmt;
 
@@ -87,12 +89,13 @@ public class ControladorArtesano {
             stmt.setString(6, artesano.getBeca());
             stmt.setString(6, artesano.getInstitucion());
             stmt.setString(8, artesano.getEnseñar());
-            stmt.setObject(9, artesano.getPersonas());
+            stmt.setLong(9, artesano.getDatoPersonal().getId());
             stmt.setObject(10, artesano.getFormacion());
             stmt.setObject(11, artesano.getTaller());
             stmt.setObject(12, artesano.getAsociativismo());
             stmt.setObject(13, artesano.getLocalidad());
             stmt.setObject(14, artesano.getDepartamento());
+            stmt.setLong(15, artesano.getId_artesano());
 
             stmt.execute();
         } catch (SQLException ex) {
@@ -121,14 +124,20 @@ public class ControladorArtesano {
     public Artesano extraer(Long id) {
 
         ControladorDatoPersonal cdp = new ControladorDatoPersonal();
-
+        ControladorFormacion cfo = new ControladorFormacion();
+        ControladorTaller cta = new ControladorTaller();
+        ControladorAsociativismo cas = new ControladorAsociativismo();
+        ControladorLocalidad clo = new ControladorLocalidad();
+        ControladorDepartamento cde = new ControladorDepartamento();
+        
         Artesano artesano = new Artesano();
 
         try {
 
-            String query = "SELECT id_artesano, descripcion, disponibilidad_viajar, disponibilidad_horaria"
-                    + "monotributista, subsidio, institucion, enseñar, id_persona, id_formacion, id_taller"
-                    + "id_asociativismo, id_localidad, id_departamento";
+            String query = "SELECT id_artesano, descripcion, disponibilidad_viajar, disponibilidad_horaria, \n"
+                    + "       monotributista, subsidio, beca, institucion, \"enseñar\", id_dato_personal, \n"
+                    + "       id_formacion, id_taller, id_asociativismo, id_localidad, id_departamento\n"
+                    + "  FROM artesanos;";
 
             PreparedStatement stmt;
 
@@ -145,8 +154,12 @@ public class ControladorArtesano {
                     artesano.setSubsidio(rs.getString("subsidio"));
                     artesano.setInstitucion(rs.getString("institucion"));
                     artesano.setEnseñar(rs.getString("enseñar"));
-                    //herramienta.setTipoHerramienta(cth.extraer(rs.getLong("id_tipo_herramienta")));
-                    artesano.setPersonas(cdp.extraer(rs.getLong(""));
+                    artesano.setDatoPersonal(cdp.extraer(rs.getLong("id_dato_personal")));
+                    artesano.setFormacion(cfo.extraer(rs.getLong("id_formacion")));
+                    artesano.setTaller(cta.extraer(rs.getLong("id_taller")));
+                    artesano.setAsociativismo(cas.extraer(rs.getLong("id_asociativismo")));
+                    artesano.setLocalidad(clo.extraer(rs.getLong("id_localidad")));
+                    artesano.setDepartamento(cde.extaer(rs.getLong("id_departamento")));
 
                 } catch (SQLException ex) {
                     Logger.getLogger(ControladorArtesano.class.getName()).log(Level.SEVERE, null, ex);

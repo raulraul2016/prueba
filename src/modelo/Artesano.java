@@ -20,7 +20,7 @@ public class Artesano {
     private String beca;
     private String enseñar;
     private String institucion;
-    private Personas personas;
+    private DatoPersonal datoPersonal;
     private Formacion formacion;
     private Taller taller;
     private Asociativismo asociativismo;
@@ -30,7 +30,7 @@ public class Artesano {
     public Artesano() {
     }
 
-    public Artesano(Long id_artesano, String descripcion, String disp_viajar, String disp_horaria, String monotributista, String subsidio, String beca, String enseñar, String institucion, Personas personas, Formacion formacion, Taller taller, Asociativismo asociativismo, Localidad localidad, Departamento departamento) {
+    public Artesano(Long id_artesano, String descripcion, String disp_viajar, String disp_horaria, String monotributista, String subsidio, String beca, String enseñar, String institucion, DatoPersonal datoPersonal, Formacion formacion, Taller taller, Asociativismo asociativismo, Localidad localidad, Departamento departamento) {
         this.id_artesano = id_artesano;
         this.descripcion = descripcion;
         this.disp_viajar = disp_viajar;
@@ -40,7 +40,7 @@ public class Artesano {
         this.beca = beca;
         this.enseñar = enseñar;
         this.institucion = institucion;
-        this.personas = personas;
+        this.datoPersonal = datoPersonal;
         this.formacion = formacion;
         this.taller = taller;
         this.asociativismo = asociativismo;
@@ -120,12 +120,12 @@ public class Artesano {
         this.institucion = institucion;
     }
 
-    public Personas getPersonas() {
-        return personas;
+    public DatoPersonal getDatoPersonal() {
+        return datoPersonal;
     }
 
-    public void setPersonas(Personas personas) {
-        this.personas = personas;
+    public void setDatoPersonal(DatoPersonal datoPersonal) {
+        this.datoPersonal = datoPersonal;
     }
 
     public Formacion getFormacion() {
@@ -168,4 +168,5 @@ public class Artesano {
         this.departamento = departamento;
     }
 
+    
 }

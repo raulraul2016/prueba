@@ -21,8 +21,9 @@ public class ControladorTaller {
     public void agregar(Taller taller) {
 
         try {
-            String query = "INSERT INTO talleres(lugar_produccion, descripcion, estado_taller)\n"
-                    + "VALUES (?, ?, ?)) ";
+            String query = "INSERT INTO talleres(\n"
+                    + "            lugar_produccion, descripcion, id_herramientas, estado_taller)\n"
+                    + "    VALUES (?, ?, ?, ?)";
 
             PreparedStatement stmt;
 
@@ -30,7 +31,8 @@ public class ControladorTaller {
 
             stmt.setString(1, taller.getLugarProduccion());
             stmt.setString(2, taller.getDescripcion());
-            stmt.setString(3, taller.getEstadoTaller());
+            stmt.setLong(3, taller.getHerramienta().getId());
+            stmt.setString(4, taller.getEstadoTaller());
 
             stmt.execute();
         } catch (SQLException ex) {
@@ -54,7 +56,7 @@ public class ControladorTaller {
             stmt.setString(1, taller.getLugarProduccion());
             stmt.setString(2, taller.getEstadoTaller());
             stmt.setString(3, taller.getDescripcion());
-            stmt.setLong(4, Long.valueOf(taller.getId_herramienta()));
+            stmt.setLong(4, taller.getHerramienta().getId());
             stmt.setLong(5, taller.getId());
 
             stmt.executeQuery();
@@ -80,7 +82,7 @@ public class ControladorTaller {
         }
     }
 
-    public Taller extraer() {
+    public Taller extraer(Long id) {
 
         Taller taller = new Taller();
 
@@ -102,7 +104,7 @@ public class ControladorTaller {
                     taller.setId(Long.valueOf(rs.getLong("id")));
                     taller.setLugarProduccion(rs.getString("lugar_produccion"));
                     taller.setDescripcion(rs.getString("descripcion"));
-                    taller.setId_herramienta(che.extraer(Long.valueOf(rs.getLong("id_tipo_herramienta"))));
+                    taller.setHerramienta(che.extraer(rs.getLong("id_herramientas=?")));
                     taller.setEstadoTaller(rs.getString("estado_taller"));
                 } catch (SQLException ex) {
                     Logger.getLogger(ControladorTaller.class.getName()).log(Level.SEVERE, null, ex);
