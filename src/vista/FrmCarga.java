@@ -25,7 +25,7 @@ import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 
 public class FrmCarga extends javax.swing.JInternalFrame {
-
+    
     ArrayList<Herramienta> herramienta;
     ArrayList<TipoHerramienta> detalleHerramientas;
     //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:ii:ss");
@@ -42,9 +42,9 @@ public class FrmCarga extends javax.swing.JInternalFrame {
     ResultSet rs;
     ResultSetMetaData rsm;
     Integer bandera = 0;
-
+    
     JDesktopPane desktopPane;
-
+    
     public void setDesktopPane(JDesktopPane desktopPane) {
         this.desktopPane = desktopPane;
     }
@@ -61,9 +61,9 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         modelo = new DefaultTableModel();
         herramienta = new ArrayList<>();
         detalleHerramientas = new ArrayList<>();
-
+        
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -807,13 +807,13 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         System.out.println(dni);
         String estadoCivil = jcbEstadoCivil.getSelectedItem().toString();
         System.out.println(estadoCivil);
-
+        
         int anioNac = jdcFechaNac.getCalendar().get(Calendar.YEAR);
         int mesNac = jdcFechaNac.getCalendar().get(Calendar.MONTH);
         int diaNac = jdcFechaNac.getCalendar().get(Calendar.DAY_OF_MONTH);
         String fechaNac = anioNac + "-" + mesNac + "-" + diaNac;
         System.out.println(fechaNac);
-
+        
         dp.setFechaNacimiento(fechaNac);
         dp.setApeNom(apeNom);
         dp.setLugNac(lugarNac);
@@ -824,31 +824,31 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         dp.setTel(telef);
         dp.setEdad(edad);
         dp.setEmail(email);
-
+        
         ControladorDatosCarga cdc = new ControladorDatosCarga();
-
+        
         int año = jdcFechaCarga.getCalendar().get(Calendar.YEAR);
         int mes = jdcFechaCarga.getCalendar().get(Calendar.MONTH);
         int dia = jdcFechaCarga.getCalendar().get(Calendar.DAY_OF_MONTH);
-
+        
         String fecha = año + "-" + mes + "-" + dia;
         dc.setFecha_carga(fecha);
-
+        
         System.out.println(fecha);
         String lCarga = jtfLugarCarga.getText();
         dc.setLugarCarga(lCarga);
-
+        
         System.out.println(lCarga);
-
+        
         ControladorDatoPersonal cdp = new ControladorDatoPersonal();
         //Controlador DatoPersona
         cdp.agregar(dp);
         System.out.println("Se agrego correctamente datos personales");
-
+        
         Integer dniTmp = dni;
         Long dniTmp1 = dniTmp.longValue();
-        dc.setId_personas(dniTmp1);
-        //Controlador DatoCarga
+        //dc.setId_dato_carga(dniTmp1);
+
         cdc.agregar(dc);
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -862,17 +862,17 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 //        her.setDescripcion(descripHerramienta);
 
         ControladorTaller ct = new ControladorTaller();
-
+        
         String lugarProduccion = jcbLugarProduccion.getSelectedItem().toString();
         String descripTaller = jtfDescripTaller.getText();
         String estadoTaller = jcbEstadoTaller.getSelectedItem().toString();
-
+        
         tal.setLugarProduccion(lugarProduccion);
         tal.setDescripcion(descripTaller);
         //tal.setHerramienta(null);
 
         ControladorHerramienta ch = new ControladorHerramienta();
-
+        
         ch.agregar(her);
         System.out.println("Se agrego correctamente datos Taller/Herramienta");
 
@@ -887,45 +887,84 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 
         // Boton Rudimentaria
         DefaultTableModel mod = new DefaultTableModel();
-
-        //hacer metodo de ventana emergente!!!   
-        int resp = JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Rudimentaria a la Lista?");
-        if (JOptionPane.OK_OPTION == resp) {
-            //cambiar AbmDetalleHerramienta por FrmDetalleHerramienta
-
-            AbmDetalleHerramienta adh = new AbmDetalleHerramienta();
-            adh.setTitle("Herramientas Rudimentarias");
-            adh.setLocationRelativeTo(null);
-            adh.setVisible(true);
-            this.desktopIcon.add(adh);
-            System.out.println("Se agrego una herramienta Rudimentaria");
-        } else {
-
-            JOptionPane.showMessageDialog(null, "Seleccione otro tipo de Herramienta si lo necesita");
+        
+        String query = "SELECT \n"
+                + "  herramientas.nombre_herramienta, \n"
+                + "  tipo_herramienta.nombre_tipo_herramienta\n"
+                + "FROM \n"
+                + "  public.herramientas, \n"
+                + "  public.tipo_herramienta\n"
+                + "WHERE \n"
+                + "  herramientas.id_tipo_herramienta = tipo_herramienta.id_tipo_herramienta;";
+        
+        try {
+            stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.executeQuery();
+            
+            rsm = rs.getMetaData();
+            
+            ArrayList<String[]> nombreHerramienta = new ArrayList<>();
+            
+            while (rs.next()) {
+                
+                String[] rows = new String[rsm.getColumnCount()];
+                
+                for (int i = 0; i < rows.length; i++) {
+                    rows[i] = rs.getString(i + 1);
+                }
+                nombreHerramienta.add(rows);
+                
+            }
+            modelo = (DefaultTableModel) this.jtbHerramientaTipo.getModel();
+            
+            for (int i = 0; i < nombreHerramienta.size(); i++) {
+                modelo.addRow(nombreHerramienta.get(i));
+                
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
 
+//        //hacer metodo de ventana emergente!!!   
+//        int resp = JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Rudimentaria a la Lista?");
+//        if (JOptionPane.OK_OPTION == resp) {
+//            //cambiar AbmDetalleHerramienta por FrmDetalleHerramienta
+//
+//            AbmDetalleHerramienta adh = new AbmDetalleHerramienta();
+//            adh.setTitle("Herramientas Rudimentarias");
+//            adh.setLocationRelativeTo(null);
+//            adh.setVisible(true);
+//            this.desktopIcon.add(adh);
+//            System.out.println("Se agrego una herramienta Rudimentaria");
+//        } else {
+//
+//            JOptionPane.showMessageDialog(null, "Seleccione otro tipo de Herramienta si lo necesita");
+//        }
 
     }//GEN-LAST:event_jbRudimentariaActionPerformed
     //}
     private void jbRudimentariaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRudimentariaMouseClicked
-
+        
 
     }//GEN-LAST:event_jbRudimentariaMouseClicked
 
     private void jbManualesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbManualesActionPerformed
-
+        
         int resp = JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Manual a la lista");
         if (JOptionPane.OK_OPTION == resp) {
+            /*
+             FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
+             fdh.setTitle("Herrameintas Manuales");
 
-            FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
-            fdh.setTitle("Herrameintas Manuales");
-
-            fdh.setVisible(true);
-            this.desktopIcon.add(fdh);
-            System.out.println("Se agrego una herramienta Manual");
+             fdh.setVisible(true);
+             this.desktopIcon.add(fdh);
+             System.out.println("Se agrego una herramienta Manual");
+             */
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione otro tipo de Herramienta si lo Necesita");
-
+            
         }
 
     }//GEN-LAST:event_jbManualesActionPerformed
@@ -934,18 +973,18 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 
         // Boton Electricas
         DefaultTableModel mod = new DefaultTableModel();
-
+        
         int resp = JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Electrica a la lista");
         if (JOptionPane.OK_OPTION == resp) {
 
-            FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
-            fdh.setTitle("Herramientas Electricas");
+            /*            FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
+             fdh.setTitle("Herramientas Electricas");
 
-            fdh.setVisible(true);
-            this.desktopIcon.add(fdh);
-            System.out.println("Se agrego una herramienta Electrica");
-        } else {
-
+             fdh.setVisible(true);
+             this.desktopIcon.add(fdh);
+             System.out.println("Se agrego una herramienta Electrica");
+             */ } else {
+            
             JOptionPane.showMessageDialog(null, "Seleccione otro tipo de Herramienta si lo necesita");
         }
 
@@ -955,16 +994,16 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 
         // Boton Maquinarias
         DefaultTableModel mod = new DefaultTableModel();
-
+        
         int resp = JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Maquinaria a la lista");
         if (JOptionPane.OK_OPTION == resp) {
-            FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
-            fdh.setTitle("Herramienta Maquinaria");
+            /*            FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
+             fdh.setTitle("Herramienta Maquinaria");
 
-            fdh.setVisible(true);
-            this.desktopIcon.add(fdh);
-            System.out.println("Se agrego una herramienta Maquinaria");
-        } else {
+             fdh.setVisible(true);
+             this.desktopIcon.add(fdh);
+             System.out.println("Se agrego una herramienta Maquinaria");
+             */ } else {
             JOptionPane.showMessageDialog(null, "Seleccione otro tipo de Herramienta si lo necesita");
         }
     }//GEN-LAST:event_jbMaquinariasActionPerformed
@@ -972,15 +1011,15 @@ public class FrmCarga extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         // Boton agregar herramienta nueva
-        FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
-        AbmActividades abmDetalleHerramienta = new AbmActividades();
-        abmDetalleHerramienta.setTitle("Detalle Herramienta");
-        desktopPane.add(abmDetalleHerramienta);
-        abmDetalleHerramienta.setVisible(true);
+/*        FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
+         AbmActividades abmDetalleHerramienta = new AbmActividades();
+         abmDetalleHerramienta.setTitle("Detalle Herramienta");
+         desktopPane.add(abmDetalleHerramienta);
+         abmDetalleHerramienta.setVisible(true);*/
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    
     public void nombreFila() {
-
+        
         dp = new DatoPersonal();
         //cdp = new ControladorDatoPersonal();
         dc = new DatosCarga();
@@ -997,27 +1036,27 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         modelo.addColumn("Dni");
         modelo.addColumn("Email");
         modelo.addColumn("Estado Civil");
-
+        
     }
-
+    
     private void cargaFilas() {
-
+        
         try {
-
+            
             String query = "SELECT fecha_carga, lugar_carga, id_personas, apellido_nombre, domicilio, lugar_nacimiento,"
                     + "edad, dni, correo_electronico, estado_civil FROM datos_carga , personas "
                     + "WHERE datos_carga.id_personas = personas.id_persona";
-
+            
             stmt = conexion.getConexion().prepareStatement(query);
-
+            
             rs = stmt.executeQuery();
-
+            
             rsm = rs.getMetaData();
-
+            
             while (rs.next()) {
-
+                
                 Object[] fila = new Object[rsm.getColumnCount()];
-
+                
                 fila[0] = rs.getString(2);
                 fila[1] = rs.getString(3);
                 fila[2] = rs.getString(4);
@@ -1029,26 +1068,26 @@ public class FrmCarga extends javax.swing.JInternalFrame {
                 fila[8] = rs.getString(10);
                 fila[9] = rs.getString(11);
                 fila[10] = rs.getString(12);
-
+                
                 modelo.addRow(fila);
-
+                
             }
-
+            
             rs.close();
-
+            
         } catch (SQLException error) {
             JOptionPane.showConfirmDialog(null, error);
-
+            
         }
-
+        
     }
-
+    
     private void actualizaTabla() {
-
+        
         ResultSet r;
         DefaultTableModel mod;
         try {
-
+            
             r = rs;
             // nombreFila();
             //generosControlador.cargaFilas();
@@ -1056,9 +1095,9 @@ public class FrmCarga extends javax.swing.JInternalFrame {
             cargaFilas();
             mod = new DefaultTableModel();
             String fila[] = new String[1];
-
+            
             while (r.next()) {
-
+                
                 fila[1] = r.getString("fecha_carga");
                 fila[2] = r.getString("lugar_carga");
                 fila[3] = r.getString("apellido_nombre");
@@ -1070,11 +1109,11 @@ public class FrmCarga extends javax.swing.JInternalFrame {
                 fila[9] = r.getString("estado_civil");
                 fila[10] = r.getString(10);
                 fila[11] = r.getString(11);
-
+                
                 mod.addRow(fila);
-
+                
             }
-
+            
         } catch (Exception e) {
             System.out.println(e);
         }
