@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.DatoPersonal;
 import modelo.DatosCarga;
 
 /**
@@ -26,54 +25,50 @@ public class ControladorDatosCarga {
 
     public void agregar(DatosCarga datosCarga) {
 
-        PreparedStatement stmt;
-
         ControladorDatoPersonal cdp = new ControladorDatoPersonal();
 
-        DatosCarga dc = new DatosCarga();
-        DatoPersonal dp = new DatoPersonal();
         try {
+            PreparedStatement stmt;
 
             String query = "INSERT INTO datos_carga(\n"
-                    + "            lugar_carga, id_dato_carga, id_personas, fecha_carga)\n"
-                    + "    VALUES (?, ?, ?, ?);";
+                    + "            lugar_carga, id_personas, fecha_carga)\n"
+                    + "    VALUES (?, ?, ?);";
 
             stmt = conexion.getConexion().prepareStatement(query);
 
             stmt.setString(1, datosCarga.getLugarCarga());
-            stmt.setLong(2, datosCarga.getId_dato_carga());
-            //stmt.setLong(3, datosCarga.getId_dato_carga());
-            stmt.setLong(3, datosCarga.getDatoPersonal().getId());
-            stmt.setString(4, datosCarga.getFecha_carga());
+            stmt.setLong(2, datosCarga.getDatoPersonal().getId());
+            stmt.setString(3, datosCarga.getFecha_carga());
 
             stmt.executeQuery();
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorDatosCarga.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
     public void modificar(DatosCarga datosCarga) {
 
-        ControladorDatoPersonal cdp = new ControladorDatoPersonal();
-
         try {
+            ControladorDatoPersonal cdp = new ControladorDatoPersonal();
 
-            String query = "UPDATE datos_carga SET lugar_carga = ?, id_personas, fecha_carga = ? \n"
+            String query = "UPDATE datos_carga SET lugar_carga = ?, id_personas=?, fecha_carga = ? \n"
                     + " WHERE id_dato_carga = ?";
 
             PreparedStatement stmt;
-            stmt = conexion.getConexion().prepareStatement(query);
+            stmt = conexion.getConexion().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
 
             stmt.setString(1, datosCarga.getLugarCarga());
-            stmt.setString(2, datosCarga.getFecha_carga());
             stmt.setLong(3, datosCarga.getDatoPersonal().getId());
+            stmt.setString(2, datosCarga.getFecha_carga());
             stmt.setLong(4, datosCarga.getId_dato_carga());
 
             stmt.execute();
-        } catch (Exception e) {
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorDatosCarga.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     public void eliminar(DatosCarga datosCarga) {

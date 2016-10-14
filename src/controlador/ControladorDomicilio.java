@@ -100,7 +100,8 @@ public class ControladorDomicilio {
     public Domicilio extraer(Long id) {
 
         Domicilio domicilio = new Domicilio();
-        Localidad localidad = new Localidad();
+
+        ControladorLocalidad clo = new ControladorLocalidad();
 
         try {
 
@@ -119,7 +120,7 @@ public class ControladorDomicilio {
                     domicilio.setPais(rs.getString("pais"));
                     domicilio.setProvincia(rs.getString("provincia"));
                     domicilio.setObservacion(rs.getString("observacion"));
-                    //domicilio.setLocalidad(cl.extraer().getId_locaclidad(rs.getInt("id_localidad")));
+                    domicilio.setLocalidad(clo.extraer(rs.getLong("id_localidad")));
 
                 } catch (SQLException ex) {
                     Logger.getLogger(ControladorDomicilio.class.getName()).log(Level.SEVERE, null, ex);

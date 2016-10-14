@@ -17,14 +17,17 @@ public class ControladorDatoPersonal {
 
     private static String url;
     private static final Conexion conexion = new Conexion();
+    ResultSet rs;
 
     public ControladorDatoPersonal() {
 
     }
 
     //Metodo agregar tesis3
-    public void agregar(DatoPersonal dp) {
+    public Long agregar(DatoPersonal dp) {
 
+        Long llave = null;
+        
         try {
 
             String query = "insert into personas(apellido_nombre, lugar_nacimiento,estado_civil, "
@@ -32,7 +35,14 @@ public class ControladorDatoPersonal {
                     + "VALUES (?, ?, ?, ?,?, ?, ?, ?, ?)";
             PreparedStatement stmt;
 
-            stmt = conexion.getConexion().prepareStatement(query);
+            /*
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO bla(blabla)",PreparedStatement.RETURN_GENERATED_KEYS);
+             ps.executeUpdate();
+             if (rs != nul && rs.next()) {
+             long llave = rs.getLong(1);
+             }
+             */
+            stmt = conexion.getConexion().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
 
             stmt.setString(1, dp.getApeNom());
             stmt.setString(2, dp.getLugNac());
@@ -46,9 +56,14 @@ public class ControladorDatoPersonal {
 
             stmt.execute();
 
+            if (rs != null && rs.next()) {
+                llave = rs.getLong(1);
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(ControladorDatoPersonal.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return llave;
     }
 
     public void modificar(DatoPersonal dp) {
