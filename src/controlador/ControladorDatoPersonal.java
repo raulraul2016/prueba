@@ -27,7 +27,7 @@ public class ControladorDatoPersonal {
     public Long agregar(DatoPersonal dp) {
 
         Long llave = null;
-        
+
         try {
 
             String query = "insert into personas(apellido_nombre, lugar_nacimiento,estado_civil, "
@@ -175,6 +175,34 @@ public class ControladorDatoPersonal {
             Logger.getLogger(ControladorDatoPersonal.class.getName()).log(Level.SEVERE, null, ex);
         }
         return arrayDatoPersonal;
+    }
+
+    public Long extraerUltimoId() {
+
+        Long id = null;
+
+        try {
+
+            String query = "SELECT id_persona "
+                    + "FROM personas";
+
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                try {
+                    id = rs.getLong(3);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorDatoPersonal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorDatoPersonal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
     }
 
 }

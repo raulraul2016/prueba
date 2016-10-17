@@ -142,4 +142,32 @@ public class ControladorDatosCarga {
         return arrayDatosCarga;
 
     }
+
+    public Long extraerUltimoId() {
+
+        Long id = null;
+
+        try {
+
+            String query = "SELECT id_dato_carga"
+                    + " FROM datos_carga";
+
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                try {
+                    id = rs.getLong(2);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorDatosCarga.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorDatosCarga.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
 }

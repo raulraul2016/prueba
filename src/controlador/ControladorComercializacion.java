@@ -131,4 +131,33 @@ public class ControladorComercializacion {
         }
         return arrayComercializacion;
     }
+
+    public Long extraerUltimoId() {
+
+        Long id = null;
+
+        try {
+
+            String query = "SELECT id_comercializacion"
+                    + "FROM comercializacion";
+
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                try {
+                    id = rs.getLong(1);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorComercializacion.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorComercializacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+
+    }
+
 }

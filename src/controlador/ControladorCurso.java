@@ -138,4 +138,32 @@ public class ControladorCurso {
         }
         return arrayCurso;
     }
+
+    public Long extraerUltimoId() {
+
+        Long id = null;
+
+        try {
+
+            String query = "SELECT id_curso_perfeccionamiento "
+                    + "FROM cursos_perfeccionamiento";
+
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                try {
+                    id = rs.getLong(1);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorCurso.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorCurso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+
+    }
 }

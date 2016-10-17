@@ -120,4 +120,32 @@ public class ControladorAprendizaje {
         return arrayAprendizaje;
     }
 
+    public Long extraerUltimoId() {
+
+        Long id = null;
+
+        try {
+
+            String query = "SELECT id_aprendizaje\n"
+                    + "  FROM aprendizajes";
+
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                try {
+                    id = rs.getLong(1);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorAprendizaje.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorAprendizaje.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+
+    }
+
 }

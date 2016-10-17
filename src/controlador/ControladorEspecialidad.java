@@ -71,19 +71,19 @@ public class ControladorEspecialidad {
     public Especialidad extraer(Long id) {
 
         Especialidad esp = new Especialidad();
-        
+
         try {
             String query = "SELECT id_especialidad, tipo_especialidad, descripcion\n"
                     + "  FROM especialidades";
-            
+
             PreparedStatement stmt;
-            
+
             stmt = conexion.getConexion().prepareStatement(query);
-            
+
             ResultSet rs = stmt.executeQuery();
-            
-            while(rs.next()){
-                
+
+            while (rs.next()) {
+
                 try {
                     esp.setIdEspecialidad(rs.getLong("id_especialidad"));
                     esp.setTipoEspecialidad(rs.getString("tipo_especialidad"));
@@ -97,26 +97,51 @@ public class ControladorEspecialidad {
         }
         return esp;
     }
-    
-    public ArrayList<Especialidad> extraerTodo(){
-        
-        ArrayList<Especialidad>  arrayEspecialidad = new ArrayList<Especialidad>();
-        
+
+    public ArrayList<Especialidad> extraerTodo() {
+
+        ArrayList<Especialidad> arrayEspecialidad = new ArrayList<Especialidad>();
+
         try {
-            
-            
+
             String query = "SELECT * FROM especialidad";
-            
+
             PreparedStatement stmt;
-            
+
             stmt = conexion.getConexion().prepareStatement(query);
-            
+
             stmt.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(ControladorEspecialidad.class.getName()).log(Level.SEVERE, null, ex);
         }
         return arrayEspecialidad;
-        
+
+    }
+
+    public Long extraerUltimoId() {
+
+        Long id = null;
+
+        try {
+            String query = "SELECT id_especialidad "
+                    + "FROM especialidades";
+
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                try {
+                    id = rs.getLong(1);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorEspecialidad.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorEspecialidad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
     }
 
 }

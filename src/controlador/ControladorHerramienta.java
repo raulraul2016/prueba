@@ -133,4 +133,31 @@ public class ControladorHerramienta {
         return arrayHerramienta;
 
     }
+
+    public Long extraerUltimoId() {
+
+        Long id = null;
+
+        try {
+
+            String query = "SELECT id_herramienta"
+                    + " FROM herramientas";
+
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                try {
+                    id = rs.getLong(1);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorHerramienta.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorHerramienta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
 }
