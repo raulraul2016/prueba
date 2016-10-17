@@ -132,4 +132,32 @@ public class ControladorMetodologia {
         return arrayMetodologia;
 
     }
+
+    public Long extraerUltimoId() {
+
+        Long id = null;
+
+        try {
+
+            String query = "SELECT id_metodologia "
+                    + "FROM metodologias";
+
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                try {
+                    id = rs.getLong(1);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorMetodologia.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorMetodologia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
 }

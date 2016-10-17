@@ -134,7 +134,8 @@ public class ControladorLocalidad {
 
         try {
 
-            String query = "";
+            String query = "SELECT id_localidad"
+                    + " FROM localidades;";
 
             PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
 

@@ -2,6 +2,7 @@ package controlador;
 
 import conexion.Conexion;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -78,6 +79,33 @@ public class ControladorPremio {
             Logger.getLogger(ControladorPremio.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public Long extraerUltimoId() {
+
+        Long id = null;
+        
+        try {
+                        
+            String query = "SELECT id_premio"
+                    + "  FROM premios";
+            
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                
+                try {
+                    id = rs.getLong(1);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorPremio.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorPremio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
     }
 
 }
