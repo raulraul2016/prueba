@@ -66,6 +66,40 @@ public class ControladorDatoPersonal {
         return llave;
     }
 
+    public Long agregar(DatoPersonal dp,Conexion conexion) {
+
+        try {
+
+            String query = "insert into personas(apellido_nombre, lugar_nacimiento,estado_civil, "
+                    + "domicilio, e_mail, dni, telefono, edad, fecha_nacimiento)"
+                    + "VALUES (?, ?, ?, ?,?, ?, ?, ?, ?)";
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+
+            stmt.setString(1, dp.getApeNom());
+            stmt.setString(2, dp.getLugNac());
+            stmt.setString(3, dp.getEstaCivil());
+            stmt.setString(4, dp.getDomicilio());
+            stmt.setString(5, dp.getEmail());
+            stmt.setInt(6, dp.getDni());
+            stmt.setString(7, dp.getTel());
+            stmt.setString(8, dp.getEdad());
+            stmt.setString(9, dp.getFechaNacimiento());
+
+            stmt.execute();
+            rs=stmt.getGeneratedKeys();
+            if (rs != null && rs.next()) {
+                Long llave = rs.getLong(3);
+                return llave;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorDatoPersonal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
     public void modificar(DatoPersonal dp) {
 
         try {

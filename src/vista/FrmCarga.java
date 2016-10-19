@@ -1,5 +1,6 @@
 package vista;
 
+import conexion.Conexion;
 import controlador.ControladorDatoPersonal;
 import controlador.ControladorDatosCarga;
 import static controlador.ControladorEspecialidad.conexion;
@@ -42,7 +43,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
     ResultSet rs;
     ResultSetMetaData rsm;
     Integer bandera = 0;
-
+    Conexion conexion;
     JDesktopPane desktopPane;
 
     public void setDesktopPane(JDesktopPane desktopPane) {
@@ -51,16 +52,16 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 
     ///////////////////////////////////////////////////
     public FrmCarga() {
-        initComponents();
-
-        //sdf = new SimpleDateFormat("dd - MM - yyyy");
-        dc = new DatosCarga();
-        dp = new DatoPersonal();
-        her = new Herramienta();
-        tal = new Taller();
-        modelo = new DefaultTableModel();
-        herramienta = new ArrayList<>();
-        detalleHerramientas = new ArrayList<>();
+            initComponents();
+            
+            //sdf = new SimpleDateFormat("dd - MM - yyyy");
+            dc = new DatosCarga();
+            dp = new DatoPersonal();
+            her = new Herramienta();
+            tal = new Taller();
+            modelo = new DefaultTableModel();
+            herramienta = new ArrayList<>();
+            detalleHerramientas = new ArrayList<>();
 
     }
 
@@ -788,41 +789,30 @@ public class FrmCarga extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        conexion = new Conexion();
         try {
-            //System.out.println("Se agrago correctamente el dato carga");
-            //Datos Persona
+            conexion.getConexion().setAutoCommit(false);
             String apeNom = jtfApellidoNombre.getText();
             System.out.println(apeNom);
-
             String domicilio = jtfDomicilio.getText();
             System.out.println(domicilio);
-
             String lugarNac = jtfLugarNac.getText();
             System.out.println(lugarNac);
-
             String telef = jtfTelefono.getText();
             System.out.println(telef);
-
             String email = jtfEmail.getText();
             System.out.println(email);
-
             String edad = jtfEdad.getText();
             System.out.println(edad);
-
             Integer dni = Integer.parseInt(jtfDni.getText());
             System.out.println(dni);
-
             String estadoCivil = jcbEstadoCivil.getSelectedItem().toString();
             System.out.println(estadoCivil);
-
             int anioNac = jdcFechaNac.getCalendar().get(Calendar.YEAR);
             int mesNac = jdcFechaNac.getCalendar().get(Calendar.MONTH);
             int diaNac = jdcFechaNac.getCalendar().get(Calendar.DAY_OF_MONTH);
-
             String fechaNac = anioNac + "-" + mesNac + "-" + diaNac;
             System.out.println(fechaNac);
-
             dp.setFechaNacimiento(fechaNac);
             dp.setApeNom(apeNom);
             dp.setLugNac(lugarNac);
@@ -833,45 +823,33 @@ public class FrmCarga extends javax.swing.JInternalFrame {
             dp.setTel(telef);
             dp.setEdad(edad);
             dp.setEmail(email);
-
             ControladorDatoPersonal cdp = new ControladorDatoPersonal();
-
-            ResultSet generatedKeysResultSet = stmt.getGeneratedKeys();
-            generatedKeysResultSet.next();
-            long id_personas = generatedKeysResultSet.getLong(1);
-
-            //Long id_personas = cdp.agregar(dp);
-
-//        dp.setId(id_persona);
-//
-//        if (id_persona >0) {
-//            System.out.println("Se crearon datos personales");
-//
-//        } else {
-            // DATO CARGA
+            Long id_persona = cdp.agregar(dp, conexion);
+            dp.setId(id_persona);
             int año = jdcFechaCarga.getCalendar().get(Calendar.YEAR);
             int mes = jdcFechaCarga.getCalendar().get(Calendar.MONTH);
             int dia = jdcFechaCarga.getCalendar().get(Calendar.DAY_OF_MONTH);
-
             String fecha = año + "-" + mes + "-" + dia;
             dc.setFecha_carga(fecha);
             System.out.println(fecha);
-
             String lCarga = jtfLugarCarga.getText();
             dc.setLugarCarga(lCarga);
             System.out.println(lCarga);
-
             Integer dniTmp = dni;
             Long dniTmp1 = dniTmp.longValue();
-
             dc.setDatoPersonal(dp);
-
             ControladorDatosCarga cdc = new ControladorDatosCarga();
-
-            cdc.agregar(dc);
+            cdc.agregar(dc, conexion);
             System.out.println(dc.toString());
         } catch (SQLException ex) {
-            Logger.getLogger(FrmCarga.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                conexion.getConexion().rollback();
+                Logger.getLogger(FrmCarga.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(FrmCarga.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }finally{
+            conexion.cerrarConexion();
         }
 
 

@@ -48,6 +48,30 @@ public class ControladorDatosCarga {
 
     }
 
+    public void agregar(DatosCarga datosCarga,Conexion conexion) {
+
+
+        try {
+            PreparedStatement stmt;
+
+            String query = "INSERT INTO datos_carga(\n"
+                    + "            lugar_carga, id_personas, fecha_carga)\n"
+                    + "    VALUES (?, ?, ?);";
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.setString(1, datosCarga.getLugarCarga());
+            stmt.setLong(2, datosCarga.getDatoPersonal().getId());
+            stmt.setString(3, datosCarga.getFecha_carga());
+
+            stmt.execute();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorDatosCarga.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
     public void modificar(DatosCarga datosCarga) {
 
         try {
