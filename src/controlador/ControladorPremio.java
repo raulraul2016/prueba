@@ -81,21 +81,53 @@ public class ControladorPremio {
 
     }
 
-    public Long extraerUltimoId() {
+    public Premio extraer(Long id) {
 
-        Long id = null;
+        Premio premio = new Premio();
         
         try {
-                        
-            String query = "SELECT id_premio"
+            
+            
+            String query = "SELECT id_premio, tipo_premio, institucion, descripcion\n"
                     + "  FROM premios";
             
             PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
             
-            ResultSet rs = stmt.executeQuery();
+            ResultSet rs = null;
             
             while(rs.next()){
                 
+                try {
+                    premio.setId_premio(rs.getLong("id_premio"));
+                    premio.setTipo_premio(rs.getString("tipo_premio"));
+                    premio.setInstitucion(rs.getString("institucion"));
+                    premio.setDescripcion(rs.getString("descripcion"));
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorPremio.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorPremio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return premio;
+    }
+
+    public Long extraerUltimoId() {
+
+        Long id = null;
+
+        try {
+
+            String query = "SELECT id_premio"
+                    + "  FROM premios";
+
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
                 try {
                     id = rs.getLong(1);
                 } catch (SQLException ex) {

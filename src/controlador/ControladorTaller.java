@@ -104,7 +104,7 @@ public class ControladorTaller {
                     taller.setId(Long.valueOf(rs.getLong("id")));
                     taller.setLugarProduccion(rs.getString("lugar_produccion"));
                     taller.setDescripcion(rs.getString("descripcion"));
-                    taller.setHerramienta(che.extraer(rs.getLong("id_herramientas=?")));
+                    taller.setHerramienta(che.extraer(rs.getLong("id_herramientas")));
                     taller.setEstadoTaller(rs.getString("estado_taller"));
                 } catch (SQLException ex) {
                     Logger.getLogger(ControladorTaller.class.getName()).log(Level.SEVERE, null, ex);
@@ -124,14 +124,43 @@ public class ControladorTaller {
         try {
             String query = "SELECT * FROM  taller";
 
-            PreparedStatement stmt;
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt = conexion.getConexion().prepareStatement(query);
+            stmt.executeQuery();
 
         } catch (SQLException ex) {
             Logger.getLogger(ControladorTaller.class.getName()).log(Level.SEVERE, null, ex);
         }
         return arrayTaller;
 
+    }
+
+    public Long extraerUltimoId() {
+
+        Long id = null;
+        
+        try {
+            
+            
+            String query = "SELECT id_taller "
+                    + "FROM talleres";
+            
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                
+                try {
+                    id = rs.getLong(1);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorTaller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
     }
 }

@@ -85,7 +85,7 @@ public class ControladorAprendizaje {
 
             String query = "SELECT id_aprendizaje, tipo_aprendizaje, descripcion";
 
-            PreparedStatement stmt;
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
 
             ResultSet rs = null;
 
@@ -98,7 +98,7 @@ public class ControladorAprendizaje {
         } catch (SQLException ex) {
             Logger.getLogger(ControladorAprendizaje.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return aprendizaje;
     }
 
     public ArrayList<Aprendizaje> extraerTodo() {

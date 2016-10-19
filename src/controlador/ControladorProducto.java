@@ -22,9 +22,11 @@ public class ControladorProducto {
     public void agregar(Producto producto) {
 
         try {
-            String query = "INSERT INTO public.productos(\n"
-                    + "            tipo_producto, descripcion)\n"
-                    + "    VALUES (?, ?)";
+            String query = "INSERT INTO productos(\n"
+                    + "            tipo_producto, descripcion, precio_producto, cantidad, \n"
+                    + "            id_materia_prima)\n"
+                    + "    VALUES (?, ?, ?, ?, \n"
+                    + "            ?)";
 
             PreparedStatement stmt;
 
@@ -32,6 +34,9 @@ public class ControladorProducto {
 
             stmt.setString(1, producto.getTipo_producto());
             stmt.setString(2, producto.getDescripcion());
+            stmt.setDouble(3, producto.getPrecio());
+            stmt.setInt(4, producto.getCantidad());
+            stmt.setLong(5, producto.getMateriaPrima().getId_materia_prima());
 
             stmt.execute();
         } catch (SQLException ex) {
@@ -43,8 +48,9 @@ public class ControladorProducto {
     public void modificar(Producto producto) {
 
         try {
-            String query = "UPDATE public.productos\n"
-                    + "   SET tipo_producto=?, descripcion=?\n"
+            String query = "UPDATE productos\n"
+                    + "   SET tipo_producto=?, descripcion=?, precio_producto=?, \n"
+                    + "       cantidad=?, id_materia_prima=?\n"
                     + " WHERE id_producto=?";
 
             PreparedStatement stmt;
@@ -53,7 +59,10 @@ public class ControladorProducto {
 
             stmt.setString(1, producto.getTipo_producto());
             stmt.setString(2, producto.getDescripcion());
-            stmt.setLong(3, producto.getId_producto());
+            stmt.setDouble(3, producto.getPrecio());
+            stmt.setInt(4, producto.getCantidad());
+            stmt.setLong(5, producto.getMateriaPrima().getId_materia_prima());
+            stmt.setLong(6, producto.getId_producto());
 
             stmt.execute();
         } catch (SQLException ex) {
@@ -88,8 +97,8 @@ public class ControladorProducto {
         try {
 
             String query = "SELECT id_producto, tipo_producto, descripcion, precio_producto, cantidad, \n"
-                    + "       id_materia_prima\n"
-                    + "  FROM productos";
+                    + "     id_materia_prima\n"
+                    + "     FROM productos";
 
             PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
 
@@ -127,7 +136,6 @@ public class ControladorProducto {
 
             ResultSet rs = stmt.executeQuery();
 
-            stmt.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -9,22 +9,22 @@ public class Rubro {
     private Long id;
     private String tipoRubro;
     private String descripcionRubro;
-    private Long id_especialidad;
-    private Long id_aprendizaje;
+    private Especialidad especialidad;
+    private Aprendizaje aprendizaje;
     
     
     public Rubro(){
         
     }
 
-    public Rubro(Long id, String tipoRubro, String descripcionRubro) {
+    public Rubro(Long id, String tipoRubro, String descripcionRubro, Especialidad especialidad, Aprendizaje aprendizaje) {
         this.id = id;
         this.tipoRubro = tipoRubro;
         this.descripcionRubro = descripcionRubro;
-        this.id_especialidad = id_especialidad;
-        this.id_aprendizaje = id_aprendizaje;
+        this.especialidad = especialidad;
+        this.aprendizaje = aprendizaje;
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -49,21 +49,21 @@ public class Rubro {
         this.descripcionRubro = descripcionRubro;
     }
 
-    public Long getId_especialidad() {
-        return id_especialidad;
+    public Especialidad getEspecialidad() {
+        return especialidad;
     }
 
-    public void setId_especialidad(Long id_especialidad) {
-        this.id_especialidad = id_especialidad;
+    public void setEspecialidad(Especialidad especialidad) {
+        this.especialidad = especialidad;
     }
 
-    public Long getId_aprendizaje() {
-        return id_aprendizaje;
+    public Aprendizaje getAprendizaje() {
+        return aprendizaje;
     }
 
-    public void setId_aprendizaje(Long id_aprendizaje) {
-        this.id_aprendizaje = id_aprendizaje;
+    public void setAprendizaje(Aprendizaje aprendizaje) {
+        this.aprendizaje = aprendizaje;
     }
-    
+
     
 }

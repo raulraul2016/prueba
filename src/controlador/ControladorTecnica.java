@@ -7,7 +7,9 @@ package controlador;
 
 import conexion.Conexion;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Tecnica;
@@ -47,7 +49,7 @@ public class ControladorTecnica {
 
         try {
             String query = "UPDATE public.tecnicas\n"
-                    + "   SET id_tecnica=?, tipo_tecnica=?, tecnica_diferente=?, descripcion=?\n"
+                    + "   SET tipo_tecnica=?, tecnica_diferente=?, descripcion=?\n"
                     + " WHERE id_tecnica=?";
 
             PreparedStatement stmt;
@@ -82,6 +84,56 @@ public class ControladorTecnica {
         } catch (SQLException ex) {
             Logger.getLogger(ControladorTecnica.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+    }
+
+    public Tecnica extraer() {
+
+        Tecnica tecnica = new Tecnica();
+
+        try {
+
+            String query = "SELECT id_tecnica, tipo_tecnica, tecnica_diferente, descripcion\n"
+                    + "  FROM tecnicas";
+
+            PreparedStatement stmt = conexiion.getConexion().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                try {
+                    tecnica.setId_tecnica(rs.getLong("id_tecnica"));
+                    tecnica.setTipo_tecnica(rs.getString("tipo_tecnica"));
+                    tecnica.setTecnica_diferente(rs.getString("tecnica_diferente"));
+                    tecnica.setDescripcion(rs.getString("descripcion"));
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorTecnica.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorTecnica.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return tecnica;
+    }
+
+    public ArrayList<Tecnica> extraerTodo() {
+
+        ArrayList<Tecnica> arrayTecnica = new ArrayList<Tecnica>();
+
+        try {
+
+            String query = "SELECT id_tecnica, tipo_tecnica, tecnica_diferente, descripcion\n"
+                    + "  FROM tecnicas";
+
+            PreparedStatement stmt = conexiion.getConexion().prepareStatement(query);
+
+            stmt.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorTecnica.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayTecnica;
 
     }
 
