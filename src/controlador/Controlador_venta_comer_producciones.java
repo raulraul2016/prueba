@@ -7,7 +7,9 @@ package controlador;
 
 import conexion.Conexion;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Venta_comer_producciones;
@@ -69,18 +71,96 @@ public class Controlador_venta_comer_producciones {
         try {
             String query = "DELETE FROM venta_comer_producciones_artesano\n"
                     + " WHERE id_venta_comer_produ=?";
-            
+
             PreparedStatement stmt;
-            
+
             stmt = conexion.getConexion().prepareStatement(query);
-            
+
             stmt.setLong(1, venta_comer_producciones.getId_venta_comer_produ());
-            
+
             stmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(Controlador_venta_comer_producciones.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
+    }
+
+    public Venta_comer_producciones extraer(Long id) {
+
+        Venta_comer_producciones venta_comer_producciones = new Venta_comer_producciones();
+
+        try {
+
+            String query = "SELECT id_venta_comer_produ, periodo_mayor_venta, descripcion\n"
+                    + "  FROM venta_produccion";
+
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                try {
+                    venta_comer_producciones.setId_venta_comer_produ(rs.getLong("id_venta_comer_produ"));
+                    venta_comer_producciones.setPeriodo_mayor_venta(rs.getString("periodo_mayor_venta"));
+                    venta_comer_producciones.setDescripcion(rs.getString("descripcion"));
+                } catch (SQLException ex) {
+                    Logger.getLogger(Controlador_venta_comer_producciones.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Controlador_venta_comer_producciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public ArrayList<Venta_comer_producciones> extraerTodo() {
+
+        ArrayList<Venta_comer_producciones> arrayVenta = new ArrayList<Venta_comer_producciones>();
+
+        try {
+
+            String query = "SELECT id_venta_comer_produ, periodo_mayor_venta, descripcion\n"
+                    + "  FROM venta_produccion";
+
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(Controlador_venta_comer_producciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayVenta;
+
+    }
+
+    public Long extraerUltimoId() {
+
+        Long id = null;
+
+        try {
+
+            String query = "SELECT id_venta_comer_produ"
+                    + " FROM venta_produccion";
+
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                try {
+                    id = rs.getLong(1);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Controlador_venta_comer_producciones.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Controlador_venta_comer_producciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+
     }
 
 }

@@ -7,7 +7,9 @@ package controlador;
 
 import conexion.Conexion;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Trueque;
@@ -79,6 +81,83 @@ public class ControladorTrueque {
             Logger.getLogger(ControladorTrueque.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public Trueque extraer(Long id) {
+
+        Trueque trueque = new Trueque();
+
+        try {
+
+            String query = "SELECT id_trueque "
+                    + "FROM trueques";
+
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                try {
+                    trueque.setId_trueque(rs.getLong("id_trueque"));
+                    trueque.setTipo_trueque(rs.getString("tipo_trueque"));
+                    trueque.setDescripcion(rs.getString("descripcion"));
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorTrueque.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorTrueque.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return trueque;
+    }
+
+    public ArrayList<Trueque> extraerTodo() {
+
+        ArrayList<Trueque> arrayTrueque = new ArrayList<Trueque>();
+
+        try {
+
+            String query = "SELECT id_trueque, tipo_trueque, descripcion\n"
+                    + "  FROM trueques";
+
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorTrueque.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayTrueque;
+
+    }
+
+    public Long extraerUltimoId() {
+
+        Long id = null;
+
+        try {
+
+            String query = "SELECT id_trueque"
+                    + " FROM trueques";
+
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                try {
+                    id = rs.getLong(1);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorTrueque.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorTrueque.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
     }
 
 }
