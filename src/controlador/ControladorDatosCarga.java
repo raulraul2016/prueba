@@ -21,7 +21,7 @@ import modelo.DatosCarga;
 public class ControladorDatosCarga {
 
     private static String url;
-    private static final Conexion conexion = new Conexion();
+    private Conexion conexion;
 
     public void agregar(DatosCarga datosCarga) {
 
@@ -54,9 +54,7 @@ public class ControladorDatosCarga {
         try {
             PreparedStatement stmt;
 
-            String query = "INSERT INTO datos_carga(\n"
-                    + "            lugar_carga, id_personas, fecha_carga)\n"
-                    + "    VALUES (?, ?, ?);";
+            String query = "INSERT INTO datos_carga(lugar_carga, id_personas, fecha_carga)VALUES (?, ?, ?)";
 
             stmt = conexion.getConexion().prepareStatement(query);
 

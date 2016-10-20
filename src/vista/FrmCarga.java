@@ -52,16 +52,16 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 
     ///////////////////////////////////////////////////
     public FrmCarga() {
-            initComponents();
-            
-            //sdf = new SimpleDateFormat("dd - MM - yyyy");
-            dc = new DatosCarga();
-            dp = new DatoPersonal();
-            her = new Herramienta();
-            tal = new Taller();
-            modelo = new DefaultTableModel();
-            herramienta = new ArrayList<>();
-            detalleHerramientas = new ArrayList<>();
+        initComponents();
+
+        //sdf = new SimpleDateFormat("dd - MM - yyyy");
+        dc = new DatosCarga();
+        dp = new DatoPersonal();
+        her = new Herramienta();
+        tal = new Taller();
+        modelo = new DefaultTableModel();
+        herramienta = new ArrayList<>();
+        detalleHerramientas = new ArrayList<>();
 
     }
 
@@ -118,8 +118,9 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         jPanel6 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtbHerramientasArtesano = new javax.swing.JTable();
-        jButton7 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbAgregaHerramienta = new javax.swing.JButton();
+        jbAgragar = new javax.swing.JButton();
+        jbQuitaHerramienta = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jButton8 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
@@ -476,14 +477,16 @@ public class FrmCarga extends javax.swing.JInternalFrame {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        jButton7.setText(">>");
+        jbAgregaHerramienta.setText(">>");
 
-        jButton2.setText("+");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbAgragar.setText("+");
+        jbAgragar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbAgragarActionPerformed(evt);
             }
         });
+
+        jbQuitaHerramienta.setText("<<");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -513,9 +516,13 @@ public class FrmCarga extends javax.swing.JInternalFrame {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton7)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jbAgragar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbAgregaHerramienta)
+                            .addComponent(jbQuitaHerramienta))
+                        .addGap(0, 6, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11))
         );
@@ -524,10 +531,12 @@ public class FrmCarga extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(128, 128, 128)
+                        .addComponent(jbAgregaHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbQuitaHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbAgragar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -794,53 +803,64 @@ public class FrmCarga extends javax.swing.JInternalFrame {
             conexion.getConexion().setAutoCommit(false);
             String apeNom = jtfApellidoNombre.getText();
             System.out.println(apeNom);
-            String domicilio = jtfDomicilio.getText();
-            System.out.println(domicilio);
             String lugarNac = jtfLugarNac.getText();
             System.out.println(lugarNac);
-            String telef = jtfTelefono.getText();
-            System.out.println(telef);
+            String estadoCivil = jcbEstadoCivil.getSelectedItem().toString();
+            System.out.println(estadoCivil);
+            String domicilio = jtfDomicilio.getText();
+            System.out.println(domicilio);
             String email = jtfEmail.getText();
             System.out.println(email);
+            String telef = jtfTelefono.getText();
+            System.out.println(telef);
             String edad = jtfEdad.getText();
             System.out.println(edad);
             Integer dni = Integer.parseInt(jtfDni.getText());
             System.out.println(dni);
-            String estadoCivil = jcbEstadoCivil.getSelectedItem().toString();
-            System.out.println(estadoCivil);
             int anioNac = jdcFechaNac.getCalendar().get(Calendar.YEAR);
             int mesNac = jdcFechaNac.getCalendar().get(Calendar.MONTH);
             int diaNac = jdcFechaNac.getCalendar().get(Calendar.DAY_OF_MONTH);
             String fechaNac = anioNac + "-" + mesNac + "-" + diaNac;
             System.out.println(fechaNac);
-            dp.setFechaNacimiento(fechaNac);
+
             dp.setApeNom(apeNom);
             dp.setLugNac(lugarNac);
-            dp.setFechaNacimiento(fechaNac);
-            dp.setDni(dni);
             dp.setEstaCivil(estadoCivil);
+            dp.setFechaNacimiento(fechaNac);
             dp.setDomicilio(domicilio);
+            dp.setEmail(email);
             dp.setTel(telef);
             dp.setEdad(edad);
-            dp.setEmail(email);
+            dp.setDni(dni);
+            dp.setFechaNacimiento(fechaNac);
+
             ControladorDatoPersonal cdp = new ControladorDatoPersonal();
+
             Long id_persona = cdp.agregar(dp, conexion);
             dp.setId(id_persona);
+
             int año = jdcFechaCarga.getCalendar().get(Calendar.YEAR);
             int mes = jdcFechaCarga.getCalendar().get(Calendar.MONTH);
             int dia = jdcFechaCarga.getCalendar().get(Calendar.DAY_OF_MONTH);
+
             String fecha = año + "-" + mes + "-" + dia;
+
             dc.setFecha_carga(fecha);
             System.out.println(fecha);
+
             String lCarga = jtfLugarCarga.getText();
             dc.setLugarCarga(lCarga);
             System.out.println(lCarga);
-            Integer dniTmp = dni;
-            Long dniTmp1 = dniTmp.longValue();
+
+            //Integer dniTmp = dni;
+            //Long dniTmp1 = dniTmp.longValue();
             dc.setDatoPersonal(dp);
+
             ControladorDatosCarga cdc = new ControladorDatosCarga();
+
             cdc.agregar(dc, conexion);
-            System.out.println(dc.toString());
+            conexion.getConexion().commit();
+
         } catch (SQLException ex) {
             try {
                 conexion.getConexion().rollback();
@@ -848,7 +868,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
             } catch (SQLException ex1) {
                 Logger.getLogger(FrmCarga.class.getName()).log(Level.SEVERE, null, ex1);
             }
-        }finally{
+        } finally {
             conexion.cerrarConexion();
         }
 
@@ -887,19 +907,24 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 
     private void jbRudimentariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRudimentariaActionPerformed
 
-        // Boton Rudimentaria
-        DefaultTableModel mod = new DefaultTableModel();
-
-        String query = "SELECT \n"
-                + "  herramientas.nombre_herramienta, \n"
-                + "  tipo_herramienta.nombre_tipo_herramienta\n"
-                + "FROM \n"
-                + "  public.herramientas, \n"
-                + "  public.tipo_herramienta\n"
-                + "WHERE \n"
-                + "  herramientas.id_tipo_herramienta = tipo_herramienta.id_tipo_herramienta;";
-
         try {
+            // Boton Rudimentaria
+
+            String textoBoton = jbRudimentaria.getText();
+
+            jlNombreTipoHerramienta.setText(textoBoton);
+                    
+            DefaultTableModel mod = new DefaultTableModel();
+
+            String query = "SELECT \n"
+                    + "  herramientas.nombre_herramienta, \n"
+                    + "  tipo_herramienta.nombre_tipo_herramienta\n"
+                    + "FROM \n"
+                    + "  public.herramientas, \n"
+                    + "  public.tipo_herramienta\n"
+                    + "WHERE \n"
+                    + "  herramientas.id_tipo_herramienta = tipo_herramienta.id_tipo_herramienta";
+
             stmt = conexion.getConexion().prepareStatement(query);
 
             stmt.executeQuery();
@@ -925,10 +950,6 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 
             }
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-
 //        //hacer metodo de ventana emergente!!!   
 //        int resp = JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Rudimentaria a la Lista?");
 //        if (JOptionPane.OK_OPTION == resp) {
@@ -944,6 +965,9 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 //
 //            JOptionPane.showMessageDialog(null, "Seleccione otro tipo de Herramienta si lo necesita");
 //        }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmCarga.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_jbRudimentariaActionPerformed
     //}
@@ -1010,7 +1034,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jbMaquinariasActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jbAgragarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgragarActionPerformed
 
         // Boton agregar herramienta nueva
 /*        FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
@@ -1018,7 +1042,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
          abmDetalleHerramienta.setTitle("Detalle Herramienta");
          desktopPane.add(abmDetalleHerramienta);
          abmDetalleHerramienta.setVisible(true);*/
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jbAgragarActionPerformed
 
     public void nombreFila() {
 
@@ -1126,9 +1150,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
     private javax.swing.JButton JbElectricas;
     private javax.swing.ButtonGroup bgTipoHerram;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
@@ -1180,8 +1202,11 @@ public class FrmCarga extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JButton jbAgragar;
+    private javax.swing.JButton jbAgregaHerramienta;
     private javax.swing.JButton jbManuales;
     private javax.swing.JButton jbMaquinarias;
+    private javax.swing.JButton jbQuitaHerramienta;
     private javax.swing.JButton jbRudimentaria;
     private javax.swing.JComboBox jcbEstadoCivil;
     private javax.swing.JComboBox jcbEstadoTaller;
