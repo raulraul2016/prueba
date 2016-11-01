@@ -81,17 +81,19 @@ public class ControladorComercializacion {
         }
     }
 
-    public Comercializacion extraer() {
+    public Comercializacion extraer(Long id) {
+
+        PreparedStatement stmt;
 
         Comercializacion comercializacion = new Comercializacion();
 
         try {
 
-            String query = "SELECT * FROM comercializacion";
-
-            PreparedStatement stmt;
+            String query = "SELECT * FROM comercializacion FROM comercializacion WHERE id_comercializacion = ?";
 
             stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.setLong(1, id);
 
             ResultSet rs = stmt.executeQuery();
 
@@ -115,6 +117,8 @@ public class ControladorComercializacion {
 
     public ArrayList<Comercializacion> extraerTodo() {
 
+        Comercializacion aux = new Comercializacion();
+        ResultSet rs;
         ArrayList<Comercializacion> arrayComercializacion = new ArrayList<Comercializacion>();
 
         try {
@@ -125,7 +129,7 @@ public class ControladorComercializacion {
 
             stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.executeQuery();
+            rs = stmt.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(ControladorComercializacion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -158,6 +162,30 @@ public class ControladorComercializacion {
         }
         return id;
 
+    }
+
+    public ArrayList<Comercializacion> extraerTodoTipo(int tipo) {
+
+        Comercializacion aux = new Comercializacion();
+        ResultSet rs;
+        ArrayList<Comercializacion> arrayComercializacion = new ArrayList<Comercializacion>();
+
+        try {
+
+            String query = "SELECT * FROM comercializacion WHERE id_comercializacion = ?";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.setLong(1, tipo);
+
+            rs = stmt.executeQuery();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorComercializacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayComercializacion;
     }
 
 }

@@ -80,14 +80,16 @@ public class ControladorAprendizaje {
     public Aprendizaje extraer(Long id) {
 
         Aprendizaje aprendizaje = new Aprendizaje();
-
+        PreparedStatement stmt;
         try {
 
-            String query = "SELECT id_aprendizaje, tipo_aprendizaje, descripcion";
+            String query = "SELECT id_aprendizaje, tipo_aprendizaje, descripcion FROM aprendizajez WHERE id_aprendizaje = ?";
 
-            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+            stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setLong(1, id);
 
-            ResultSet rs = null;
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
 
@@ -148,4 +150,36 @@ public class ControladorAprendizaje {
 
     }
 
+     public ArrayList<Aprendizaje> extraerTodoTipo(int tipo) {
+
+         Aprendizaje aux = new Aprendizaje();
+        ArrayList<Aprendizaje> arrayAprendizaje = new ArrayList<Aprendizaje>();
+        ResultSet rs;
+        try {
+
+            String query = "SELECT * FROM aprendizajes WHERE id_aprendizaje = ?";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setInt(1, tipo);
+
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                
+                aux = extraer(rs.getLong(1));
+                arrayAprendizaje.add(aux);
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorAprendizaje.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayAprendizaje;
+    }
+    
+    
+    
 }

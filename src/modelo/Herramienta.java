@@ -12,17 +12,16 @@ public class Herramienta {
     private String nombreHerramienta;
     private TipoHerramienta tipoHerramienta;
     private String descripcion;
-    private ArrayList<TipoHerramienta> dHerramienta;
+    //private ArrayList<TipoHerramienta> dHerramienta;
 
     public Herramienta() {
     }
 
-    public Herramienta(Long id, String nombreHerramienta, TipoHerramienta tipoHerramienta, String descripcion, ArrayList<TipoHerramienta> dHerramienta) {
+    public Herramienta(Long id, String nombreHerramienta, TipoHerramienta tipoHerramienta, String descripcion) {
         this.id = id;
         this.nombreHerramienta = nombreHerramienta;
         this.tipoHerramienta = tipoHerramienta;
         this.descripcion = descripcion;
-        this.dHerramienta = dHerramienta;
     }
 
     public Long getId() {
@@ -57,13 +56,4 @@ public class Herramienta {
         this.descripcion = descripcion;
     }
 
-    public ArrayList<TipoHerramienta> getdHerramienta() {
-        return dHerramienta;
-    }
-
-    public void setdHerramienta(ArrayList<TipoHerramienta> dHerramienta) {
-        this.dHerramienta = dHerramienta;
-    }
-
-    
 }

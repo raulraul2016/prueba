@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author bangho
@@ -26,11 +28,12 @@ public class Artesano {
     private Asociativismo asociativismo;
     private Localidad localidad;
     private Departamento departamento;
+    private ArrayList<Herramienta> herramientaArtesano;
 
     public Artesano() {
     }
 
-    public Artesano(Long id_artesano, String descripcion, String disp_viajar, String disp_horaria, String monotributista, String subsidio, String beca, String enseñar, String institucion, DatoPersonal datoPersonal, Formacion formacion, Taller taller, Asociativismo asociativismo, Localidad localidad, Departamento departamento) {
+    public Artesano(Long id_artesano, String descripcion, String disp_viajar, String disp_horaria, String monotributista, String subsidio, String beca, String enseñar, String institucion, DatoPersonal datoPersonal, Formacion formacion, Taller taller, Asociativismo asociativismo, Localidad localidad, Departamento departamento, ArrayList<Herramienta> herramientaArtesano) {
         this.id_artesano = id_artesano;
         this.descripcion = descripcion;
         this.disp_viajar = disp_viajar;
@@ -46,7 +49,10 @@ public class Artesano {
         this.asociativismo = asociativismo;
         this.localidad = localidad;
         this.departamento = departamento;
+        this.herramientaArtesano = herramientaArtesano;
     }
+    
+    
 
     public Long getId_artesano() {
         return id_artesano;
@@ -166,6 +172,14 @@ public class Artesano {
 
     public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
+    }
+
+    public ArrayList<Herramienta> getHerramientaArtesano() {
+        return herramientaArtesano;
+    }
+
+    public void setHerramientaArtesano(ArrayList<Herramienta> herramientaArtesano) {
+        this.herramientaArtesano = herramientaArtesano;
     }
 
     

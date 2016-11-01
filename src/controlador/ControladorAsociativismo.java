@@ -79,16 +79,17 @@ public class ControladorAsociativismo {
 
     public Asociativismo extraer(Long id) {
 
+        PreparedStatement stmt;
         Asociativismo aso = new Asociativismo();
 
         try {
 
-            String query = "SELECT * FROM asociativismos";
+            ControladorAsociativismo cas = new ControladorAsociativismo();
 
-            PreparedStatement stmt;
+            String query = "SELECT * FROM asociativismos FROM asociativismos WHERE id_asociativismo = ?";
 
             stmt = conexion.getConexion().prepareStatement(query);
-
+            stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -108,24 +109,26 @@ public class ControladorAsociativismo {
         }
         return aso;
     }
-    /*
-     public ArrayList<DatoPersonal> extraerTodo() {
-
-     ArrayList<DatoPersonal> arrayDatoPersonal = new ArrayList<DatoPersonal>();
-     */
 
     public ArrayList<Asociativismo> extraerTodo() {
 
+        Asociativismo aux = new Asociativismo();
+        ResultSet rs;
         ArrayList<Asociativismo> arrayAso = new ArrayList<Asociativismo>();
-
+            
         try {
             String query = "SELECT * FROM asociativismos";
 
             PreparedStatement stmt;
 
             stmt = conexion.getConexion().prepareStatement(query);
-
-            stmt.executeQuery();
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                
+                aux = extraer(rs.getLong(1));
+                arrayAso.add(aux);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ControladorAsociativismo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -158,6 +161,35 @@ public class ControladorAsociativismo {
             Logger.getLogger(ControladorAsociativismo.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
+
+    }
+    
+    public ArrayList<Asociativismo> extraerTodoTipo(int tipo) {
+
+        Asociativismo aux = new Asociativismo();
+        ResultSet rs;
+        ArrayList<Asociativismo> arrayAso = new ArrayList<Asociativismo>();
+            
+        try {
+            String query = "SELECT * FROM asociativismos WHERE id_asociativismo = ?";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setLong(1, tipo);
+            
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                
+                aux = extraer(rs.getLong(1));
+                arrayAso.add(aux);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorAsociativismo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayAso;
 
     }
 

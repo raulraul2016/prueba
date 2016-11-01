@@ -82,17 +82,17 @@ public class ControladorHerramienta {
     }
 
     public Herramienta extraer(Long id) {
-
+        PreparedStatement stmt;
         Herramienta herramienta = new Herramienta();
 
         try {
 
             ControladorTipoHerramienta cth = new ControladorTipoHerramienta();
-            String query = "SELECT id_herramienta, nombre_herramienta, id_tipo_herramienta, descripcion";
+            String query = "SELECT id_herramienta, nombre_herramienta, id_tipo_herramienta, descripcion FROM herramientas WHERE id_herramienta=?";
 
-            PreparedStatement stmt;
-
-            ResultSet rs = null;
+            stmt = conexion.getConexion().prepareStatement(query);
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
 
@@ -111,11 +111,12 @@ public class ControladorHerramienta {
         } catch (SQLException ex) {
             Logger.getLogger(ControladorHerramienta.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return herramienta;
     }
 
     public ArrayList<Herramienta> extraerTodo() {
-
+        Herramienta aux = new Herramienta();
+        ResultSet rs;
         ArrayList<Herramienta> arrayHerramienta = new ArrayList<Herramienta>();
 
         try {
@@ -125,7 +126,38 @@ public class ControladorHerramienta {
 
             stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.executeQuery();
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                aux = extraer(rs.getLong(1));
+                arrayHerramienta.add(aux);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorHerramienta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayHerramienta;
+
+    }
+
+    public ArrayList<Herramienta> extraerTodoTipo(int tipo) {
+        Herramienta aux = new Herramienta();
+        ArrayList<Herramienta> arrayHerramienta = new ArrayList<Herramienta>();
+        ResultSet rs;
+        try {
+            String query = "SELECT * FROM herramientas WHERE id_tipo_herramienta = ?";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.setInt(1, tipo);
+
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                aux = extraer(rs.getLong(1));
+                arrayHerramienta.add(aux);
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(ControladorHerramienta.class.getName()).log(Level.SEVERE, null, ex);
