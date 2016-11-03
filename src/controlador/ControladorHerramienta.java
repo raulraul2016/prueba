@@ -88,7 +88,8 @@ public class ControladorHerramienta {
         try {
 
             ControladorTipoHerramienta cth = new ControladorTipoHerramienta();
-            String query = "SELECT id_herramienta, nombre_herramienta, id_tipo_herramienta, descripcion FROM herramientas WHERE id_herramienta=?";
+            String query = "SELECT id_herramienta, nombre_herramienta, id_tipo_herramienta, descripcion "
+                    + "FROM herramientas WHERE id_herramienta = ?";
 
             stmt = conexion.getConexion().prepareStatement(query);
             stmt.setLong(1, id);

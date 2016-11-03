@@ -99,16 +99,17 @@ public class ControladorDomicilio {
 
     public Domicilio extraer(Long id) {
 
+        PreparedStatement stmt;
         Domicilio domicilio = new Domicilio();
-
         ControladorLocalidad clo = new ControladorLocalidad();
 
         try {
 
-            ControladorLocalidad cl = new ControladorLocalidad();
-            String query = "SELECT * FROM domicilio";
+            String query = "SELECT * FROM domicilio WHERE id_domicilio = ?";
 
-            PreparedStatement stmt = null;
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.setLong(1, id);
 
             ResultSet rs = stmt.executeQuery();
 
@@ -135,6 +136,8 @@ public class ControladorDomicilio {
 
     public ArrayList<Domicilio> extraerTodo() {
 
+        Domicilio aux = new Domicilio();
+        ResultSet rs;
         ArrayList<Domicilio> arrayDomicilio = new ArrayList<Domicilio>();
 
         try {
@@ -145,7 +148,13 @@ public class ControladorDomicilio {
 
             stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.executeQuery();
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                aux = extraer(rs.getLong(1));
+                arrayDomicilio.add(aux);
+
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ControladorDomicilio.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -179,6 +188,35 @@ public class ControladorDomicilio {
             Logger.getLogger(ControladorDomicilio.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
+    }
+    
+    public ArrayList<Domicilio> extraerTodoTipo(int tipo) {
+        
+        Domicilio aux = new Domicilio();
+        ArrayList<Domicilio> arrayDomicilio = new ArrayList<Domicilio>();
+        ResultSet rs;
+
+        try {
+
+            String query = "SELECT id_domicilio, domicilio, descripcion FROM domicilio WHERE id_domicilio = ?";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setInt(1, tipo);
+
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                aux = extraer(rs.getLong(1));
+                arrayDomicilio.add(aux);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorDomicilio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayDomicilio;
+
     }
 
 }

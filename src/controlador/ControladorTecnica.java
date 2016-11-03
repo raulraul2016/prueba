@@ -87,16 +87,19 @@ public class ControladorTecnica {
 
     }
 
-    public Tecnica extraer() {
+    public Tecnica extraer(Long id) {
 
         Tecnica tecnica = new Tecnica();
+        PreparedStatement stmt;
 
         try {
 
             String query = "SELECT id_tecnica, tipo_tecnica, tecnica_diferente, descripcion\n"
-                    + "  FROM tecnicas";
+                    + "  FROM tecnicas WHERE id_tecnica = ?";
 
-            PreparedStatement stmt = conexiion.getConexion().prepareStatement(query);
+            stmt = conexiion.getConexion().prepareStatement(query);
+            
+            stmt.setLong(1, id);
 
             ResultSet rs = stmt.executeQuery();
 
@@ -120,6 +123,8 @@ public class ControladorTecnica {
 
     public ArrayList<Tecnica> extraerTodo() {
 
+        Tecnica aux = new Tecnica();
+        ResultSet rs;
         ArrayList<Tecnica> arrayTecnica = new ArrayList<Tecnica>();
 
         try {
@@ -129,7 +134,13 @@ public class ControladorTecnica {
 
             PreparedStatement stmt = conexiion.getConexion().prepareStatement(query);
 
-            stmt.executeQuery();
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                
+                aux = extraer(rs.getLong(1));
+                arrayTecnica.add(aux);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ControladorTecnica.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -164,6 +175,35 @@ public class ControladorTecnica {
             Logger.getLogger(ControladorTecnica.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
+    }
+    
+    public ArrayList<Tecnica> extraerTodoTipo(int tipo) {
+
+        Tecnica aux = new Tecnica();
+        ResultSet rs;
+        ArrayList<Tecnica> arrayTecnica = new ArrayList<Tecnica>();
+
+        try {
+
+            String query = "SELECT id_tecnica, tipo_tecnica, tecnica_diferente, descripcion\n"
+                    + "  FROM tecnicas";
+
+            PreparedStatement stmt = conexiion.getConexion().prepareStatement(query);
+            
+            stmt.setInt(1, tipo);
+
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                
+                aux = extraer(rs.getLong(1));
+                arrayTecnica.add(aux);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorTecnica.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayTecnica;
+
     }
 
 }

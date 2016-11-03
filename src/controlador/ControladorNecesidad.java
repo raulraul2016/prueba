@@ -85,17 +85,20 @@ public class ControladorNecesidad {
 
     public Necesidad extraer(Long id) {
 
+        PreparedStatement stmt;
         Necesidad necesidad = new Necesidad();
 
         try {
 
             String query = "SELECT id_necesidad, tipo_necesidad, asistencia_tecnica, descripcion, \n"
                     + "       \"disponibilidad_enseñanza\"\n"
-                    + "  FROM necesidades";
+                    + "  FROM necesidades WHERE id_necesidad = ?";
 
-            PreparedStatement stmt;
+            stmt = conexion.getConexion().prepareStatement(query);
 
-            ResultSet rs = null;
+            stmt.setLong(1, id);
+
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
 
@@ -118,6 +121,8 @@ public class ControladorNecesidad {
 
     public ArrayList<Necesidad> extraerTodo() {
 
+        Necesidad aux = new Necesidad();
+        ResultSet rs;
         ArrayList<Necesidad> arrayNecesidad = new ArrayList<Necesidad>();
 
         try {
@@ -128,7 +133,12 @@ public class ControladorNecesidad {
 
             stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.executeQuery();
+            rs = stmt.executeQuery();
+            if(rs.next()){
+                aux = extraer(rs.getLong(1));
+                arrayNecesidad.add(aux);
+            }
+            
         } catch (SQLException ex) {
             Logger.getLogger(ControladorNecesidad.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -161,5 +171,32 @@ public class ControladorNecesidad {
             Logger.getLogger(ControladorNecesidad.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
+    }
+    
+    public ArrayList<Necesidad> extraerTodoTipo(int tipo) {
+
+        Necesidad aux = new Necesidad();
+        ResultSet rs;
+        ArrayList<Necesidad> arrayNecesidad = new ArrayList<Necesidad>();
+
+        try {
+
+            String query = "SELECT * FROM necesidades WHERE id_necesidad = ?";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            rs = stmt.executeQuery();
+            if(rs.next()){
+                aux = extraer(rs.getLong(1));
+                arrayNecesidad.add(aux);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorNecesidad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayNecesidad;
+
     }
 }

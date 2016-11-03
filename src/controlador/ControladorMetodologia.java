@@ -80,17 +80,18 @@ public class ControladorMetodologia {
 
     public Metodologia extraer(Long id) {
 
+        PreparedStatement stmt;
         Metodologia metodologia = new Metodologia();
 
         try {
 
             String query = "SELECT id_metodologia, descripcion_trabajo, descripcion_tiempo_produ, \n"
                     + "       precio_producto, cantidad_producto\n"
-                    + "  FROM metodologias";
-
-            PreparedStatement stmt;
+                    + "  FROM metodologias WHERE id_metodologia = ?";
 
             stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.setLong(1, id);
 
             ResultSet rs = stmt.executeQuery();
 
@@ -115,6 +116,8 @@ public class ControladorMetodologia {
 
     public ArrayList<Metodologia> extraerTodo() {
 
+        Metodologia aux = new Metodologia();
+        ResultSet rs;
         ArrayList<Metodologia> arrayMetodologia = new ArrayList<Metodologia>();
 
         try {
@@ -125,7 +128,11 @@ public class ControladorMetodologia {
 
             stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.executeQuery();
+            rs = stmt.executeQuery();
+            if(rs.next()){
+                aux = extraer(rs.getLong(1));
+                arrayMetodologia.add(aux);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ControladorMetodologia.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -159,5 +166,31 @@ public class ControladorMetodologia {
             Logger.getLogger(ControladorMetodologia.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
+    }
+    
+    public ArrayList<Metodologia> extraerTodoTipo(int tipo) {
+
+        Metodologia aux = new Metodologia();
+        ResultSet rs;
+        ArrayList<Metodologia> arrayMetodologia = new ArrayList<Metodologia>();
+
+        try {
+
+            String query = "SELECT * FROM metodologias WHERE id_metodologia = ?";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            rs = stmt.executeQuery();
+            if(rs.next()){
+                aux = extraer(rs.getLong(1));
+                arrayMetodologia.add(aux);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorMetodologia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayMetodologia;
+
     }
 }

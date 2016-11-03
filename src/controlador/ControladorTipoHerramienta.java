@@ -86,15 +86,16 @@ public class ControladorTipoHerramienta {
 
     public TipoHerramienta extraer(Long id) {
 
+        PreparedStatement stmt;
         TipoHerramienta th = new TipoHerramienta();
         try {
             String query = "SELECT id_tipo_herramienta, nombre_tipo_herramienta\n"
                     + "  FROM tipo_herramienta WHERE id_tipo_herramienta = ?";
 
-            PreparedStatement stmt;
-
             stmt = conexion.getConexion().prepareStatement(query);
+
             stmt.setLong(1, id);
+
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -112,6 +113,8 @@ public class ControladorTipoHerramienta {
 
     public ArrayList<TipoHerramienta> extraerTodos() {
 
+        TipoHerramienta aux = new TipoHerramienta();
+        ResultSet rs;
         ArrayList<TipoHerramienta> arrayTipoHerramienta = new ArrayList<TipoHerramienta>();
         try {
 
@@ -119,7 +122,12 @@ public class ControladorTipoHerramienta {
 
             PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
 
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                aux = extraer(rs.getLong(1));
+                arrayTipoHerramienta.add(aux);
+            }
 
             while (rs.next()) {
 
@@ -165,4 +173,42 @@ public class ControladorTipoHerramienta {
         }
         return id;
     }
+    
+    public ArrayList<TipoHerramienta> extraerTodosTipo(int tipo) {
+
+        TipoHerramienta aux = new TipoHerramienta();
+        ResultSet rs;
+        ArrayList<TipoHerramienta> arrayTipoHerramienta = new ArrayList<TipoHerramienta>();
+        try {
+
+            String query = "Select * from tipo_herramienta";
+
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setInt(1, tipo);
+
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                aux = extraer(rs.getLong(1));
+                arrayTipoHerramienta.add(aux);
+            }
+
+            while (rs.next()) {
+
+                TipoHerramienta th = new TipoHerramienta();
+                th.setTipo_herramienta(Long.valueOf(rs.getLong(1)));
+                th.setNombre_tipo_herramienta(rs.getString(2));
+                arrayTipoHerramienta.add(th);
+            }
+            conexion.cerrarConexion();
+
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorTipoHerramienta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayTipoHerramienta;
+
+    }
+    
 }

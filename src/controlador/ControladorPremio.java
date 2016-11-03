@@ -4,6 +4,7 @@ import conexion.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Premio;
@@ -82,17 +83,19 @@ public class ControladorPremio {
     }
 
     public Premio extraer(Long id) {
-
+        PreparedStatement stmt;
         Premio premio = new Premio();
 
         try {
 
             String query = "SELECT id_premio, tipo_premio, institucion, descripcion\n"
-                    + "  FROM premios";
+                    + "  FROM premios WHERE id_premio = ?";
 
-            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+            stmt = conexion.getConexion().prepareStatement(query);
 
-            ResultSet rs = null;
+            stmt.setLong(1, id);
+
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
 
@@ -110,6 +113,32 @@ public class ControladorPremio {
             Logger.getLogger(ControladorPremio.class.getName()).log(Level.SEVERE, null, ex);
         }
         return premio;
+    }
+
+    public ArrayList<Premio> extraerTodo() {
+
+        Premio aux = new Premio();
+        ResultSet rs;
+        ArrayList<Premio> arrayPremio = new ArrayList<Premio>();
+
+        try {
+
+            String query = "SELECT * FROM premios";
+
+            PreparedStatement stmt;
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                aux = extraer(rs.getLong(1));
+                arrayPremio.add(aux);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorPremio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayPremio;
+
     }
 
     public Long extraerUltimoId() {
@@ -137,6 +166,34 @@ public class ControladorPremio {
             Logger.getLogger(ControladorPremio.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
+    }
+    
+    public ArrayList<Premio> extraerTodoTipo(int tipo) {
+
+        Premio aux = new Premio();
+        ResultSet rs;
+        ArrayList<Premio> arrayPremio = new ArrayList<Premio>();
+
+        try {
+
+            String query = "SELECT * FROM premios WHERE id_premio = ?";
+
+            PreparedStatement stmt;
+            stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setInt(1, tipo);
+
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                aux = extraer(rs.getLong(1));
+                arrayPremio.add(aux);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorPremio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayPremio;
+
     }
 
 }

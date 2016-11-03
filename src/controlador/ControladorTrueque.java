@@ -85,14 +85,16 @@ public class ControladorTrueque {
 
     public Trueque extraer(Long id) {
 
+        PreparedStatement stmt;
         Trueque trueque = new Trueque();
 
         try {
 
-            String query = "SELECT id_trueque "
-                    + "FROM trueques";
+            String query = "SELECT id_trueque FROM trueques WHERE id_trueque = ?";
 
-            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+            stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setLong(1, id);
 
             ResultSet rs = stmt.executeQuery();
 
@@ -115,6 +117,8 @@ public class ControladorTrueque {
 
     public ArrayList<Trueque> extraerTodo() {
 
+        Trueque aux = new Trueque();
+        ResultSet rs;
         ArrayList<Trueque> arrayTrueque = new ArrayList<Trueque>();
 
         try {
@@ -124,7 +128,12 @@ public class ControladorTrueque {
 
             PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.executeQuery();
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                aux = extraer(rs.getLong(1));
+                arrayTrueque.add(aux);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ControladorTrueque.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -158,6 +167,34 @@ public class ControladorTrueque {
             Logger.getLogger(ControladorTrueque.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
+    }
+    
+    public ArrayList<Trueque> extraerTodoTipo(int tipo) {
+
+        Trueque aux = new Trueque();
+        ResultSet rs;
+        ArrayList<Trueque> arrayTrueque = new ArrayList<Trueque>();
+
+        try {
+
+            String query = "SELECT id_trueque, tipo_trueque, descripcion\n"
+                    + "  FROM trueques";
+
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setInt(1, tipo);
+
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                aux = extraer(rs.getLong(1));
+                arrayTrueque.add(aux);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorTrueque.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayTrueque;
+
     }
 
 }

@@ -48,8 +48,7 @@ public class ControladorDatosCarga {
 
     }
 
-    public void agregar(DatosCarga datosCarga,Conexion conexion) {
-
+    public void agregar(DatosCarga datosCarga, Conexion conexion) {
 
         try {
             PreparedStatement stmt;
@@ -69,7 +68,7 @@ public class ControladorDatosCarga {
         }
 
     }
-    
+
     public void modificar(DatosCarga datosCarga) {
 
         try {
@@ -113,6 +112,7 @@ public class ControladorDatosCarga {
 
     public DatosCarga extraer(Long id) {
 
+        PreparedStatement stmt;
         DatosCarga datosCarga = new DatosCarga();
         ControladorDatoPersonal cdp = new ControladorDatoPersonal();
 
@@ -121,9 +121,11 @@ public class ControladorDatosCarga {
             String query = "SELECT lugar_carga, id_dato_carga, id_personas, fecha_carga"
                     + " FROM datos_carga";
 
-            PreparedStatement stmt;
+            stmt = conexion.getConexion().prepareStatement(query);
 
-            ResultSet rs = null;
+            stmt.setLong(1, id);
+
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
 
@@ -146,6 +148,8 @@ public class ControladorDatosCarga {
 
     public ArrayList<DatosCarga> extraerTodo() {
 
+        DatosCarga aux = new DatosCarga();
+        ResultSet rs;
         ArrayList<DatosCarga> arrayDatosCarga = new ArrayList<DatosCarga>();
 
         try {
@@ -157,7 +161,12 @@ public class ControladorDatosCarga {
 
             stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.executeQuery();
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                aux = extraer(rs.getLong(1));
+                arrayDatosCarga.add(aux);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ControladorDatosCarga.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -192,4 +201,35 @@ public class ControladorDatosCarga {
         }
         return id;
     }
+    
+    public ArrayList<DatosCarga> extraerTodoTipo(int tipo) {
+
+        DatosCarga aux = new DatosCarga();
+        ResultSet rs;
+        ArrayList<DatosCarga> arrayDatosCarga = new ArrayList<DatosCarga>();
+
+        try {
+
+            String query = "SELECT lugar_carga, id_dato_carga, id_personas, fecha_carga "
+                    + "FROM datos_carga WHERE id_dato_carga = ?";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setInt(1, tipo);
+
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                aux = extraer(rs.getLong(1));
+                arrayDatosCarga.add(aux);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorDatosCarga.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayDatosCarga;
+
+    }
+    
 }

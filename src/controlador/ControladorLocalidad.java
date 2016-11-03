@@ -76,15 +76,16 @@ public class ControladorLocalidad {
 
     public Localidad extraer(Long id) {
 
+        PreparedStatement stmt;
         Localidad localidad = new Localidad();
 
         try {
 
-            String query = "SELECT id_localidad, nombre_localidad, descripcion FROM localidad";
-
-            PreparedStatement stmt;
+            String query = "SELECT id_localidad, nombre_localidad, descripcion FROM localidad WHERE id_localidad = ?";
 
             stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.setLong(1, id);
 
             ResultSet rs = stmt.executeQuery();
 
@@ -95,8 +96,6 @@ public class ControladorLocalidad {
                 localidad.setDescripcion(rs.getString("descripcion"));
 
             }
-
-            stmt = conexion.getConexion().prepareStatement(query);
 
             stmt.setLong(1, localidad.getId_locaclidad());
             stmt.setString(2, localidad.getDescripcion());
@@ -110,6 +109,8 @@ public class ControladorLocalidad {
 
     public ArrayList<Localidad> extraerTodo() {
 
+        Localidad aux = new Localidad();
+        ResultSet rs;
         ArrayList<Localidad> arrayLocalidad = new ArrayList<Localidad>();
 
         try {
@@ -120,7 +121,13 @@ public class ControladorLocalidad {
 
             stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.executeQuery();
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+
+                aux = extraer(rs.getLong(1));
+                arrayLocalidad.add(aux);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ControladorLocalidad.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -153,6 +160,36 @@ public class ControladorLocalidad {
             Logger.getLogger(ControladorLocalidad.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
+    }
+
+    public ArrayList<Localidad> extraerTodoTipo(int tipo) {
+
+        Localidad aux = new Localidad();
+        ResultSet rs;
+        ArrayList<Localidad> arrayLocalidad = new ArrayList<Localidad>();
+
+        try {
+
+            String query = "SELECT * FROM localidad WHERE id_localidad = ?";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setInt(1, tipo);
+
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+
+                aux = extraer(rs.getLong(1));
+                arrayLocalidad.add(aux);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorLocalidad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayLocalidad;
+
     }
 
 }

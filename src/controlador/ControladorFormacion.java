@@ -77,13 +77,16 @@ public class ControladorFormacion {
 
     public Formacion extraer(Long id) {
 
+        PreparedStatement stmt;
         Formacion formacion = new Formacion();
         try {
 
-            String query = "SELECT * FROM id_formacion";
+            String query = "SELECT id_formacion, nivel_formacion, descripcion FROM formaciones"
+                    + "WHERE id_formacion = ?";
 
-            PreparedStatement stmt;
             stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -104,6 +107,8 @@ public class ControladorFormacion {
 
     public ArrayList<Formacion> extraerTodo() {
 
+        Formacion aux = new Formacion();
+        ResultSet rs;
         ArrayList arrayFormacion = new ArrayList<Formacion>();
 
         try {
@@ -114,7 +119,12 @@ public class ControladorFormacion {
 
             stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.executeQuery();
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                aux = extraer(rs.getLong(1));
+                arrayFormacion.add(aux);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ControladorFormacion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -147,6 +157,35 @@ public class ControladorFormacion {
             Logger.getLogger(ControladorFormacion.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
+    }
+
+    public ArrayList<Formacion> extraerTodoTipo(int tipo) {
+
+        Formacion aux = new Formacion();
+        ResultSet rs;
+        ArrayList arrayFormacion = new ArrayList<Formacion>();
+
+        try {
+
+            String query = "SELECT * FROM formacion WHERE id_formacion = ?";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setInt(1, tipo);
+
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                aux = extraer(rs.getLong(1));
+                arrayFormacion.add(aux);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorFormacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayFormacion;
+
     }
 
 }

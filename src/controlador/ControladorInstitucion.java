@@ -94,19 +94,20 @@ public class ControladorInstitucion {
         }
     }
 
-    public Institucion extraer() {
+    public Institucion extraer(Long id) {
 
-        ControladorDomicilio cdo = new ControladorDomicilio();
-
+        PreparedStatement stmt;
         Institucion institucion = new Institucion();
+        ControladorDomicilio cdo = new ControladorDomicilio();
 
         try {
 
-            String query = "SELECT * FROM institucion";
-
-            PreparedStatement stmt;
+            String query = "SELECT id_institucion, nombre_institucion, observacion, id_domicilio, fecha_entrega"
+                    + " FROM institucion WHERE id_institucion = ?";
 
             stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setLong(1, id);
 
             ResultSet rs = stmt.executeQuery();
 
@@ -130,6 +131,8 @@ public class ControladorInstitucion {
 
     public ArrayList<Institucion> extraerTodo() {
 
+        Institucion aux = new Institucion();
+        ResultSet rs = null;
         ArrayList<Institucion> arrayInstitucion = new ArrayList<Institucion>();
 
         try {
@@ -141,6 +144,12 @@ public class ControladorInstitucion {
             stmt = conexion.getConexion().prepareStatement(query);
 
             stmt.executeQuery();
+            
+            if(rs.next()){
+                
+                aux = extraer(rs.getLong(1));
+                arrayInstitucion.add(aux);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ControladorInstitucion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -172,6 +181,35 @@ public class ControladorInstitucion {
             Logger.getLogger(ControladorInstitucion.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
+    }
+    
+    public ArrayList<Institucion> extraerTodoTipo(int tipo) {
+
+        Institucion aux = new Institucion();
+        ResultSet rs;
+        ArrayList<Institucion> arrayInstitucion = new ArrayList<Institucion>();
+
+        try {
+
+            String query = "SELECT * FROM institucion WHERE id_instuticion = ?";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setInt(1, tipo);
+
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                
+                aux = extraer(rs.getLong(1));
+                arrayInstitucion.add(aux);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorInstitucion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayInstitucion;
     }
 
 }

@@ -97,12 +97,13 @@ public class ControladorProducto {
         try {
 
             String query = "SELECT id_producto, tipo_producto, descripcion, precio_producto, cantidad, \n"
-                    + "     id_materia_prima\n"
-                    + "     FROM productos";
+                    + "     id_materia_prima FROM productos WHERE id_producto = ?";
 
             PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setLong(1, id);
 
-            ResultSet rs = null;
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
 
@@ -125,6 +126,8 @@ public class ControladorProducto {
 
     public ArrayList<Producto> extraerTodo() {
 
+        Producto aux = new Producto();
+        ResultSet rs;
         ArrayList<Producto> arrayProducto = new ArrayList<Producto>();
 
         try {
@@ -134,7 +137,11 @@ public class ControladorProducto {
 
             PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
 
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
+            if(rs.next()){
+                aux = extraer(rs.getLong(1));
+                arrayProducto.add(aux);
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, ex);
@@ -168,4 +175,33 @@ public class ControladorProducto {
         }
         return id;
     }
+    
+    public ArrayList<Producto> extraerTodoTipo(int tipo) {
+
+        Producto aux = new Producto();
+        ResultSet rs;
+        ArrayList<Producto> arrayProducto = new ArrayList<Producto>();
+
+        try {
+            String query = "SELECT id_producto, tipo_producto, descripcion, precio_producto, cantidad, \n"
+                    + "       id_materia_prima\n"
+                    + "  FROM productos WHERE id_producto = ?";
+
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setInt(1, tipo);
+
+            rs = stmt.executeQuery();
+            if(rs.next()){
+                aux = extraer(rs.getLong(1));
+                arrayProducto.add(aux);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayProducto;
+
+    }
+    
 }

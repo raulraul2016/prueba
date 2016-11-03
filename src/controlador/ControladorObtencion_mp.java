@@ -79,16 +79,19 @@ public class ControladorObtencion_mp {
 
     public Obtencion_mp extraer(Long id) {
 
+        PreparedStatement stmt;
         Obtencion_mp obtencion_mp = new Obtencion_mp();
 
         try {
 
             String query = "SELECT id_extraccion_mp, adquisicion_mp, descripcion"
-                    + " FROM materia_prima_forma_obtencion";
+                    + " FROM materia_prima_forma_obtencion WHERE id_extraccion = ?";
 
-            PreparedStatement stmt;
+            stmt = conexion.getConexion().prepareStatement(query);
 
-            ResultSet rs = null;
+            stmt.setLong(1, id);
+
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
 
@@ -109,6 +112,8 @@ public class ControladorObtencion_mp {
 
     public ArrayList<Obtencion_mp> extraerTodo() {
 
+        Obtencion_mp aux = new Obtencion_mp();
+        ResultSet rs;
         ArrayList<Obtencion_mp> arrayObtencion_mp = new ArrayList<Obtencion_mp>();
 
         try {
@@ -119,7 +124,12 @@ public class ControladorObtencion_mp {
 
             stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.executeQuery();
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                aux = extraer(rs.getLong(1));
+                arrayObtencion_mp.add(aux);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ControladorObtencion_mp.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -152,5 +162,34 @@ public class ControladorObtencion_mp {
             Logger.getLogger(ControladorObtencion_mp.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
+    }
+
+    public ArrayList<Obtencion_mp> extraerTodoTipo(int tipo) {
+
+        Obtencion_mp aux = new Obtencion_mp();
+        ResultSet rs;
+        ArrayList<Obtencion_mp> arrayObtencion_mp = new ArrayList<Obtencion_mp>();
+
+        try {
+
+            String query = "SELECT * FROM materia_prima_forma_obtencion WHERE id_extraccion_mp = ?";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setLong(1, tipo);
+
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                aux = extraer(rs.getLong(1));
+                arrayObtencion_mp.add(aux);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorObtencion_mp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayObtencion_mp;
+
     }
 }

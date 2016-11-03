@@ -87,14 +87,17 @@ public class Controlador_venta_comer_producciones {
 
     public Venta_comer_producciones extraer(Long id) {
 
+        PreparedStatement stmt;
         Venta_comer_producciones venta_comer_producciones = new Venta_comer_producciones();
 
         try {
 
             String query = "SELECT id_venta_comer_produ, periodo_mayor_venta, descripcion\n"
-                    + "  FROM venta_produccion";
+                    + "  FROM venta_produccion WHERE id_venta_comer_produ = ?";
 
-            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.setLong(1, id);
 
             ResultSet rs = stmt.executeQuery();
 
@@ -117,6 +120,8 @@ public class Controlador_venta_comer_producciones {
 
     public ArrayList<Venta_comer_producciones> extraerTodo() {
 
+        Venta_comer_producciones aux = new Venta_comer_producciones();
+        ResultSet rs;
         ArrayList<Venta_comer_producciones> arrayVenta = new ArrayList<Venta_comer_producciones>();
 
         try {
@@ -126,7 +131,12 @@ public class Controlador_venta_comer_producciones {
 
             PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.executeQuery();
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                aux = extraer(rs.getLong(1));
+                arrayVenta.add(aux);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Controlador_venta_comer_producciones.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -160,6 +170,34 @@ public class Controlador_venta_comer_producciones {
             Logger.getLogger(Controlador_venta_comer_producciones.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
+
+    }
+
+    public ArrayList<Venta_comer_producciones> extraerTodo(int tipo) {
+
+        Venta_comer_producciones aux = new Venta_comer_producciones();
+        ResultSet rs;
+        ArrayList<Venta_comer_producciones> arrayVenta = new ArrayList<Venta_comer_producciones>();
+
+        try {
+
+            String query = "SELECT id_venta_comer_produ, periodo_mayor_venta, descripcion\n"
+                    + "  FROM venta_produccion WHERE id_venta_comer_produ = ?";
+
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setInt(1, tipo);
+
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                aux = extraer(rs.getLong(1));
+                arrayVenta.add(aux);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Controlador_venta_comer_producciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayVenta;
 
     }
 

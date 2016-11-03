@@ -97,9 +97,11 @@ public class ControladorRubro {
         try {
 
             String query = "SELECT id_rubro, tipo_rubro, descripcion, id_aprendizaje, id_especialidad\n"
-                    + "  FROM rubros";
+                    + "  FROM rubros WHERE id_producto = ?";
 
             PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setLong(1, id);
 
             ResultSet rs = stmt.executeQuery();
 
@@ -124,6 +126,8 @@ public class ControladorRubro {
 
     public ArrayList<Rubro> extraerTodo() {
 
+        Rubro aux = new Rubro();
+        ResultSet rs = null;
         ArrayList<Rubro> arrayRubro = new ArrayList<Rubro>();
 
         try {
@@ -133,7 +137,10 @@ public class ControladorRubro {
 
             PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.executeQuery();
+            if(rs.next()){
+                aux = extraer(rs.getLong(1));
+                arrayRubro.add(aux);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ControladorRubro.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -168,4 +175,33 @@ public class ControladorRubro {
         return id;
 
     }
+    
+    public ArrayList<Rubro> extraerTodoTipo(int tipo) {
+
+        Rubro aux = new Rubro();
+        ResultSet rs = null;
+        ArrayList<Rubro> arrayRubro = new ArrayList<Rubro>();
+
+        try {
+
+            String query = "SELECT id_rubro, tipo_rubro, descripcion, id_aprendizaje, id_especialidad\n"
+                    + "  FROM rubros WHERE id_rubro";
+
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setInt(1, tipo);
+            
+            rs = stmt.executeQuery();
+
+            if(rs.next()){
+                aux = extraer(rs.getLong(1));
+                arrayRubro.add(aux);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorRubro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayRubro;
+
+    }
+    
 }

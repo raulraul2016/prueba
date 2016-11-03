@@ -83,15 +83,19 @@ public class ControladorDepartamento {
 
     public Departamento extaer(Long id) {
 
+        PreparedStatement stmt;
         Departamento departamento = new Departamento();
 
         try {
 
-            String query = "SELECT * FROM departamentos";
+            String query = "SELECT id_departamento, departamento, descripcion FROM departamentos "
+                    + "WHERE id_departamento = ?";
+            
+            stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setLong(1, id);
 
-            PreparedStatement stmt;
-
-            ResultSet rs = null;
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
 
@@ -112,6 +116,8 @@ public class ControladorDepartamento {
 
     public ArrayList<Departamento> extraerTodo() {
 
+        Departamento aux = new Departamento();
+        ResultSet rs;
         ArrayList<Departamento> arrayDepartamento = new ArrayList<Departamento>();
 
         try {
@@ -122,7 +128,13 @@ public class ControladorDepartamento {
 
             stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.executeQuery();
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                
+                aux = extaer(rs.getLong(1));
+                arrayDepartamento.add(aux);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ControladorDepartamento.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -155,5 +167,36 @@ public class ControladorDepartamento {
             Logger.getLogger(ControladorDepartamento.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
+    }
+    
+    public ArrayList<Departamento> extraerTodoTipo(int tipo) {
+
+        Departamento aux = new Departamento();
+        ResultSet rs;
+        ArrayList<Departamento> arrayDepartamento = new ArrayList<Departamento>();
+
+        try {
+
+            String query = "SELECT id_departamento, departamento, descripcion FROM departamentos"
+                    + "WHERE id_departamento = ?";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+            
+            stmt.setInt(1, tipo);
+
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                
+                aux = extaer(rs.getLong(1));
+                arrayDepartamento.add(aux);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorDepartamento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayDepartamento;
+
     }
 }
