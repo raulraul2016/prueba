@@ -1,5 +1,6 @@
 package vista;
 
+import Gestion.GestionHerramienta;
 import GrillaHerramienta.GrillaHerramienta;
 import conexion.Conexion;
 import controlador.ControladorDatoPersonal;
@@ -26,6 +27,7 @@ import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import controlador.ControladorTipoHerramienta;
+import vista.abm.ABMHerramienta;
 
 public class FrmCarga extends javax.swing.JInternalFrame {
 
@@ -1536,6 +1538,11 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 
     private void jbAgragarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgragarActionPerformed
 
+        //Agregar otra herrameinta
+        
+        ABMHerramienta abmh = new ABMHerramienta();
+        this.desktopPane.add(abmh);
+        abmh.setVisible(true);
         
     }//GEN-LAST:event_jbAgragarActionPerformed
 
