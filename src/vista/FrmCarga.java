@@ -1520,42 +1520,18 @@ public class FrmCarga extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbManualesActionPerformed
 
     private void JbElectricasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbElectricasActionPerformed
-
         // Boton Electricas
-        DefaultTableModel mod = new DefaultTableModel();
-
-        int resp = JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Electrica a la lista");
-        if (JOptionPane.OK_OPTION == resp) {
-
-            /*            FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
-             fdh.setTitle("Herramientas Electricas");
-
-             fdh.setVisible(true);
-             this.desktopIcon.add(fdh);
-             System.out.println("Se agrego una herramienta Electrica");
-             */ } else {
-
-            JOptionPane.showMessageDialog(null, "Seleccione otro tipo de Herramienta si lo necesita");
-        }
+      String textoBoton = JbElectricas.getText();
+        jlNombreTipoHerramienta.setText(textoBoton);
+        actualizaTabla1(152);
 
     }//GEN-LAST:event_JbElectricasActionPerformed
 
     private void jbMaquinariasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMaquinariasActionPerformed
-
         // Boton Maquinarias
-        DefaultTableModel mod = new DefaultTableModel();
-
-        int resp = JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Maquinaria a la lista");
-        if (JOptionPane.OK_OPTION == resp) {
-            /*            FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
-             fdh.setTitle("Herramienta Maquinaria");
-
-             fdh.setVisible(true);
-             this.desktopIcon.add(fdh);
-             System.out.println("Se agrego una herramienta Maquinaria");
-             */ } else {
-            JOptionPane.showMessageDialog(null, "Seleccione otro tipo de Herramienta si lo necesita");
-        }
+      String textoBoton = jbMaquinarias.getText();
+        jlNombreTipoHerramienta.setText(textoBoton);
+        actualizaTabla1(153);
     }//GEN-LAST:event_jbMaquinariasActionPerformed
 
     private void jbAgragarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgragarActionPerformed
@@ -1569,11 +1545,11 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         jtbHerramientaTipo.setModel(grillaHerramienta);
     }
     
-    public void actualizaTabla2(int tipo) {
-
-        grillaHerramienta = new GrillaHerramienta((ArrayList<Herramienta>) ch.extraerTodoTipo(tipo));
-        jtbHerramientaTipo.setModel(grillaHerramienta);
-    }
+//    public void actualizaTabla2(int tipo) {
+//
+//        grillaHerramienta = new GrillaHerramienta((ArrayList<Herramienta>) ch.extraerTodoTipo(tipo));
+//        jtbHerramientaTipo.setModel(grillaHerramienta);
+//    }
 
     public void nombreFila() {
 
