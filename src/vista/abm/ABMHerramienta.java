@@ -5,17 +5,21 @@
  */
 package vista.abm;
 
+import controlador.ControladorHerramienta;
+import modelo.Herramienta;
+
 /**
  *
  * @author bangho
  */
 public class ABMHerramienta extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form AbmHerramienta
-     */
+    Herramienta herramienta = new Herramienta();
+    ControladorHerramienta ch = new ControladorHerramienta();
+
     public ABMHerramienta() {
         initComponents();
+
     }
 
     /**
@@ -36,9 +40,15 @@ public class ABMHerramienta extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
+        setClosable(true);
+        setMaximizable(true);
+        setTitle("ABM Herramientas");
+
         jLabel2.setText("Nombre de Herramienta:");
 
         jLabel4.setText("Tipo Herramienta:");
+
+        jcbTipoHerramienta.setEditable(true);
 
         jLabel3.setText("Descripción Herramienta:");
 
@@ -50,6 +60,11 @@ public class ABMHerramienta extends javax.swing.JInternalFrame {
         });
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,18 +116,32 @@ public class ABMHerramienta extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    
         //Boton aceptar ---> Agrega a la BD otra Herramienta.-
+
+        String nombreH = jtfNombreHerramienta.getText();
+        Integer tipoH = Integer.parseInt((String) jcbTipoHerramienta.getSelectedItem());
+        String descripcionH = jtfDescripcionHerramienta.getText();
+
+        herramienta.setNombreHerramienta(nombreH);
+        herramienta.setTipoHerramienta(tipoH);
+        herramienta.setTipoHerramienta(tipoH);
+        herramienta.setDescripcion(descripcionH);
         
-        
+        ch.agregar(herramienta);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // Boton cancelar
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

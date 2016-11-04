@@ -16,6 +16,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        this.setExtendedState(MAXIMIZED_BOTH);
     }
 
     /**
@@ -100,6 +101,7 @@ public class Principal extends javax.swing.JFrame {
         
         FrmCarga abmDatos = new FrmCarga();
         abmDatos.setDesktopPane(this.desktopPane);
+        
         abmDatos.setVisible(true);
         this.desktopPane.add(abmDatos);
     }//GEN-LAST:event_openMenuItemActionPerformed
@@ -140,6 +142,7 @@ public class Principal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+               // Principal.setDefaultLookAndFeelDecorated(rootPaneCheckingEnabled);
                 new Principal().setVisible(true);
             }
         });

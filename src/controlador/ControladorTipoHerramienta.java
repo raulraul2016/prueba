@@ -211,4 +211,33 @@ public class ControladorTipoHerramienta {
 
     }
     
+     public ArrayList<TipoHerramienta> extraerTipoHerramienta(int tipo) {
+        TipoHerramienta aux = new TipoHerramienta();
+        ArrayList<TipoHerramienta> arrayTipoHerramienta = new ArrayList<TipoHerramienta>();
+        ResultSet rs;
+        try {
+            String query = "SELECT tipo_herramienta.nombre_tipo_herramienta\n"
+                    + "FROM public.tipo_herramienta\n"
+                    + "WHERE id_tipo_herramienta = ?";
+
+            PreparedStatement stmt;
+
+            stmt = conexion.getConexion().prepareStatement(query);
+
+            stmt.setInt(1, tipo);
+
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                aux = extraer(rs.getLong(1));
+                arrayTipoHerramienta.add(aux);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorHerramienta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayTipoHerramienta;
+
+    }
+    
 }

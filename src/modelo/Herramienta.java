@@ -56,4 +56,14 @@ public class Herramienta {
         this.descripcion = descripcion;
     }
 
+    public void setTipoHerramienta(Integer tipoH) {
+        this.tipoHerramienta = tipoHerramienta;
+    }
+
+    @Override
+    public String toString() {
+        return "Herramienta{" + "tipoHerramienta=" + tipoHerramienta + '}';
+    }
+
+   
 }
