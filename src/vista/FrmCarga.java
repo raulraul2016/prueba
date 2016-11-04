@@ -28,7 +28,7 @@ import javax.swing.JTable;
 import controlador.ControladorTipoHerramienta;
 
 public class FrmCarga extends javax.swing.JInternalFrame {
-    
+
     ArrayList<Herramienta> herramienta;
     ArrayList<TipoHerramienta> detalleHerramientas;
     //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:ii:ss");
@@ -68,9 +68,9 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         herramienta = new ArrayList<>();
         detalleHerramientas = new ArrayList<>();
         ch = new ControladorHerramienta();
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1417,7 +1417,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
             int diaNac = jdcFechaNac.getCalendar().get(Calendar.DAY_OF_MONTH);
             String fechaNac = anioNac + "-" + mesNac + "-" + diaNac;
             System.out.println(fechaNac);
-            
+
             dp.setApeNom(apeNom);
             dp.setLugNac(lugarNac);
             dp.setEstaCivil(estadoCivil);
@@ -1428,21 +1428,21 @@ public class FrmCarga extends javax.swing.JInternalFrame {
             dp.setEdad(edad);
             dp.setDni(dni);
             dp.setFechaNacimiento(fechaNac);
-            
+
             ControladorDatoPersonal cdp = new ControladorDatoPersonal();
-            
+
             Long id_persona = cdp.agregar(dp, conexion);
             dp.setId(id_persona);
-            
+
             int año = jdcFechaCarga.getCalendar().get(Calendar.YEAR);
             int mes = jdcFechaCarga.getCalendar().get(Calendar.MONTH);
             int dia = jdcFechaCarga.getCalendar().get(Calendar.DAY_OF_MONTH);
-            
+
             String fecha = año + "-" + mes + "-" + dia;
-            
+
             dc.setFecha_carga(fecha);
             System.out.println(fecha);
-            
+
             String lCarga = jtfLugarCarga.getText();
             dc.setLugarCarga(lCarga);
             System.out.println(lCarga);
@@ -1450,12 +1450,12 @@ public class FrmCarga extends javax.swing.JInternalFrame {
             //Integer dniTmp = dni;
             //Long dniTmp1 = dniTmp.longValue();
             dc.setDatoPersonal(dp);
-            
+
             ControladorDatosCarga cdc = new ControladorDatosCarga();
-            
+
             cdc.agregar(dc, conexion);
             conexion.getConexion().commit();
-            
+
         } catch (SQLException ex) {
             try {
                 conexion.getConexion().rollback();
@@ -1466,7 +1466,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         } finally {
             conexion.cerrarConexion();
         }
-        
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
     //}
@@ -1478,17 +1478,17 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         //her.setTipoHerramienta(tipoHerremienta);
 //        her.setDescripcion(descripHerramienta);
         ControladorTaller ct = new ControladorTaller();
-        
+
         String lugarProduccion = jcbLugarProduccion.getSelectedItem().toString();
         String descripTaller = jtfDescripTaller.getText();
         String estadoTaller = jcbEstadoTaller.getSelectedItem().toString();
-        
+
         tal.setLugarProduccion(lugarProduccion);
         tal.setDescripcion(descripTaller);
         //tal.setHerramienta(null);
 
         ControladorHerramienta ch = new ControladorHerramienta();
-        
+
         ch.agregar(her);
         System.out.println("Se agrego correctamente datos Taller/Herramienta");
 
@@ -1500,43 +1500,30 @@ public class FrmCarga extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jbRudimentariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRudimentariaActionPerformed
-        
+
         String textoBoton = jbRudimentaria.getText();
         jlNombreTipoHerramienta.setText(textoBoton);
-        actualizaTabla(150);
-        
+        actualizaTabla1(150);
 
     }//GEN-LAST:event_jbRudimentariaActionPerformed
     //}
     private void jbRudimentariaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRudimentariaMouseClicked
-        
+
 
     }//GEN-LAST:event_jbRudimentariaMouseClicked
 
     private void jbManualesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbManualesActionPerformed
-        
-        int resp = JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Manual a la lista");
-        if (JOptionPane.OK_OPTION == resp) {
-            /*
-             FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
-             fdh.setTitle("Herrameintas Manuales");
 
-             fdh.setVisible(true);
-             this.desktopIcon.add(fdh);
-             System.out.println("Se agrego una herramienta Manual");
-             */
-        } else {
-            JOptionPane.showMessageDialog(null, "Seleccione otro tipo de Herramienta si lo Necesita");
-            
-        }
-
+        String textoBoton = jbManuales.getText();
+        jlNombreTipoHerramienta.setText(textoBoton);
+        actualizaTabla1(151);
     }//GEN-LAST:event_jbManualesActionPerformed
 
     private void JbElectricasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbElectricasActionPerformed
 
         // Boton Electricas
         DefaultTableModel mod = new DefaultTableModel();
-        
+
         int resp = JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Electrica a la lista");
         if (JOptionPane.OK_OPTION == resp) {
 
@@ -1547,7 +1534,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
              this.desktopIcon.add(fdh);
              System.out.println("Se agrego una herramienta Electrica");
              */ } else {
-            
+
             JOptionPane.showMessageDialog(null, "Seleccione otro tipo de Herramienta si lo necesita");
         }
 
@@ -1557,7 +1544,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 
         // Boton Maquinarias
         DefaultTableModel mod = new DefaultTableModel();
-        
+
         int resp = JOptionPane.showConfirmDialog(null, "Desea agregar una Herramienta Maquinaria a la lista");
         if (JOptionPane.OK_OPTION == resp) {
             /*            FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
@@ -1573,22 +1560,23 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 
     private void jbAgragarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgragarActionPerformed
 
-        // Boton agregar herramienta nueva
-/*        FrmDetalleHerramienta fdh = new FrmDetalleHerramienta();
-         AbmActividades abmDetalleHerramienta = new AbmActividades();
-         abmDetalleHerramienta.setTitle("Detalle Herramienta");
-         desktopPane.add(abmDetalleHerramienta);
-         abmDetalleHerramienta.setVisible(true);*/
-    }//GEN-LAST:event_jbAgragarActionPerformed
-    
-    public void actualizaTabla(int tipo) {
         
+    }//GEN-LAST:event_jbAgragarActionPerformed
+
+    public void actualizaTabla1(int tipo) {
+
         grillaHerramienta = new GrillaHerramienta((ArrayList<Herramienta>) ch.extraerTodoTipo(tipo));
         jtbHerramientaTipo.setModel(grillaHerramienta);
     }
     
+    public void actualizaTabla2(int tipo) {
+
+        grillaHerramienta = new GrillaHerramienta((ArrayList<Herramienta>) ch.extraerTodoTipo(tipo));
+        jtbHerramientaTipo.setModel(grillaHerramienta);
+    }
+
     public void nombreFila() {
-        
+
         dp = new DatoPersonal();
         //cdp = new ControladorDatoPersonal();
         dc = new DatosCarga();
@@ -1605,27 +1593,27 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         modelo.addColumn("Dni");
         modelo.addColumn("Email");
         modelo.addColumn("Estado Civil");
-        
+
     }
-    
+
     private void cargaFilas() {
-        
+
         try {
-            
+
             String query = "SELECT fecha_carga, lugar_carga, id_personas, apellido_nombre, domicilio, lugar_nacimiento,"
                     + "edad, dni, correo_electronico, estado_civil FROM datos_carga , personas "
                     + "WHERE datos_carga.id_personas = personas.id_persona";
-            
+
             stmt = conexion.getConexion().prepareStatement(query);
-            
+
             rs = stmt.executeQuery();
-            
+
             rsm = rs.getMetaData();
-            
+
             while (rs.next()) {
-                
+
                 Object[] fila = new Object[rsm.getColumnCount()];
-                
+
                 fila[0] = rs.getString(2);
                 fila[1] = rs.getString(3);
                 fila[2] = rs.getString(4);
@@ -1637,26 +1625,26 @@ public class FrmCarga extends javax.swing.JInternalFrame {
                 fila[8] = rs.getString(10);
                 fila[9] = rs.getString(11);
                 fila[10] = rs.getString(12);
-                
+
                 modelo.addRow(fila);
-                
+
             }
-            
+
             rs.close();
-            
+
         } catch (SQLException error) {
             JOptionPane.showConfirmDialog(null, error);
-            
+
         }
-        
+
     }
-    
+
     private void actualizaTabla() {
-        
+
         ResultSet r;
         DefaultTableModel mod;
         try {
-            
+
             r = rs;
             // nombreFila();
             //generosControlador.cargaFilas();
@@ -1664,9 +1652,9 @@ public class FrmCarga extends javax.swing.JInternalFrame {
             cargaFilas();
             mod = new DefaultTableModel();
             String fila[] = new String[1];
-            
+
             while (r.next()) {
-                
+
                 fila[1] = r.getString("fecha_carga");
                 fila[2] = r.getString("lugar_carga");
                 fila[3] = r.getString("apellido_nombre");
@@ -1678,11 +1666,11 @@ public class FrmCarga extends javax.swing.JInternalFrame {
                 fila[9] = r.getString("estado_civil");
                 fila[10] = r.getString(10);
                 fila[11] = r.getString(11);
-                
+
                 mod.addRow(fila);
-                
+
             }
-            
+
         } catch (Exception e) {
             System.out.println(e);
         }

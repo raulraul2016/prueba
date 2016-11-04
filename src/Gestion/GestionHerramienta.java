@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Gestion;
 
 import GrillaHerramienta.GrillaHerramienta;
@@ -40,7 +35,6 @@ public class GestionHerramienta extends javax.swing.JInternalFrame {
         GrillaHerramienta grillaHerramienta = new GrillaHerramienta((ArrayList<Herramienta>) che.extraerTodo());
         jtbHerramientas.setModel(grillaHerramienta);
 
-        //GrillaHerramienta grillaHerramienta = new GrillaHerramienta();
         PreparedStatement stmt;
         DefaultComboBoxModel<Herramienta> herramientas = new DefaultComboBoxModel<>();
         DefaultTableModel modelo;
@@ -231,8 +225,8 @@ public class GestionHerramienta extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // Boton modificar
-        
-        if( jtbHerramientas.getSelectedRow()!= -1){
+
+        if (jtbHerramientas.getSelectedRow() != -1) {
             Herramienta her = new Herramienta();
             int fila = jtbHerramientas.getSelectedRow();
             Long id = (Long) jtbHerramientas.getModel().getValueAt(fila, 0);
@@ -247,13 +241,13 @@ public class GestionHerramienta extends javax.swing.JInternalFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // Boton Eliminar
-        
-        if(jtbHerramientas.getSelectedRow() != -1){
-            
+
+        if (jtbHerramientas.getSelectedRow() != -1) {
+
             GrillaHerramienta grillaHerramienta = (GrillaHerramienta) jtbHerramientas.getModel();
             grillaHerramienta.deleteRow(jtbHerramientas.getSelectedRow());
         }
-        
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -263,15 +257,14 @@ public class GestionHerramienta extends javax.swing.JInternalFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // Boton Actualizar
-        
-        GrillaHerramienta grillaHerramienta = new GrillaHerramienta((ArrayList <Herramienta>) che.extraerTodo());
-        
+
+        GrillaHerramienta grillaHerramienta = new GrillaHerramienta((ArrayList<Herramienta>) che.extraerTodo());
+
     }//GEN-LAST:event_jButton5ActionPerformed
-    
-    
+
     public void cargarTabla() {
-        
-        grillaHerramienta = new GrillaHerramienta((ArrayList <Herramienta>) che.extraerTodo());
+
+        grillaHerramienta = new GrillaHerramienta((ArrayList<Herramienta>) che.extraerTodo());
         jtbHerramientas.setModel(grillaHerramienta);
 
     }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GrillaHerramienta;
 
 import controlador.ControladorHerramienta;
@@ -19,12 +14,11 @@ import modelo.Herramienta;
 public class GrillaHerramienta extends AbstractTableModel {
 
     public ArrayList<Herramienta> arrayHerramientas;
-    public boolean cellEditable=false;
-    public int [] columEditable=null;
-    ArrayList <String> columIdentifiers;
+    public boolean cellEditable = false;
+    public int[] columEditable = null;
+    ArrayList<String> columIdentifiers;
     String[] columNames;
     ArrayList header;
-    
 
     //get
     public ArrayList<Herramienta> getArrayHerramientas() {
@@ -36,19 +30,15 @@ public class GrillaHerramienta extends AbstractTableModel {
         this.arrayHerramientas = arrayHerramientas;
     }
 
-    //Constructor vacio
-//    public GrillaHerramienta((ArrayList <Herramienta>) che.extrarTodo) {
-//        this.arrayHerramientas = arrayHerramientas;
-//    }
     public GrillaHerramienta(ArrayList<Herramienta> arrayHerramientas) {
         this.arrayHerramientas = arrayHerramientas;
-        columNames=new String[2];
-        columNames[0]="id";
-        columNames[1]="Nombre";
-        
-        header=new ArrayList();
+        columNames = new String[2];
+        columNames[0] = "id";
+        columNames[1] = "Nombre";
+
+        header = new ArrayList();
         header.addAll(Arrays.asList(columNames));
-        columIdentifiers=header;
+        columIdentifiers = header;
     }
 
     @Override
@@ -87,11 +77,10 @@ public class GrillaHerramienta extends AbstractTableModel {
         fireTableDataChanged();
     }
 
-    public Herramienta getRow(int index){
+    public Herramienta getRow(int index) {
         return arrayHerramientas.get(index);
     }
-            
-            
+
     public String getColumnName(int rowIndex) {
         return columIdentifiers.get(rowIndex);
 
