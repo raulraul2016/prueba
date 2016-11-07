@@ -26,13 +26,13 @@ public class ControladorMateriaPrima {
     public void agregar(MateriaPrima materiaPrima) {
 
         try {
-            String query = "INSERT INTO materias_prima(tipo_materia_prima, descripcion) VALUES (?, ?)";
+            String query = "INSERT INTO materias_prima(nombre_materia_prima, descripcion) VALUES (?, ?)";
 
             PreparedStatement stmt;
 
             stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.setString(1, materiaPrima.getTipo_materia_prima());
+            stmt.setString(1, materiaPrima.getNombre_materia_prima());
             stmt.setString(2, materiaPrima.getDescripcion());
 
             stmt.execute();
@@ -45,13 +45,14 @@ public class ControladorMateriaPrima {
     public void modificar(MateriaPrima materiaPrima) {
 
         try {
-            String query = "UPDATE materias_prima SET tipo_materia_prima=?, descripcion=? WHERE id_materia_prima=?";
+            String query = "UPDATE materias_prima SET nombre_materia_prima=?, descripcion=?"
+                    + " WHERE id_materia_prima=?";
 
             PreparedStatement stmt;
 
             stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.setString(1, materiaPrima.getTipo_materia_prima());
+            stmt.setString(1, materiaPrima.getNombre_materia_prima());
             stmt.setString(2, materiaPrima.getDescripcion());
 
             stmt.execute();
@@ -84,7 +85,7 @@ public class ControladorMateriaPrima {
 
         try {
 
-            String query = "SELECT id_materia_prima, tipo_materia_prima, descripcion\n"
+            String query = "SELECT id_materia_prima, nombre_materia_prima, descripcion\n"
                     + "  FROM materias_prima WHERE id_materia_prima = ?";
 
             stmt = conexion.getConexion().prepareStatement(query);
@@ -97,7 +98,7 @@ public class ControladorMateriaPrima {
 
                 try {
                     mp.setId_materia_prima(rs.getLong("id_materia_prima"));
-                    mp.setTipo_materia_prima(rs.getString("tipo_materia_prima"));
+                    mp.setNombre_materia_prima(rs.getString("nombre_materia_prima"));
                     mp.setDescripcion(rs.getString("descripcion"));
                 } catch (SQLException ex) {
                     Logger.getLogger(ControladorMateriaPrima.class.getName()).log(Level.SEVERE, null, ex);
@@ -174,7 +175,7 @@ public class ControladorMateriaPrima {
             PreparedStatement stmt;
 
             stmt = conexion.getConexion().prepareStatement(query);
-            
+
             stmt.setInt(1, tipo);
 
             rs = stmt.executeQuery();

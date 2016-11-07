@@ -9,16 +9,16 @@ package modelo;
  *
  * @author bgh007
  */
-public class Obtencion_mp {
-    
+public class MateriaPrimaLugarObtencion {
+
     private Long id_obtencion_mp;
     private String tipo_obten_mat_pri;
     private String descripcion;
 
-    public Obtencion_mp() {
+    public MateriaPrimaLugarObtencion() {
     }
 
-    public Obtencion_mp(Long id_obtencion_mp, String tipo_obten_mat_pri, String descripcion) {
+    public MateriaPrimaLugarObtencion(Long id_obtencion_mp, String tipo_obten_mat_pri, String descripcion) {
         this.id_obtencion_mp = id_obtencion_mp;
         this.tipo_obten_mat_pri = tipo_obten_mat_pri;
         this.descripcion = descripcion;
@@ -47,7 +47,5 @@ public class Obtencion_mp {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
-    
-    
+
 }

@@ -6,7 +6,12 @@
 package vista.abm;
 
 import controlador.ControladorHerramienta;
+import controlador.ControladorTipoHerramienta;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import modelo.Herramienta;
+import modelo.TipoHerramienta;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
@@ -14,12 +19,49 @@ import modelo.Herramienta;
  */
 public class ABMHerramienta extends javax.swing.JInternalFrame {
 
-    Herramienta herramienta = new Herramienta();
-    ControladorHerramienta ch = new ControladorHerramienta();
+    Herramienta herramienta;
+    ControladorTipoHerramienta cth = new ControladorTipoHerramienta();
+    ControladorHerramienta ch=new ControladorHerramienta();
+    ArrayList<TipoHerramienta> arrayTHerramienta = new ArrayList<TipoHerramienta>();
+    DefaultComboBoxModel<TipoHerramienta> boxModel;
 
+    /*
+     public AbmDependencia(String operacion,Dependencia dependencia) {
+     // obtengo los parametros y se lo asigno a las propiedades de la clase
+     this.operacion = operacion;
+     this.dependencia=dependencia;
+     //obtengo dependencias
+     dependenciasSuperior=(ArrayList<Dependencia>)dc.extraerTodos();
+     //genero vector dependecnias para cargar el modelo del combobox
+     Dependencia[] d=new Dependencia[dependenciasSuperior.size()];
+     for (int i = 0; i < dependenciasSuperior.size(); i++) {     
+     d[i]=dependenciasSuperior.get(i);
+     }
+     */
     public ABMHerramienta() {
+
         initComponents();
 
+    }
+
+    public ABMHerramienta(Herramienta herramienta) {
+
+        this.herramienta = herramienta;
+
+        arrayTHerramienta = (ArrayList<TipoHerramienta>) cth.extraerTodos();
+
+        TipoHerramienta[] h = new TipoHerramienta[arrayTHerramienta.size()];
+        for (int i = 0;i<arrayTHerramienta.size(); i++) {
+
+            h[i] = arrayTHerramienta.get(i);
+
+        }
+        boxModel = new DefaultComboBoxModel<TipoHerramienta>(h);
+        initComponents();
+        jcbTipoHerramienta.setModel(boxModel);
+        jcbTipoHerramienta.setSelectedItem(null);
+        
+        AutoCompleteDecorator.decorate(jcbTipoHerramienta);
     }
 
     /**
@@ -131,9 +173,9 @@ public class ABMHerramienta extends javax.swing.JInternalFrame {
 
         herramienta.setNombreHerramienta(nombreH);
         herramienta.setTipoHerramienta(tipoH);
-        herramienta.setTipoHerramienta(tipoH);
+        //herramienta.setTipoHerramienta(tipoH);
         herramienta.setDescripcion(descripcionH);
-        
+
         ch.agregar(herramienta);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -1540,7 +1540,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 
         //Agregar otra herrameinta
         
-        ABMHerramienta abmh = new ABMHerramienta();
+        ABMHerramienta abmh = new ABMHerramienta(new Herramienta());
         this.desktopPane.add(abmh);
         abmh.setVisible(true);
         

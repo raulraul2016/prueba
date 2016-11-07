@@ -39,6 +39,11 @@ public class TipoHerramienta {
     public void setNombre_tipo_herramienta(String nombre_tipo_herramienta) {
         this.nombre_tipo_herramienta = nombre_tipo_herramienta;
     }
+
+    @Override
+    public String toString() {
+        return getNombre_tipo_herramienta();
+    }
    
    
 }
