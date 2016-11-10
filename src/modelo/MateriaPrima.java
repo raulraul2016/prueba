@@ -43,4 +43,11 @@ public class MateriaPrima {
         this.descripcion = descripcion;
     }
 
+    @Override
+    public String toString() {
+        return getNombre_materia_prima();
+    }
+    
+    
+
 }

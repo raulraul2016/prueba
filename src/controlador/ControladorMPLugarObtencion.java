@@ -29,7 +29,7 @@ public class ControladorMPLugarObtencion {
 
             stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.setString(1, materiaPrimaLugarObtencion.getTipo_obten_mat_pri());
+            stmt.setString(1, materiaPrimaLugarObtencion.getLugar_obtencion());
             stmt.setString(2, materiaPrimaLugarObtencion.getDescripcion());
 
             stmt.execute();
@@ -50,7 +50,7 @@ public class ControladorMPLugarObtencion {
 
             stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.setString(1, materiaPrimaLugarObtencion.getTipo_obten_mat_pri());
+            stmt.setString(1, materiaPrimaLugarObtencion.getLugar_obtencion());
             stmt.setString(2, materiaPrimaLugarObtencion.getDescripcion());
             stmt.setLong(3, materiaPrimaLugarObtencion.getId_obtencion_mp());
 
@@ -98,7 +98,7 @@ public class ControladorMPLugarObtencion {
 
                 try {
                     materiaPrimaLugarObtencion.setId_obtencion_mp(rs.getLong(1));
-                    materiaPrimaLugarObtencion.setTipo_obten_mat_pri(rs.getString(2));
+                    materiaPrimaLugarObtencion.setLugar_obtencion(rs.getString(2));
                     materiaPrimaLugarObtencion.setDescripcion(rs.getString(3));
 
                 } catch (SQLException ex) {

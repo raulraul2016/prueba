@@ -1,11 +1,13 @@
 package vista;
 
-import Gestion.GestionHerramienta;
 import GrillaHerramienta.GrillaHerramienta;
 import conexion.Conexion;
 import controlador.ControladorDatoPersonal;
 import controlador.ControladorDatosCarga;
 import controlador.ControladorHerramienta;
+import controlador.ControladorMPFormaObtencion;
+import controlador.ControladorMPLugarObtencion;
+import controlador.ControladorMateriaPrima;
 import controlador.ControladorTaller;
 import modelo.DatoPersonal;
 import modelo.DatosCarga;
@@ -23,10 +25,14 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import controlador.ControladorTipoHerramienta;
+import modelo.MateriaPrima;
+import modelo.MateriaPrimaFormaObtencion;
+import modelo.MateriaPrimaLugarObtencion;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import vista.abm.ABMHerramienta;
 
 public class FrmCarga extends javax.swing.JInternalFrame {
@@ -52,6 +58,15 @@ public class FrmCarga extends javax.swing.JInternalFrame {
     JTable tabla;
     ControladorHerramienta ch;
     GrillaHerramienta grillaHerramienta;//= new GrillaHerramienta((ArrayList<Herramienta>) ch.extraerTodo());
+    DefaultComboBoxModel<MateriaPrima> boxModel;
+    DefaultComboBoxModel<MateriaPrimaFormaObtencion> boxModel1;
+    DefaultComboBoxModel<MateriaPrimaLugarObtencion> boxModel2;
+    ArrayList<MateriaPrima> arrayMateriaPrima = new ArrayList<MateriaPrima>();
+    ArrayList<MateriaPrimaFormaObtencion> arrayMateriaPrimaFormaObtencion = new ArrayList<MateriaPrimaFormaObtencion>();
+    ArrayList<MateriaPrimaLugarObtencion> arrayMateriaPrimaLugarObtencion = new ArrayList<MateriaPrimaLugarObtencion>();
+    ControladorMateriaPrima cmp = new ControladorMateriaPrima();
+    ControladorMPFormaObtencion cmpfo = new ControladorMPFormaObtencion();
+    ControladorMPLugarObtencion cmplo = new ControladorMPLugarObtencion();
 
     public void setDesktopPane(JDesktopPane desktopPane) {
         this.desktopPane = desktopPane;
@@ -70,6 +85,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         herramienta = new ArrayList<>();
         detalleHerramientas = new ArrayList<>();
         ch = new ControladorHerramienta();
+        cargaComboBox();
 
     }
 
@@ -130,11 +146,11 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         jbQuitaHerramienta = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jcbTipoMateriaPrima = new javax.swing.JComboBox();
         jLabel17 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
+        jcbFormaObtencionMP = new javax.swing.JComboBox();
         jLabel18 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox();
+        jcbLugarObtencionMP = new javax.swing.JComboBox();
         jLabel40 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jButton8 = new javax.swing.JButton();
@@ -559,6 +575,8 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 
         jLabel13.setText("¿Que tipo de Materia Prima");
 
+        jcbTipoMateriaPrima.setEditable(true);
+
         jLabel17.setText("¿Como la Adquiere?");
 
         jLabel18.setText("Lugar de Procedencia");
@@ -567,12 +585,12 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jcbLugarObtencionMP, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jcbTipoMateriaPrima, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(9, 9, 9))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -580,7 +598,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
                             .addComponent(jLabel17)
                             .addComponent(jLabel18))
                         .addContainerGap())
-                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jcbFormaObtencionMP, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -588,15 +606,15 @@ public class FrmCarga extends javax.swing.JInternalFrame {
                 .addGap(17, 17, 17)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcbTipoMateriaPrima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcbFormaObtencionMP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcbLugarObtencionMP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1523,7 +1541,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 
     private void JbElectricasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbElectricasActionPerformed
         // Boton Electricas
-      String textoBoton = JbElectricas.getText();
+        String textoBoton = JbElectricas.getText();
         jlNombreTipoHerramienta.setText(textoBoton);
         actualizaTabla1(152);
 
@@ -1531,7 +1549,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
 
     private void jbMaquinariasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMaquinariasActionPerformed
         // Boton Maquinarias
-      String textoBoton = jbMaquinarias.getText();
+        String textoBoton = jbMaquinarias.getText();
         jlNombreTipoHerramienta.setText(textoBoton);
         actualizaTabla1(153);
     }//GEN-LAST:event_jbMaquinariasActionPerformed
@@ -1539,11 +1557,10 @@ public class FrmCarga extends javax.swing.JInternalFrame {
     private void jbAgragarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgragarActionPerformed
 
         //Agregar otra herrameinta
-        
         ABMHerramienta abmh = new ABMHerramienta(new Herramienta());
         this.desktopPane.add(abmh);
         abmh.setVisible(true);
-        
+
     }//GEN-LAST:event_jbAgragarActionPerformed
 
     public void actualizaTabla1(int tipo) {
@@ -1551,13 +1568,12 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         grillaHerramienta = new GrillaHerramienta((ArrayList<Herramienta>) ch.extraerTodoTipo(tipo));
         jtbHerramientaTipo.setModel(grillaHerramienta);
     }
-    
+
 //    public void actualizaTabla2(int tipo) {
 //
 //        grillaHerramienta = new GrillaHerramienta((ArrayList<Herramienta>) ch.extraerTodoTipo(tipo));
 //        jtbHerramientaTipo.setModel(grillaHerramienta);
 //    }
-
     public void nombreFila() {
 
         dp = new DatoPersonal();
@@ -1657,6 +1673,49 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             System.out.println(e);
         }
+
+    }
+
+//    public cargaCombo(ArrayList<MateriaPrima> arrayMateriaPrima) {
+//
+//    }
+    
+    public void cargaComboBox(){
+        
+        arrayMateriaPrima = cmp.extraerTodo();
+        MateriaPrima[] mp = new MateriaPrima[arrayMateriaPrima.size()];
+        
+        for (int i = 0; i < arrayMateriaPrima.size(); i++) {
+            
+            mp[i] = arrayMateriaPrima.get(i);
+        }
+        
+        boxModel = new DefaultComboBoxModel(mp);
+        initComponents();
+        
+        jcbTipoMateriaPrima.setModel(boxModel);
+        jcbTipoMateriaPrima.setSelectedItem(null);
+        
+        AutoCompleteDecorator.decorate(jcbTipoMateriaPrima);
+    }
+    
+    public void cargaComboBox1(){
+        
+        arrayMateriaPrimaFormaObtencion = cmpfo.extraerTodo();
+        MateriaPrimaFormaObtencion[] mpfo = new MateriaPrimaFormaObtencion[arrayMateriaPrimaFormaObtencion.size()];
+        
+        for (int i = 0; i < arrayMateriaPrimaFormaObtencion.size(); i++) {
+            
+            mpfo[i] = arrayMateriaPrimaFormaObtencion.get(i);
+        }
+        
+        boxModel1 = new DefaultComboBoxModel(mpfo);
+        initComponents();
+        
+        jcbTipoMateriaPrima.setModel(boxModel);
+        jcbTipoMateriaPrima.setSelectedItem(null);
+        
+        AutoCompleteDecorator.decorate(jcbTipoMateriaPrima);
     }
 
 
@@ -1691,9 +1750,6 @@ public class FrmCarga extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JCheckBox jCheckBox8;
     private javax.swing.JCheckBox jCheckBox9;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
     private javax.swing.JComboBox jComboBox4;
     private javax.swing.JComboBox jComboBox5;
     private javax.swing.JComboBox jComboBox6;
@@ -1789,7 +1845,10 @@ public class FrmCarga extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbRudimentaria;
     private javax.swing.JComboBox jcbEstadoCivil;
     private javax.swing.JComboBox jcbEstadoTaller;
+    private javax.swing.JComboBox jcbFormaObtencionMP;
+    private javax.swing.JComboBox jcbLugarObtencionMP;
     private javax.swing.JComboBox jcbLugarProduccion;
+    private javax.swing.JComboBox jcbTipoMateriaPrima;
     private com.toedter.calendar.JDateChooser jdcFechaCarga;
     private com.toedter.calendar.JDateChooser jdcFechaNac;
     private javax.swing.JLabel jlId;

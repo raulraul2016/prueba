@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -12,15 +12,15 @@ package modelo;
 public class MateriaPrimaLugarObtencion {
 
     private Long id_obtencion_mp;
-    private String tipo_obten_mat_pri;
+    private String lugar_obtencion;
     private String descripcion;
 
     public MateriaPrimaLugarObtencion() {
     }
 
-    public MateriaPrimaLugarObtencion(Long id_obtencion_mp, String tipo_obten_mat_pri, String descripcion) {
+    public MateriaPrimaLugarObtencion(Long id_obtencion_mp, String lugar_obtencion, String descripcion) {
         this.id_obtencion_mp = id_obtencion_mp;
-        this.tipo_obten_mat_pri = tipo_obten_mat_pri;
+        this.lugar_obtencion = lugar_obtencion;
         this.descripcion = descripcion;
     }
 
@@ -32,12 +32,12 @@ public class MateriaPrimaLugarObtencion {
         this.id_obtencion_mp = id_obtencion_mp;
     }
 
-    public String getTipo_obten_mat_pri() {
-        return tipo_obten_mat_pri;
+    public String getLugar_obtencion() {
+        return lugar_obtencion;
     }
 
-    public void setTipo_obten_mat_pri(String tipo_obten_mat_pri) {
-        this.tipo_obten_mat_pri = tipo_obten_mat_pri;
+    public void setLugar_obtencion(String lugar_obtencion) {
+        this.lugar_obtencion = lugar_obtencion;
     }
 
     public String getDescripcion() {

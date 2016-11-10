@@ -21,23 +21,10 @@ public class ABMHerramienta extends javax.swing.JInternalFrame {
 
     Herramienta herramienta;
     ControladorTipoHerramienta cth = new ControladorTipoHerramienta();
-    ControladorHerramienta ch=new ControladorHerramienta();
+    ControladorHerramienta ch = new ControladorHerramienta();
     ArrayList<TipoHerramienta> arrayTHerramienta = new ArrayList<TipoHerramienta>();
     DefaultComboBoxModel<TipoHerramienta> boxModel;
 
-    /*
-     public AbmDependencia(String operacion,Dependencia dependencia) {
-     // obtengo los parametros y se lo asigno a las propiedades de la clase
-     this.operacion = operacion;
-     this.dependencia=dependencia;
-     //obtengo dependencias
-     dependenciasSuperior=(ArrayList<Dependencia>)dc.extraerTodos();
-     //genero vector dependecnias para cargar el modelo del combobox
-     Dependencia[] d=new Dependencia[dependenciasSuperior.size()];
-     for (int i = 0; i < dependenciasSuperior.size(); i++) {     
-     d[i]=dependenciasSuperior.get(i);
-     }
-     */
     public ABMHerramienta() {
 
         initComponents();
@@ -51,7 +38,7 @@ public class ABMHerramienta extends javax.swing.JInternalFrame {
         arrayTHerramienta = (ArrayList<TipoHerramienta>) cth.extraerTodos();
 
         TipoHerramienta[] h = new TipoHerramienta[arrayTHerramienta.size()];
-        for (int i = 0;i<arrayTHerramienta.size(); i++) {
+        for (int i = 0; i < arrayTHerramienta.size(); i++) {
 
             h[i] = arrayTHerramienta.get(i);
 
@@ -60,7 +47,7 @@ public class ABMHerramienta extends javax.swing.JInternalFrame {
         initComponents();
         jcbTipoHerramienta.setModel(boxModel);
         jcbTipoHerramienta.setSelectedItem(null);
-        
+
         AutoCompleteDecorator.decorate(jcbTipoHerramienta);
     }
 

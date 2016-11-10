@@ -96,13 +96,10 @@ public class ControladorMateriaPrima {
 
             while (rs.next()) {
 
-                try {
-                    mp.setId_materia_prima(rs.getLong("id_materia_prima"));
-                    mp.setNombre_materia_prima(rs.getString("nombre_materia_prima"));
-                    mp.setDescripcion(rs.getString("descripcion"));
-                } catch (SQLException ex) {
-                    Logger.getLogger(ControladorMateriaPrima.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                mp.setId_materia_prima(rs.getLong("id_materia_prima"));
+                mp.setNombre_materia_prima(rs.getString("nombre_materia_prima"));
+                mp.setDescripcion(rs.getString("descripcion"));
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(ControladorMateriaPrima.class.getName()).log(Level.SEVERE, null, ex);
@@ -118,7 +115,7 @@ public class ControladorMateriaPrima {
 
         try {
 
-            String query = "SELECT * FROM materias_prima";
+            String query = "SELECT id_materia_prima FROM materias_prima";
 
             PreparedStatement stmt;
 
@@ -126,7 +123,7 @@ public class ControladorMateriaPrima {
 
             rs = stmt.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 aux = extraer(rs.getLong(1));
                 arrayMateriaPrima.add(aux);
             }
@@ -134,32 +131,6 @@ public class ControladorMateriaPrima {
             Logger.getLogger(ControladorMateriaPrima.class.getName()).log(Level.SEVERE, null, ex);
         }
         return arrayMateriaPrima;
-    }
-
-    public Long extraerUltimoId() {
-
-        Long id = null;
-
-        try {
-
-            String query = "";
-
-            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
-
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-
-                try {
-                    id = rs.getLong(1);
-                } catch (SQLException ex) {
-                    Logger.getLogger(ControladorMateriaPrima.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ControladorMateriaPrima.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return id;
     }
 
     public ArrayList<MateriaPrima> extraerTodoTipo(int tipo) {
