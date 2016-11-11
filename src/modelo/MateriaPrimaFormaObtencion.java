@@ -14,16 +14,15 @@ public class MateriaPrimaFormaObtencion {
     private Long id_extraccion_mp;
     private String adquisicion_mp;
     private String descripcion;
-    private MateriaPrima materiaPrima;
+    
 
     public MateriaPrimaFormaObtencion() {
     }
 
-    public MateriaPrimaFormaObtencion(Long id_extraccion_mp, String adquisicion_mp, String descripcion, MateriaPrima materiaPrima) {
+    public MateriaPrimaFormaObtencion(Long id_extraccion_mp, String adquisicion_mp, String descripcion) {
         this.id_extraccion_mp = id_extraccion_mp;
         this.adquisicion_mp = adquisicion_mp;
         this.descripcion = descripcion;
-        this.materiaPrima = materiaPrima;
     }
 
     public Long getId_extraccion_mp() {
@@ -50,13 +49,7 @@ public class MateriaPrimaFormaObtencion {
         this.descripcion = descripcion;
     }
 
-    public MateriaPrima getMateriaPrima() {
-        return materiaPrima;
-    }
-
-    public void setMateriaPrima(MateriaPrima materiaPrima) {
-        this.materiaPrima = materiaPrima;
-    }
+    
 
     @Override
     public String toString() {

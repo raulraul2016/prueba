@@ -86,6 +86,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         detalleHerramientas = new ArrayList<>();
         ch = new ControladorHerramienta();
         cargaComboBox();
+        cargaComboBox1();
 
     }
 
@@ -120,6 +121,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jlId = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
@@ -331,6 +333,9 @@ public class FrmCarga extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jtfDomicilio)))))
                 .addContainerGap(268, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jSeparator1)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -386,7 +391,9 @@ public class FrmCarga extends javax.swing.JInternalFrame {
                             .addComponent(jtfDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jcbEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(321, 321, 321))
+                .addGap(28, 28, 28)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(283, 283, 283))
         );
 
         jTabbedPane1.addTab("Datos Carga", jPanel1);
@@ -1712,10 +1719,10 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         boxModel1 = new DefaultComboBoxModel(mpfo);
         initComponents();
         
-        jcbTipoMateriaPrima.setModel(boxModel);
-        jcbTipoMateriaPrima.setSelectedItem(null);
+        jcbFormaObtencionMP.setModel(boxModel1);
+        jcbFormaObtencionMP.setSelectedItem(null);
         
-        AutoCompleteDecorator.decorate(jcbTipoMateriaPrima);
+        AutoCompleteDecorator.decorate(jcbFormaObtencionMP);
     }
 
 
@@ -1825,6 +1832,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;

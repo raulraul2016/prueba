@@ -22,8 +22,8 @@ public class ControladorMPFormaObtencion {
 
         try {
             String query = "INSERT INTO materia_prima_forma_obtencion(\n"
-                    + "    adquisicion_mp, descripcion, id_materia_prima)\n"
-                    + "    VALUES (?, ?, ?)";
+                    + "    adquisicion_mp, descripcion)\n"
+                    + "    VALUES (?, ?)";
 
             PreparedStatement stmt;
 
@@ -43,7 +43,7 @@ public class ControladorMPFormaObtencion {
 
         try {
             String query = "UPDATE materia_prima_forma_obtencion\n"
-                    + "   SET adquisicion_mp=?, descripcion=?, id_materia_prima=?\n"
+                    + "   SET adquisicion_mp=?, descripcion=?\n"
                     + " WHERE id_extraccion_mp=?";
 
             PreparedStatement stmt;
@@ -64,14 +64,15 @@ public class ControladorMPFormaObtencion {
     public void eliminar(MateriaPrimaFormaObtencion materiaPrimaFormaObtencion) {
 
         try {
-            String query = "DELETE FROM public.materia_prima_lugar_obtenciones\n"
-                    + " WHERE id_obtencion_mp=?";
+            String query = "DELETE FROM materia_prima_forma_obtencion"
+                    + "WHERE id_extraccion_mp=?";
 
             PreparedStatement stmt;
 
             stmt = conexion.getConexion().prepareStatement(query);
 
             stmt.setLong(1, materiaPrimaFormaObtencion.getId_extraccion_mp());
+            
         } catch (SQLException ex) {
             Logger.getLogger(ControladorMPFormaObtencion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -86,7 +87,7 @@ public class ControladorMPFormaObtencion {
         try {
 
             String query = "SELECT id_extraccion_mp, adquisicion_mp, descripcion"
-                    + " FROM materia_prima_lugar_obtenciones WHERE id_extraccion = ?";
+                    + "FROM materia_prima_forma_obtencion WHERE id_extraccion_mp = ?";
 
             stmt = conexion.getConexion().prepareStatement(query);
 
@@ -96,16 +97,19 @@ public class ControladorMPFormaObtencion {
 
             while (rs.next()) {
 
-                try {
+                materiaPrimaFormaObtencion.setId_extraccion_mp(rs.getLong("id_extraccion_mp"));
+                materiaPrimaFormaObtencion.setAdquisicion_mp(rs.getString("adquisicion_mp"));
+                materiaPrimaFormaObtencion.setDescripcion(rs.getString("descripcion"));
 
-                    materiaPrimaFormaObtencion.setId_extraccion_mp(rs.getLong("id_extraccion_mp"));
-                    materiaPrimaFormaObtencion.setAdquisicion_mp(rs.getString("adquisicion_mp"));
-                    materiaPrimaFormaObtencion.setDescripcion(rs.getString("descripcion"));
-
-                } catch (SQLException ex) {
-                    Logger.getLogger(ControladorMPFormaObtencion.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
+//                //materiaPrimaFormaObtencion.setId_extraccion_mp(rs.getLong("id_extraccion_mp"));
+//                materiaPrimaFormaObtencion.setId_extraccion_mp(rs.getLong(1));
+//                //materiaPrimaFormaObtencion.setAdquisicion_mp(rs.getString("adquisicion_mp"));
+//                materiaPrimaFormaObtencion.setAdquisicion_mp(rs.getString(2));
+//                //materiaPrimaFormaObtencion.setDescripcion(rs.getString("descripcion"));
+//                materiaPrimaFormaObtencion.setDescripcion(rs.getString(3));
+//                materiaPrimaFormaObtencion.setId_extraccion_mp(rs.getLong(1));
+//                materiaPrimaFormaObtencion.setAdquisicion_mp(rs.getString(2));
+//                materiaPrimaFormaObtencion.setDescripcion(rs.getString(3));
             }
         } catch (SQLException ex) {
             Logger.getLogger(ControladorMPFormaObtencion.class.getName()).log(Level.SEVERE, null, ex);
@@ -121,23 +125,25 @@ public class ControladorMPFormaObtencion {
 
         try {
 
-            String query = "SELECT id_lugar_obtencion FROM materia_prima_lugar_obtenciones";
+            //String query = "SELECT id_lugar_obtencion FROM materia_prima_lugar_obtenciones";
+            String query = "SELECT id_extraccion_mp "
+                    + "FROM materia_prima_forma_obtencion";
 
-            PreparedStatement stmt;
-
-            stmt = conexion.getConexion().prepareStatement(query);
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
 
             rs = stmt.executeQuery();
 
             while (rs.next()) {
+
                 aux = extraer(rs.getLong(1));
                 arrayMateriaPrimaFormaObtencion.add(aux);
+
             }
+
         } catch (SQLException ex) {
             Logger.getLogger(ControladorMPFormaObtencion.class.getName()).log(Level.SEVERE, null, ex);
         }
         return arrayMateriaPrimaFormaObtencion;
-
     }
 
     public ArrayList<MateriaPrimaFormaObtencion> extraerTodoTipo(int tipo) {
