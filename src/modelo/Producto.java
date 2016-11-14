@@ -12,21 +12,17 @@ package modelo;
 public class Producto {
 
     private Long id_producto;
-    private String tipo_producto;
+    private String nomnbreProducto;
     private String descripcion;
-    private Double precio;
-    private Integer cantidad;
     private MateriaPrima materiaPrima;
 
     public Producto() {
     }
 
-    public Producto(Long id_producto, String tipo_producto, String descripcion, Double precio, Integer cantidad, MateriaPrima materiaPrima) {
+    public Producto(Long id_producto, String nomnbreProducto, String descripcion, MateriaPrima materiaPrima) {
         this.id_producto = id_producto;
-        this.tipo_producto = tipo_producto;
+        this.nomnbreProducto = nomnbreProducto;
         this.descripcion = descripcion;
-        this.precio = precio;
-        this.cantidad = cantidad;
         this.materiaPrima = materiaPrima;
     }
 
@@ -38,12 +34,12 @@ public class Producto {
         this.id_producto = id_producto;
     }
 
-    public String getTipo_producto() {
-        return tipo_producto;
+    public String getNomnbreProducto() {
+        return nomnbreProducto;
     }
 
-    public void setTipo_producto(String tipo_producto) {
-        this.tipo_producto = tipo_producto;
+    public void setNomnbreProducto(String nomnbreProducto) {
+        this.nomnbreProducto = nomnbreProducto;
     }
 
     public String getDescripcion() {
@@ -54,22 +50,6 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public Double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
-
-    public Integer getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
-
     public MateriaPrima getMateriaPrima() {
         return materiaPrima;
     }
@@ -78,4 +58,5 @@ public class Producto {
         this.materiaPrima = materiaPrima;
     }
 
+    
 }

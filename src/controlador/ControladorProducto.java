@@ -23,19 +23,15 @@ public class ControladorProducto {
 
         try {
             String query = "INSERT INTO productos(\n"
-                    + "            tipo_producto, descripcion, precio_producto, cantidad, \n"
-                    + "            id_materia_prima)\n"
-                    + "    VALUES (?, ?, ?, ?, \n"
-                    + "            ?)";
+                    + "            tipo_producto, descripcion, id_materia_prima)\n"
+                    + "    VALUES (?, ?, ?)";
 
             PreparedStatement stmt;
 
             stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.setString(1, producto.getTipo_producto());
+            stmt.setString(1, producto.getNomnbreProducto());
             stmt.setString(2, producto.getDescripcion());
-            stmt.setDouble(3, producto.getPrecio());
-            stmt.setInt(4, producto.getCantidad());
             stmt.setLong(5, producto.getMateriaPrima().getId_materia_prima());
 
             stmt.execute();
@@ -49,18 +45,15 @@ public class ControladorProducto {
 
         try {
             String query = "UPDATE productos\n"
-                    + "   SET tipo_producto=?, descripcion=?, precio_producto=?, \n"
-                    + "       cantidad=?, id_materia_prima=?\n"
+                    + "   SET tipo_producto=?, descripcion=?, id_materia_prima=?\n"
                     + " WHERE id_producto=?";
 
             PreparedStatement stmt;
 
             stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.setString(1, producto.getTipo_producto());
+            stmt.setString(1, producto.getNomnbreProducto());
             stmt.setString(2, producto.getDescripcion());
-            stmt.setDouble(3, producto.getPrecio());
-            stmt.setInt(4, producto.getCantidad());
             stmt.setLong(5, producto.getMateriaPrima().getId_materia_prima());
             stmt.setLong(6, producto.getId_producto());
 
@@ -96,11 +89,11 @@ public class ControladorProducto {
         ControladorMateriaPrima cmp = new ControladorMateriaPrima();
         try {
 
-            String query = "SELECT id_producto, tipo_producto, descripcion, precio_producto, cantidad, \n"
-                    + "     id_materia_prima FROM productos WHERE id_producto = ?";
+            String query = "SELECT id_producto, tipo_producto, descripcion,"
+                    + "id_materia_prima FROM productos WHERE id_producto = ?";
 
             PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
-            
+
             stmt.setLong(1, id);
 
             ResultSet rs = stmt.executeQuery();
@@ -109,10 +102,8 @@ public class ControladorProducto {
 
                 try {
                     producto.setId_producto(rs.getLong("id_producto"));
-                    producto.setTipo_producto(rs.getString("tipo_producto"));
+                    producto.setNomnbreProducto(rs.getString("tipo_producto"));
                     producto.setDescripcion(rs.getString("descripcion"));
-                    producto.setPrecio(rs.getDouble("precio_producto"));
-                    producto.setCantidad(rs.getInt("cantidad"));
                     producto.setMateriaPrima(cmp.extraer(rs.getLong("id_materia_prima")));
                 } catch (SQLException ex) {
                     Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, ex);
@@ -131,14 +122,15 @@ public class ControladorProducto {
         ArrayList<Producto> arrayProducto = new ArrayList<Producto>();
 
         try {
-            String query = "SELECT id_producto, tipo_producto, descripcion, precio_producto, cantidad, \n"
-                    + "       id_materia_prima\n"
-                    + "  FROM productos";
+            String query = "SELECT id_producto, FROM productos";
 
+            /*
+             String query = "Select id_tipo_herramienta from tipo_herramienta";
+             */
             PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
 
             rs = stmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 aux = extraer(rs.getLong(1));
                 arrayProducto.add(aux);
             }
@@ -150,32 +142,6 @@ public class ControladorProducto {
 
     }
 
-    public Long extraerUltimoId() {
-        Long id = null;
-
-        try {
-
-            String query = "SELECT id_producto"
-                    + "FROM productos";
-
-            PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
-
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-
-                try {
-                    id = rs.getLong(1);
-                } catch (SQLException ex) {
-                    Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return id;
-    }
-    
     public ArrayList<Producto> extraerTodoTipo(int tipo) {
 
         Producto aux = new Producto();
@@ -183,16 +149,15 @@ public class ControladorProducto {
         ArrayList<Producto> arrayProducto = new ArrayList<Producto>();
 
         try {
-            String query = "SELECT id_producto, tipo_producto, descripcion, precio_producto, cantidad, \n"
-                    + "       id_materia_prima\n"
+            String query = "SELECT id_producto, tipo_producto, descripcion,id_materia_prima\n"
                     + "  FROM productos WHERE id_producto = ?";
 
             PreparedStatement stmt = conexion.getConexion().prepareStatement(query);
-            
+
             stmt.setInt(1, tipo);
 
             rs = stmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 aux = extraer(rs.getLong(1));
                 arrayProducto.add(aux);
             }
@@ -203,5 +168,5 @@ public class ControladorProducto {
         return arrayProducto;
 
     }
-    
+
 }
