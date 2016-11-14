@@ -78,7 +78,7 @@ public class ControladorMPFormaObtencion {
         }
     }
 
-    public MateriaPrimaFormaObtencion extraer(Long id) {
+    public MateriaPrimaFormaObtencion extraer(int id) {
 
         PreparedStatement stmt;
 
@@ -86,18 +86,18 @@ public class ControladorMPFormaObtencion {
 
         try {
 
-            String query = "SELECT id_extraccion_mp, adquisicion_mp, descripcion"
+            String query = "SELECT id_extraccion_mp, adquisicion_mp, descripcion "
                     + "FROM materia_prima_forma_obtencion WHERE id_extraccion_mp = ?";
 
             stmt = conexion.getConexion().prepareStatement(query);
 
-            stmt.setLong(1, id);
+            stmt.setInt(1, id);
 
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
 
-                materiaPrimaFormaObtencion.setId_extraccion_mp(rs.getLong("id_extraccion_mp"));
+                materiaPrimaFormaObtencion.setId_extraccion_mp(rs.getInt("id_extraccion_mp"));
                 materiaPrimaFormaObtencion.setAdquisicion_mp(rs.getString("adquisicion_mp"));
                 materiaPrimaFormaObtencion.setDescripcion(rs.getString("descripcion"));
 
@@ -125,7 +125,6 @@ public class ControladorMPFormaObtencion {
 
         try {
 
-            //String query = "SELECT id_lugar_obtencion FROM materia_prima_lugar_obtenciones";
             String query = "SELECT id_extraccion_mp "
                     + "FROM materia_prima_forma_obtencion";
 
@@ -135,7 +134,7 @@ public class ControladorMPFormaObtencion {
 
             while (rs.next()) {
 
-                aux = extraer(rs.getLong(1));
+                aux = extraer(rs.getInt(1));
                 arrayMateriaPrimaFormaObtencion.add(aux);
 
             }
@@ -154,7 +153,7 @@ public class ControladorMPFormaObtencion {
 
         try {
 
-            String query = "SELECT * FROM materia_prima_lugar_obtenciones WHERE id_extraccion_mp = ?";
+            String query = "SELECT * FROM materia_prima_forma_obtencion WHERE id_extraccion_mp = ?";
 
             PreparedStatement stmt;
 
@@ -165,7 +164,7 @@ public class ControladorMPFormaObtencion {
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-                aux = extraer(rs.getLong(1));
+                aux = extraer(rs.getInt(1));
                 arrayMateriaPrimaFormaObtencion.add(aux);
             }
         } catch (SQLException ex) {

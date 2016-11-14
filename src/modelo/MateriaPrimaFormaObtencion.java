@@ -11,7 +11,7 @@ package modelo;
  */
 public class MateriaPrimaFormaObtencion {
 
-    private Long id_extraccion_mp;
+    private int id_extraccion_mp;
     private String adquisicion_mp;
     private String descripcion;
     
@@ -19,17 +19,17 @@ public class MateriaPrimaFormaObtencion {
     public MateriaPrimaFormaObtencion() {
     }
 
-    public MateriaPrimaFormaObtencion(Long id_extraccion_mp, String adquisicion_mp, String descripcion) {
+    public MateriaPrimaFormaObtencion(int id_extraccion_mp, String adquisicion_mp, String descripcion) {
         this.id_extraccion_mp = id_extraccion_mp;
         this.adquisicion_mp = adquisicion_mp;
         this.descripcion = descripcion;
     }
 
-    public Long getId_extraccion_mp() {
+    public int getId_extraccion_mp() {
         return id_extraccion_mp;
     }
 
-    public void setId_extraccion_mp(Long id_extraccion_mp) {
+    public void setId_extraccion_mp(int id_extraccion_mp) {
         this.id_extraccion_mp = id_extraccion_mp;
     }
 

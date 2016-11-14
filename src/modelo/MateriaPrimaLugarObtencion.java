@@ -48,4 +48,9 @@ public class MateriaPrimaLugarObtencion {
         this.descripcion = descripcion;
     }
 
+    @Override
+    public String toString() {
+        return getLugar_obtencion();
+    }
+
 }

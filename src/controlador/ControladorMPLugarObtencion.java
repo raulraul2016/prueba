@@ -86,7 +86,7 @@ public class ControladorMPLugarObtencion {
         try {
 
             String query = "SELECT id_lugar_obtencion, lugar_obtencion, descripcion "
-                    + "FROM materia_prima_lugar_obtenciones = ?";
+                    + "FROM materia_prima_lugar_obtenciones WHERE id_lugar_obtencion = ?";
 
             stmt = conexion.getConexion().prepareStatement(query);
 
@@ -120,7 +120,7 @@ public class ControladorMPLugarObtencion {
 
         try {
 
-            String query = "SELECT * FROM materia_prima_lugar_obtenciones";
+            String query = "SELECT id_lugar_obtencion FROM materia_prima_lugar_obtenciones";
 
             PreparedStatement stmt;
 
@@ -128,7 +128,7 @@ public class ControladorMPLugarObtencion {
 
             rs = stmt.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 aux = extraer(rs.getLong(1));
                 arrayMateriaPrimaLugraObtencion.add(aux);
             }

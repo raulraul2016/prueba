@@ -128,7 +128,7 @@ public class ControladorHerramienta {
             stmt = conexion.getConexion().prepareStatement(query);
 
             rs = stmt.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 aux = extraer(rs.getLong(1));
                 arrayHerramienta.add(aux);
             }
@@ -155,7 +155,7 @@ public class ControladorHerramienta {
 
             rs = stmt.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 aux = extraer(rs.getLong(1));
                 arrayHerramienta.add(aux);
             }
