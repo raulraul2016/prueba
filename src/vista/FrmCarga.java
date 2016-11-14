@@ -87,6 +87,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         ch = new ControladorHerramienta();
         cargaComboBox();
         cargaComboBox1();
+        cargaComboBox2();
 
     }
 
@@ -1725,6 +1726,11 @@ public class FrmCarga extends javax.swing.JInternalFrame {
         AutoCompleteDecorator.decorate(jcbFormaObtencionMP);
     }
 
+    public void cargaComboBox2() {
+        arrayMateriaPrimaLugarObtencion = cmplo.extraer();
+        
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JbElectricas;
@@ -1873,5 +1879,7 @@ public class FrmCarga extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfLugarNac;
     private javax.swing.JTextField jtfTelefono;
     // End of variables declaration//GEN-END:variables
+
+    
 
 }

@@ -85,8 +85,8 @@ public class ControladorMPLugarObtencion {
 
         try {
 
-            String query = "SELECT id_extraccion_mp, adquisicion_mp, descripcion"
-                    + " FROM materia_prima_lugar_obtenciones WHERE id_extraccion = ?";
+            String query = "SELECT id_lugar_obtencion, lugar_obtencion, descripcion "
+                    + "FROM materia_prima_lugar_obtenciones = ?";
 
             stmt = conexion.getConexion().prepareStatement(query);
 
