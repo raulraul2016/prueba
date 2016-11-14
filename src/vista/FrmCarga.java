@@ -1727,8 +1727,21 @@ public class FrmCarga extends javax.swing.JInternalFrame {
     }
 
     public void cargaComboBox2() {
-        arrayMateriaPrimaLugarObtencion = cmplo.extraer();
+        arrayMateriaPrimaLugarObtencion = cmplo.extraerTodo();
+        MateriaPrimaLugarObtencion[] mplo = new MateriaPrimaLugarObtencion[arrayMateriaPrimaLugarObtencion.size()];
         
+        for (int i = 0; i < arrayMateriaPrimaLugarObtencion.size(); i++) {
+            
+            mplo[i] = arrayMateriaPrimaLugarObtencion.get(i);
+                        
+        }
+        boxModel2 = new DefaultComboBoxModel<>(mplo);
+        initComponents();
+        
+        jcbLugarObtencionMP.setModel(boxModel);
+        jcbFormaObtencionMP.setSelectedItem(null);
+        
+        AutoCompleteDecorator.decorate(jcbLugarObtencionMP);
     }
     
 
