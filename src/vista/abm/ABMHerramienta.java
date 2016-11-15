@@ -9,6 +9,7 @@ import controlador.ControladorHerramienta;
 import controlador.ControladorTipoHerramienta;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import modelo.Herramienta;
 import modelo.TipoHerramienta;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
@@ -22,7 +23,7 @@ public class ABMHerramienta extends javax.swing.JInternalFrame {
     Herramienta herramienta;
     ControladorTipoHerramienta cth = new ControladorTipoHerramienta();
     ControladorHerramienta ch = new ControladorHerramienta();
-    ArrayList<TipoHerramienta> arrayTHerramienta = new ArrayList<TipoHerramienta>();
+    ArrayList<TipoHerramienta> arrayTHerramienta = new ArrayList();
     DefaultComboBoxModel<TipoHerramienta> boxModel;
 
     public ABMHerramienta() {
@@ -34,21 +35,9 @@ public class ABMHerramienta extends javax.swing.JInternalFrame {
     public ABMHerramienta(Herramienta herramienta) {
 
         this.herramienta = herramienta;
-
-        arrayTHerramienta = (ArrayList<TipoHerramienta>) cth.extraerTodos();
-
-        TipoHerramienta[] h = new TipoHerramienta[arrayTHerramienta.size()];
-        for (int i = 0; i < arrayTHerramienta.size(); i++) {
-
-            h[i] = arrayTHerramienta.get(i);
-
-        }
-        boxModel = new DefaultComboBoxModel<TipoHerramienta>(h);
         initComponents();
-        jcbTipoHerramienta.setModel(boxModel);
-        jcbTipoHerramienta.setSelectedItem(null);
-
-        AutoCompleteDecorator.decorate(jcbTipoHerramienta);
+        cargarCombo();
+        
     }
 
     /**
@@ -100,24 +89,21 @@ public class ABMHerramienta extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jtfNombreHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(58, 58, 58)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jcbTipoHerramienta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jtfDescripcionHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
@@ -138,14 +124,14 @@ public class ABMHerramienta extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jcbTipoHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(25, 25, 25)
                         .addComponent(jLabel3))
                     .addComponent(jtfDescripcionHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -153,18 +139,15 @@ public class ABMHerramienta extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //Boton aceptar ---> Agrega a la BD otra Herramienta.-
-
-        String nombreH = jtfNombreHerramienta.getText();
-        Integer tipoH = Integer.parseInt((String) jcbTipoHerramienta.getSelectedItem());
-        String descripcionH = jtfDescripcionHerramienta.getText();
-
-        herramienta.setNombreHerramienta(nombreH);
-        herramienta.setTipoHerramienta(tipoH);
-        //herramienta.setTipoHerramienta(tipoH);
-        herramienta.setDescripcion(descripcionH);
-
-        ch.agregar(herramienta);
-        this.dispose();
+        if (jtfNombreHerramienta.getText().isEmpty() || jcbTipoHerramienta.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, "Falta ingresar datos", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            herramienta.setNombreHerramienta(jtfNombreHerramienta.getText());
+            herramienta.setTipoHerramienta((TipoHerramienta) jcbTipoHerramienta.getSelectedItem());
+            herramienta.setDescripcion(jtfDescripcionHerramienta.getText());
+            ch.agregar(herramienta);
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -172,6 +155,22 @@ public class ABMHerramienta extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void cargarCombo(){
+        arrayTHerramienta = (ArrayList<TipoHerramienta>) cth.extraerTodos();
+
+        TipoHerramienta[] h = new TipoHerramienta[arrayTHerramienta.size()];
+        for (int i = 0; i < arrayTHerramienta.size(); i++) {
+
+            h[i] = arrayTHerramienta.get(i);
+
+        }
+        boxModel = new DefaultComboBoxModel(h);
+        
+        jcbTipoHerramienta.setModel(boxModel);
+        jcbTipoHerramienta.setSelectedItem(null);
+
+        AutoCompleteDecorator.decorate(jcbTipoHerramienta);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

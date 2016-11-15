@@ -12,14 +12,11 @@ import modelo.Herramienta;
 public class ControladorHerramienta {
 
     private static String url;
-    private static final Conexion conexion = new Conexion();
+    private static Conexion conexion;
 
-    public ControladorHerramienta() {
-
-    }
 
     public void agregar(Herramienta herramienta) {
-
+        conexion = new Conexion();
         try {
             String query = "INSERT INTO herramientas(\n"
                     + "            nombre_herramienta, id_tipo_herramienta, descripcion)\n"
@@ -29,18 +26,20 @@ public class ControladorHerramienta {
             stmt = conexion.getConexion().prepareStatement(query);
 
             stmt.setString(1, herramienta.getNombreHerramienta());
-            stmt.setLong(2, Long.valueOf(herramienta.getTipoHerramienta().getTipo_herramienta()));
+            stmt.setLong(2, herramienta.getTipoHerramienta().getTipo_herramienta());
             stmt.setString(3, herramienta.getDescripcion());
 
             stmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ControladorHerramienta.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            conexion.cerrarConexion();
         }
 
     }
 
     public void modificar(Herramienta herramienta) {
-
+        conexion = new Conexion();
         try {
             String query = "UPDATE herramientas\n"
                     + "   SET nombre_herramienta=?, id_tipo_herramienta=?, \n"
@@ -58,12 +57,14 @@ public class ControladorHerramienta {
             stmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ControladorHerramienta.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            conexion.cerrarConexion();
         }
 
     }
 
     public void eliminar(Herramienta herramienta) {
-
+        conexion = new Conexion();
         try {
             String query = "DELETE FROM herramientas\n"
                     + " WHERE id_herramienta = ? ";
@@ -77,11 +78,14 @@ public class ControladorHerramienta {
             stmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ControladorHerramienta.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            conexion.cerrarConexion();
         }
 
     }
 
     public Herramienta extraer(Long id) {
+        conexion = new Conexion();
         PreparedStatement stmt;
         Herramienta herramienta = new Herramienta();
 
@@ -96,17 +100,10 @@ public class ControladorHerramienta {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-
-                try {
                     herramienta.setId(rs.getLong("id_herramienta"));
                     herramienta.setNombreHerramienta(rs.getString("nombre_herramienta"));
                     herramienta.setTipoHerramienta(cth.extraer(rs.getLong("id_tipo_herramienta")));
                     herramienta.setDescripcion(rs.getString("descripcion"));
-
-                } catch (SQLException ex) {
-                    Logger.getLogger(ControladorHerramienta.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
             }
 
         } catch (SQLException ex) {
@@ -116,6 +113,7 @@ public class ControladorHerramienta {
     }
 
     public ArrayList<Herramienta> extraerTodo() {
+        conexion = new Conexion();
         Herramienta aux = new Herramienta();
         ResultSet rs;
         ArrayList<Herramienta> arrayHerramienta = new ArrayList<Herramienta>();
@@ -135,12 +133,15 @@ public class ControladorHerramienta {
 
         } catch (SQLException ex) {
             Logger.getLogger(ControladorHerramienta.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            conexion.cerrarConexion();
         }
         return arrayHerramienta;
 
     }
 
     public ArrayList<Herramienta> extraerTodoTipo(int tipo) {
+        conexion = new Conexion();
         Herramienta aux = new Herramienta();
         ArrayList<Herramienta> arrayHerramienta = new ArrayList<Herramienta>();
         ResultSet rs;
@@ -162,13 +163,15 @@ public class ControladorHerramienta {
 
         } catch (SQLException ex) {
             Logger.getLogger(ControladorHerramienta.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            conexion.cerrarConexion();
         }
         return arrayHerramienta;
 
     }
 
     public Long extraerUltimoId() {
-
+        conexion = new Conexion();
         Long id = null;
 
         try {
@@ -190,6 +193,8 @@ public class ControladorHerramienta {
             }
         } catch (SQLException ex) {
             Logger.getLogger(ControladorHerramienta.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            conexion.cerrarConexion();
         }
         return id;
     }
